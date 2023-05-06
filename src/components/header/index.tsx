@@ -55,7 +55,7 @@ const Header = () => {
     <header className=" h-12 flex w-full  bg-white items-center">
       <div className="flex justify-between w-full px-20 text-black">
         <div>
-          <span className=" text-xl font-bold">Kishor</span>
+          <Link href={'/'} className=" text-xl font-bold">Kishor</Link>
         </div>
         <div>
           <ul className=" flex gap-5 items-center font-medium ">
