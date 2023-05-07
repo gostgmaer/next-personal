@@ -1,3 +1,4 @@
+import Projects from "@/components/childs/project/Projects";
 import { log } from "console";
 import { Metadata } from "next";
 
@@ -33,5 +34,6 @@ export async function generateMetadata(ctx:any): Promise<Metadata> {
 export default async function Page() {
   const data = await getData();
 
-  return <main className="">{JSON.stringify(data)}</main>;
+  return <>
+     <Projects/></>;
 }

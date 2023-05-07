@@ -1,6 +1,7 @@
 import Header from "@/components/header";
 import "./globals.css";
 import { Lato, Roboto } from "next/font/google";
+import { MdMenu } from "react-icons/md";
 
 const inter = Roboto({
   weight: ["400", "700", "500"],
@@ -21,10 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <Header /> */}
-        <main className="flex  h-screen flex-col items-center justify-center bg-[url('/assets/images/img1.jpg')] bg-cover bg-no-repeat bg-bottom">
-          {" "}
-          <div className=" w-full  h-screen  p-10 bg-black/[.80]">{children} </div>{" "}
+        <main className="flex min-h-screen items-center justify-center overflow-hidden bg-[url('/assets/images/img1.jpg')] bg-cover bg-no-repeat bg-bottom">
+          <Header />
+          <div className="min-h-screen flex items-center flex-[11] max-h-full p-10 bg-black/[.80]">
+            {children}
+          </div>
         </main>
       </body>
     </html>
