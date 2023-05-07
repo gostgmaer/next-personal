@@ -1,5 +1,5 @@
 "use client"
-import { socialmedia } from "@/app/page";
+
 import Link from "next/link";
 import * as React from 'react';
 import { styled } from '@mui/material/styles';

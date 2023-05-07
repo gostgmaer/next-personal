@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 
-import { FaFacebook, FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+
 import Link from "next/link";
 import Projects from "@/components/childs/project/Projects";
 import { Fragment } from "react";
@@ -25,36 +25,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const socialmedia = [
-  {
-    id: 1,
-    icon: <FaGithub />,
-    name: "Github",
-    url: "github",
-    text: "Github",
-  },
-  {
-    id: 2,
-    icon: <FaLinkedin />,
-    name: "Linkedin",
-    url: "Linkedin",
-    text: "Linkedin",
-  },
-  {
-    id: 3,
-    icon: <FaFacebook />,
-    name: "Facebook",
-    url: "Facebook",
-    text: "Facebook",
-  },
-  {
-    id: 4,
-    icon: <FaInstagram />,
-    name: "Instagram",
-    url: "Instagram",
-    text: "Instagram",
-  },
-];
+
 
 export default function Page() {
   return (

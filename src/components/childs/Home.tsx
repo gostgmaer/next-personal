@@ -1,4 +1,5 @@
-import { socialmedia } from "@/app/page"
+
+import { socialmedia } from "@/assets/data/mock"
 import Link from "next/link"
 
 const Home = () => {

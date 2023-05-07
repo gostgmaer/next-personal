@@ -1,3 +1,4 @@
+import { FaFacebook, FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 export const projects = [{
     "id": 1,
     "first_name": "Zsazsa",
@@ -269,4 +270,33 @@ export const projects = [{
     "img": "http://dummyimage.com/139x100.png/dddddd/000000",
     "url": "http://dell.com/ornare/imperdiet/sapien/urna/pretium/nisl.json?volutpat=diam&in=id&congue=ornare&etiam=imperdiet&justo=sapien&etiam=urna&pretium=pretium&iaculis=nisl&justo=ut&in=volutpat&hac=sapien&habitasse=arcu&platea=sed&dictumst=augue&etiam=aliquam&faucibus=erat&cursus=volutpat&urna=in"
   }]
-  
+  export const socialmedia = [
+    {
+      id: 1,
+      icon: <FaGithub />,
+      name: "Github",
+      url: "github",
+      text: "Github",
+    },
+    {
+      id: 2,
+      icon: <FaLinkedin />,
+      name: "Linkedin",
+      url: "Linkedin",
+      text: "Linkedin",
+    },
+    {
+      id: 3,
+      icon: <FaFacebook/>,
+      name: "Facebook",
+      url: "Facebook",
+      text: "Facebook",
+    },
+    {
+      id: 4,
+      icon: <FaInstagram />,
+      name: "Instagram",
+      url: "Instagram",
+      text: "Instagram",
+    },
+  ];
