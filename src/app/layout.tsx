@@ -22,7 +22,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         {/* <Header /> */}
-        <main className="flex min-h-[calc(100vh-48px)] flex-col items-center justify-center p-10"> {children}</main>
+        <main className="flex  h-screen flex-col items-center justify-center bg-[url('/assets/images/img1.jpg')] bg-cover bg-no-repeat bg-bottom">
+          {" "}
+          <div className=" w-full  h-screen  p-10 bg-black/[.80]">{children} </div>{" "}
+        </main>
       </body>
     </html>
   );
