@@ -11,8 +11,8 @@ const Header = () => {
   const urls = [
     {
       id: 1,
-      text: "About Me",
-      url: "about",
+      text: "contact",
+      url: "contact",
       icon: "ksteggles0@geocities.com",
       navigation: "Female",
     },
