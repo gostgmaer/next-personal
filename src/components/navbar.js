@@ -1,57 +1,40 @@
 "use client";
 import Link from "next/link";
-import React from "react";
-import { useSelectedLayoutSegment } from "next/navigation";
-import { FaAppStore, FaMailBulk, FaUser } from "react-icons/fa";
-import { MdApps, MdContacts } from "react-icons/md";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
+import { socialmedia, urls } from "@/assets/data/mock";
+import Logo from "./Logo";
 
 const Navbar = () => {
-  const active = useSelectedLayoutSegment();
+  const pathname = usePathname();
 
-  const urls = [
-    {
-      id: 4,
-      text: "about",
-      url: "about",
-      icon: <FaUser className="w-5 h-5" />,
-      navigation: "about",
-    },
-
-    {
-      id: 2,
-      text: "portfolio",
-      url: "portfolio",
-      icon: <MdApps className="w-5 h-5" />,
-      navigation: "portfolio",
-    },
-    {
-      id: 1,
-      text: "contact",
-      url: "contact",
-      icon: <MdContacts className="w-5 h-5" />,
-      navigation: "contact",
-    },
-  ];
-
+  console.log(pathname);
   return (
-    <header className=" max-h-screen min-h-screen flex bg-black/[.80] items-center flex-[0.3]">
-      <div className="h-full flex-col flex justify-center w-full px-4 text-black">
-        <ul className=" flex flex-col gap-5 items-start font-medium ">
-          {urls.map((url) => (
-            <li key={url?.id}>
-              <Link
-                href={`/${url?.url}`}
-                className={` hover:opacity-100 active:opacity-100 h-5 capitalize hover:text-white ${
-                  url?.url === active
-                    ? "opacity-100 text-white"
-                    : "opacity-50 text-white"
-                } w-5 h-5 `}
-              >
-                {url?.icon}
-              </Link>
-            </li>
-          ))}
-        </ul>
+    <header className=" w-full px-32 py-8 font-medium flex item-center justify-between relative">
+      <nav className="flex capitalize items-center gap-4">
+        {urls.map((url) => (
+          <Link href={`${url?.url}`} className={`relative group`} key={url.id}>
+            {url?.text}
+            <span
+              className={`h-[1px] inline-block bg-dark absolute left-0 -bottom-0.5 group-hover:w-full transition-[width] ease-in duration-300 ${
+                pathname === url.url ? "w-full" : "w-0"
+              }`}
+            >
+              &nbsp;
+            </span>
+          </Link>
+        ))}
+      </nav>
+
+      <nav className="flex items-center gap-3">
+        {socialmedia.map((social) => (
+          <motion.a key={social.id} target="_blank" href={`${social.url}`} whileHover={{y:-2}} whileTap={{scale:0.9}}>
+            {social.icon}
+          </motion.a>
+        ))}
+      </nav>
+      <div className=" absolute left-[50%] top-2 translate-x-[-50%]">
+        <Logo />
       </div>
     </header>
   );
