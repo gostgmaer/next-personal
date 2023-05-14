@@ -1,4 +1,5 @@
-import { FaFacebook, FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+
 export const projects = [{
     "id": 1,
     "first_name": "Zsazsa",
@@ -273,14 +274,14 @@ export const projects = [{
   export const socialmedia = [
     {
       id: 1,
-      icon: <FaGithub />,
+      icon: <FaGithub/>,
       name: "Github",
       url: "github",
       text: "Github",
     },
     {
       id: 2,
-      icon: <FaLinkedin />,
+      icon: <FaLinkedin/>,
       name: "Linkedin",
       url: "Linkedin",
       text: "Linkedin",
@@ -294,7 +295,7 @@ export const projects = [{
     },
     {
       id: 4,
-      icon: <FaInstagram />,
+      icon: <FaInstagram/>,
       name: "Instagram",
       url: "Instagram",
       text: "Instagram",
