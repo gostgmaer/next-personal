@@ -31,5 +31,5 @@ export async function generateMetadata({ params }) {
 
 
 export default function Home() {
-  return <Homeelement />;
+  return <div>Home Page</div>;
 }
