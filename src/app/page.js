@@ -1,18 +1,12 @@
 import Homeelement from "@/components/Homeelement";
 import Image from "next/image";
 
-async function getData() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts/1");
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
+
 export async function generateMetadata({ params }) {
-  const Data = await getData();
+ 
   return {
-    title: Data.title,
-    description: Data.body,
+    title: "Kishor Sarkar",
+    description: "Full stack web developer",
     openGraph: {
       type: "website",
       url: "l",

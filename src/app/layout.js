@@ -1,13 +1,16 @@
 import Navbar from "@/components/navbar";
 import "./globals.css";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Source_Sans_Pro } from "next/font/google";
 import Top from "@/components/Top";
 import { AppProvider } from "@/contex/contextAPi";
 import { useGlobalContext } from "@/contex/contextAPi";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-mont",
+const sourceSansPro = Source_Sans_Pro({
+  weight: ["200", "300", "400", "600", "700", "900"],
+  style: ["italic", "normal"],
+  preload: true,
+  adjustFontFallback: true,
+  subsets: ["latin", "greek"],
 });
 export const metadata = {
   title: "Create Next App",
@@ -18,10 +21,10 @@ export default function RootLayout({ children }) {
   return (
     <AppProvider>
       <html lang="en">
-        <body className={montserrat.className}>
+        <body className={sourceSansPro.className}>
           <main className="bg-light w-full min-h-screen text-dark">
             <Navbar />
-            {children}
+            <div className="content px-32">{children}</div>
           </main>
         </body>
       </html>

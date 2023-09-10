@@ -3,7 +3,7 @@ import React from 'react'
 
 const Leftcontent = () => {
   return (
-    <div className="left flex-1">
+    <div className="Leftcontent">
     <div className="summery">
       <h4>Summery</h4>
       <p>{resumeContent.profile.summery}</p>
