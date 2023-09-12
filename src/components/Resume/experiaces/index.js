@@ -7,7 +7,7 @@ const Experiances = () => {
   return (
     <div className="experiances">
       <div className="title flex gap-2 items-center justify-start">
-        <FaBusinessTime /> <h3 className="text-2xl font-semibold">WORK EXPERIENCE</h3>
+        <h3 className="text-2xl font-semibold flex gap-2 items-center"> <FaBusinessTime className="bg-slate-800 h-6 w-6 text-white rounded-full p-1" /> WORK EXPERIENCE</h3>
       </div>
       <div className="experiancecontent flex flex-col gap-2">
         {resumeContent.experiance.data.map((item) => (
