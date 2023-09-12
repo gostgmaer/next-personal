@@ -7,7 +7,7 @@ const Logo = () => {
   return (
     <motion.div className=" flex items-center justify-center mt-2">
       <MotionLink
-        href={"/"}
+        href={"/resume"}
         className=" w-16 h-16 bg-dark text-light flex justify-center items-center rounded-full font-bold text-xl"
         whileHover={{
           backgroundColor: [

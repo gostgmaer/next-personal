@@ -11,17 +11,19 @@ import Experiances from "@/components/Resume/experiaces";
 import Education from "@/components/Resume/Education";
 import Aboutme from "@/components/Aboutme";
 import LeftContent from "@/components/Resume/Topcontent";
+import SkillSet from "@/components/Resume/Skilsset";
 
 const Page = () => {
   return (
-    <div className="resume w-full flex flex-row gap-5 py-5 items-center bg-white ">
+    <div className="resume w-full flex flex-row gap-10 mt-10 mb-10 items-start bg-white ">
     <div className="left w-1/3">
     <LeftContent />
     </div>
-    <div className="right w-2/3">
-    <Objectivity/>
+    <div className="right w-2/3 pr-10">
+      <Objectivity/>
       <Experiances />
-     <Education/>
+      <SkillSet/>
+   
     </div>
      
 
