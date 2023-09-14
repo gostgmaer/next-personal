@@ -6,7 +6,7 @@ import { MdAddChart } from "react-icons/md";
 
 const SkillSet = () => {
   return (
-    <div className="experiances mt-5">
+    <div className="experiances">
       <div className="title flex gap-2 items-center justify-start">
         <h3 className="text-2xl font-semibold flex gap-2 items-center">
           {" "}

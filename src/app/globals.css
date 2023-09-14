@@ -30,3 +30,7 @@ body {
 .Leftcontent{
   flex: 0.4;
 }
+@page {
+  size: A4; /* or letter, legal, etc. */
+
+}
