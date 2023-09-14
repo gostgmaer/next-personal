@@ -1,4 +1,4 @@
-"use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -8,7 +8,7 @@ import Logo from "./Logo";
 const Navbar = () => {
   const pathname = usePathname();
 
-  console.log(pathname);
+ 
   return (
     <header className=" w-full px-32 py-8 font-medium flex item-center justify-between relative">
       <nav className="flex capitalize items-center gap-4">
