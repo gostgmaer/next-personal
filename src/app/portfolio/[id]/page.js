@@ -56,9 +56,9 @@ console.log(project);
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
           {project?.pictures.map((picture, index) => (
             <div key={index} className="relative">
-              <img className="w-full h-48 object-cover rounded-lg" src={picture.image.url} alt={picture.caption} />
+              <img className="w-full h-48 object-cover rounded-lg" src={picture.image.url} alt={picture?.caption} />
               <div className="absolute inset-0 bg-black opacity-0 hover:opacity-50 transition-opacity">
-                <p className="text-white text-center absolute inset-x-0 bottom-4">{picture.caption.substring(0,40)+'...'}</p>
+                <p className="text-white text-center absolute inset-x-0 bottom-4">{picture?.caption?.substring(0,40)+'...'}</p>
               </div>
             </div>
           ))}
