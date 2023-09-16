@@ -1,4 +1,4 @@
-
+"use client";
 import { useContext, useState, useEffect, createContext } from "react";
 const AppContext = createContext(null);
 
