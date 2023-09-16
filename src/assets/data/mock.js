@@ -576,3 +576,11 @@ export const resumeContent = {
     },
   ],
 };
+
+
+export const userInfo = {
+  name:{
+    first:"Kishor",
+    last:"Sarkar"
+  }, about:"Cuber and Self-Taught Front-end Software Developer, I enjoy building responsive web apps & designs using HTML5, CSS3, JavaScript, Next.js, React.js, Firebase, Restful APIs.., I have been working on the web for around 3 years building freelance/learning projects."
+}
