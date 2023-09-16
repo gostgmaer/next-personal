@@ -1,8 +1,10 @@
+import { userInfo } from '@/assets/data/mock'
+import Image from 'next/image'
 import React from 'react'
 
 const Index = () => {
   return (
-    <div className=" min-h-max bg-gray-100 flex items-center justify-center">
+    <div className=" h-[calc(100vh-88px)] bg-gray-100 flex items-center justify-center">
     <div className="bg-white min-h-max p-8 rounded-lg shadow-md w-full  flex">
       <div className="w-2/3 pr-8">
         <h1 className="text-2xl font-semibold mb-4">About Me</h1>
@@ -27,11 +29,12 @@ const Index = () => {
           freelance/learning projects.</p>
       </div>
       <div className="w-1/3">
-        <div className="bg-blue-500 text-white px-4 py-2 rounded">
-        <img
-            src="/path-to-your-image.jpg" // Replace with the actual path to your image
-            alt="Profile Picture"
-            className="rounded-full h-40 w-40 object-cover"
+        <div className="bg-gray-100 text-white px-4 py-2 h-96 rounded">
+        <Image
+            src={userInfo.image} // Replace with the actual path to your image
+            alt={userInfo.name.first}
+            height={384} width={350}
+            className="rounded-full  object-cover"
           />
         </div>
       </div>
