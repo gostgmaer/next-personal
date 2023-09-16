@@ -1,4 +1,4 @@
-
+"use client";
 import { projectArray, projects } from "@/assets/data/projects";
 import Link from "next/link";
 import React, { useState } from "react";

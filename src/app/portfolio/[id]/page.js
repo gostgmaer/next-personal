@@ -1,4 +1,4 @@
-
+"use client";
 import { projectArray } from "@/assets/data/projects";
 import { usePathname } from "next/navigation";
 import React from "react";
