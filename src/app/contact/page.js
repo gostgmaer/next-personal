@@ -44,7 +44,7 @@ const Index = () => {
   };
 
   return (
-    <div className=" min-h-min bg-gray-100 w-full flex items-center justify-center">
+    <div className="  min-h-[calc(100vh-88px)] bg-gray-100 w-full flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-md w-full  flex">
         <div className="w-2/3 pr-8 ">
           <h1 className="text-2xl font-semibold mb-4">Contact Us</h1>

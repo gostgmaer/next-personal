@@ -1,12 +1,12 @@
 "use client"
-import html2pdf from 'html2pdf.js';
 import React from 'react'
 
 const DownloadResume = () => {
-   function downloadFile(filePath, fileName) {
+
+  function downloadFile() {
     var link = document.createElement('a');
-    link.href = filePath;
-    link.download = fileName;
+    link.href = "./assets/file/kishor.pdf";
+    link.download = "Kishor.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -21,8 +21,7 @@ const DownloadResume = () => {
     <div className="action-btn print:hidden">
     <div className="mt-4 flex w-full items-center justify-end">
       <button
-        onClick={()=>downloadFile('./assets/file/kishor.pdf','Kishor.pdf')}
-        // onClick={()=>window.print()}
+        onClick={downloadFile}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
       >
         Download
@@ -39,3 +38,5 @@ const DownloadResume = () => {
 }
 
 export default DownloadResume
+
+
