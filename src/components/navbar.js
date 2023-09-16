@@ -10,7 +10,7 @@ const Navbar = () => {
 
  
   return (
-    <header className=" w-full px-32 py-8 font-medium flex item-center justify-between relative">
+    <header className=" w-full px-32 py-8 font-medium flex item-center justify-between relative print:hidden">
       <nav className="flex capitalize items-center gap-4">
         {urls.map((url) => (
           <Link href={`${url?.url}`} className={`relative group`} key={url.id}>

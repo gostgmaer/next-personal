@@ -15,7 +15,7 @@ var project =  projectArray.find(item=>item.name ===lastItem)
 
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-    <img src={project.pictures[0].image.url} alt={project.name} className="w-full h-64 object-cover" />
+    <img src={project.pictures[0].image.url} alt={project.name} className="w-full h-auto object-cover" />
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-4">{project.name}</h1>
       <p className="text-gray-600 text-lg mb-4">{project.intro}</p>
