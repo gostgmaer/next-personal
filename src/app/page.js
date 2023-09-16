@@ -41,13 +41,13 @@ const ContentDetails = (second) => {
           <SiHey />
           <span>I am</span>
         </h2>
-        <h1 className="text-6xl font-bold text-gray-800 sm:text-7xl">John Doe</h1>
+        <h1 className="text-6xl font-bold text-gray-800 sm:text-7xl">{userInfo.name.first} {userInfo.name.last}</h1>
         <p className="text-md text-gray-600 leading-7 my-4 sm:text-lg sm:leading-8">
          {userInfo.about}
         </p>
         <div className="my-7 flex justify-start items-center gap-4 flex-wrap">
           <button
-            className="bg-gray-500 py-2 px-4 font-bold text-white border-2 border-gray-500 rounded-md ease-in-out duration-150 hover:text-white hover:bg-transparent hover:border-white"
+            className="bg-gray-500 py-2 px-4 font-bold text-white border-2 border-gray-500 rounded-md ease-in-out duration-150 hover:text-gray-500 hover:bg-transparent hover:border-white"
             title="View Resume"
           >
             <a href="/resume" className="flex justify-start items-center gap-1">
@@ -56,7 +56,7 @@ const ContentDetails = (second) => {
             </a>
           </button>
           <button
-            className="bg-white py-2 px-4 font-bold text-gray-500 border-2 border-white rounded-md ease-in-out duration-150 hover:text-white hover:bg-transparent hover:border-white"
+            className="bg-white py-2 px-4 font-bold text-gray-500 border-2 border-white rounded-md ease-in-out duration-150 hover:text-gray-500 hover:bg-transparent hover:border-gray-500"
             title="Get in touch"
           >
             <a
@@ -75,7 +75,7 @@ const ContentDetails = (second) => {
               <li title={item.name} key={item.id}>
                 <a
                   href={item.url}
-                  className="text-teal-500 text-md ease-in-out duration-150 hover:text-white"
+                  className="text-gray-500 text-md ease-in-out duration-150 hover:text-gray-800"
                 >
                   {item.icon}
                 </a>

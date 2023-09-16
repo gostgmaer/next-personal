@@ -429,8 +429,7 @@ export const resumeContent = {
   },
   name: "Thomas Davis",
   label: "Web Developer",
-  image:
-    "https://avatars.githubusercontent.com/u/43110343?v=4",
+  image: "https://avatars.githubusercontent.com/u/43110343?v=4",
   summary:
     "I'm a full stack web developer who can build apps from the ground up. I've worked mostly at startups so I am used to wearing many hats. I am a very product focussed developer who priotizes user feedback first and foremost. I'm generally very flexible when investigating new roles. ",
   website: "https://lordajax.com",
@@ -535,8 +534,7 @@ export const resumeContent = {
         "Used Figma for design and UX work",
         "Optimizing markets with tens of millions of rows using SQL.",
       ],
-    }
-    
+    },
   ],
   interests: [
     {
@@ -558,29 +556,32 @@ export const resumeContent = {
       fluency: "Native speaker",
       read: 1,
       write: 1,
-      speak: 1
+      speak: 1,
     },
     {
       language: "Hindi",
       fluency: "Native speaker",
       read: 0,
       write: 0,
-      speak: 1
+      speak: 1,
     },
     {
       language: "Bengali",
       fluency: "Native speaker",
       read: 1,
       write: 1,
-      speak: 1
+      speak: 1,
     },
   ],
 };
 
-
 export const userInfo = {
-  name:{
-    first:"Kishor",
-    last:"Sarkar"
-  }, about:"Cuber and Self-Taught Front-end Software Developer, I enjoy building responsive web apps & designs using HTML5, CSS3, JavaScript, Next.js, React.js, Firebase, Restful APIs.., I have been working on the web for around 3 years building freelance/learning projects."
-}
+  name: {
+    first: "Kishor",
+    last: "Sarkar",
+  },
+  image:
+  "https://avatars.githubusercontent.com/u/43110343?v=4",
+  about:
+    "Cuber and Self-Taught Front-end Software Developer, I enjoy building responsive web apps & designs using HTML5, CSS3, JavaScript, Next.js, React.js, Firebase, Restful APIs.., I have been working on the web for around 3 years building freelance/learning projects.",
+};
