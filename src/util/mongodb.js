@@ -1,37 +1,14 @@
-// util/mongodb.js
-import { MongoClient } from 'mongodb';
+import mongoose from "mongoose";
 
-const { MONGODB_URI, MONGODB_DB } = process.env;
-
-if (!MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
-}
-
-if (!MONGODB_DB) {
-  throw new Error('Please define the MONGODB_DB environment variable inside .env.local');
-}
-
-let cachedClient = null;
-let cachedDb = null;
-
-export async function connectToDatabase() {
-  if (cachedClient && cachedDb) {
-    return { client: cachedClient, db: cachedDb };
+const connectDB = async () => {
+  try {
+    if (mongoose.connection.readyState === 0) {
+      await mongoose.connect(process.env.MONGODB_URI);
+      console.log("db connected");
+    }
+  } catch (error) {
+    console.log(error);
   }
-  const OPTIONS = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  };
-  const client = new MongoClient(MONGODB_URI, {
+};
 
-  });
-
-  await client.connect();
-
-  const db = client.db(MONGODB_DB);
-
-  cachedClient = client;
-  cachedDb = db;
-
-  return { client, db };
-}
+export default connectDB;
