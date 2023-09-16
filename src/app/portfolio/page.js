@@ -1,5 +1,6 @@
 "use client";
-import { projectArray, projects } from "@/assets/data/projects";
+import { projectArray } from "@/assets/data/projects";
+import Technologies from "@/components/projects/technologi";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -25,6 +26,7 @@ const Index = () => {
         ))}
       </div>
       <div className="flex justify-center mt-4">
+   
         {Array.from(
           { length: Math.ceil(projectArray.length / projectsPerPage) },
           (_, index) => (
@@ -62,7 +64,7 @@ const Project = ({ project }) => {
         <div className="p-4">
           <h2 className="text-2xl font-semibold mb-2">{project.name}</h2>
           <p className="text-gray-600 mb-4">
-            {project.intro.substring(0, 240) + "..."}
+            {project.intro.substring(0, 235) + "..."}
           </p>
 
           <div className="flex  flex-wrap gap-2 mb-4 justify-start">
@@ -77,7 +79,8 @@ const Project = ({ project }) => {
           </div>
 
           <div className="grid grid-cols-2 gap-2 text-gray-600 mb-4">
-            <div>
+          {/* <Technologies/> */}
+            {/* <div>
               <h3 className="text-lg font-semibold">Technologies Used:</h3>
               <ul className="list-disc pl-4 flex-wrap">
                 {project.technologies.map((tech, index) => (
@@ -102,7 +105,7 @@ const Project = ({ project }) => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
           </div>
 
           {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
