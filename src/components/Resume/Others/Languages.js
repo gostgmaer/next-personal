@@ -10,7 +10,7 @@ const Languages = () => {
       <div className="Languages flex flex-col gap-2 mt-2 items-start justify-between">
         <div className="">
           <div className="title ">
-            <h3 className="text-2xl flex gap-3 items-center justify-start uppercase font-semibold">
+            <h3 className="text-2xl flex gap-3 items-center justify-start uppercase font-semibold print:text-lg">
               <MdLanguage className="bg-slate-800 h-6 w-6 text-white rounded-full p-1" />{" "}
               Language
             </h3>
@@ -23,7 +23,7 @@ const Languages = () => {
         </div>
         <div className="">
           <div className="title ">
-            <h3 className="text-2xl flex gap-3 items-center justify-start uppercase font-semibold">
+            <h3 className="text-2xl flex gap-3 items-center justify-start uppercase print:text-lg font-semibold">
               <MdLanguage className="bg-slate-800 h-6 w-6 text-white rounded-full p-1" />{" "}
               Interests
             </h3>
@@ -68,7 +68,7 @@ const Award = ({ data }) => {
   return (
     <div className="award flex flex-col justify-center items-start  pt-0 gap-1">
       <div className="title ">
-      <h3 className="text-2xl flex gap-3 items-center justify-start uppercase font-semibold">
+      <h3 className="text-2xl flex gap-3 items-center justify-start uppercase font-semibold print:text-lg">
               <FaAward className="bg-slate-800 h-6 w-6 text-white rounded-full p-1" />{" "}
               Awards
             </h3>

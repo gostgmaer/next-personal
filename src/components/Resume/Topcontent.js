@@ -16,7 +16,7 @@ const LeftContent = () => {
           <h3 className="text-xl space-x-1">Front-End Developer</h3>
         </div>
         <div className="image pt-5 p-3  rounded-b-full bg-[#442fb9]">
-          <div className="profile-img bg-white overflow-hidden  p-3 rounded-full ">
+          <div className="profile-img bg-white  p-3 rounded-full ">
             <Image
               className="w-auto rounded-full"
               // src={"/assets/images/kishor.png"}
@@ -28,9 +28,9 @@ const LeftContent = () => {
           </div>
         </div>
       </div>
-      <div className="bottomSection ">
+      <div className="bottomSection w-full ">
       <ContactInformation />
-      <div className="bottom-curve overflow-hidden text-white  ">  <Education />
+      <div className="bottom-curve  text-white  w-full print:px-4 px-5">  <Education />
 
       <Referance/>
       
@@ -51,34 +51,34 @@ export default LeftContent;
 
 function ContactInformation() {
   return (
-    <div className="contact text-lg flex flex-col gap-2 py-5 text-black">
+    <div className="contact text-lg flex flex-col gap-2 py-5 print:py-4 text-black">
       <h2 className="font-bold text-2xl flex align-middle justify-center gap-2 items-center ">
-        {" "}
+    
         <MdContacts className="bg-slate-800 h-6 w-6 text-white rounded-full p-1" /> Contact Me
       </h2>
-      <div className="contact-info px-10">
+      <div className="contact-info px-10 text-lg print:px-4 print:text-sm">
         <Link
           href={"mailto:kishor.sarkar.in@gmail.com"}
-          className=" flex align-middle justify-start gap-2 items-center text-lg"
+          className=" flex align-middle justify-start gap-2 items-center "
         >
           <MdMail /> kishor.sarkar.in@gmail.com
         </Link>
         <Link
           href={"tel:+918637317372"}
-          className=" flex align-middle justify-start gap-2 items-center text-lg"
+          className=" flex align-middle justify-start gap-2 items-center"
         >
-          {" "}
+        
           <MdPhone /> +918637317372
         </Link>
         <Link
           href={"https://www.info.com"}
-          className=" flex align-middle justify-start gap-2 items-center text-lg"
+          className=" flex align-middle justify-start gap-2 items-center "
         >
           {" "}
           <MdWeb /> www.myweb.com
         </Link>
-        <div className="contact-address text-lg flex align-middle justify-start gap-2 items-center">
-        <MdLocationCity /> <p className="text-lg">West bengal, India</p>
+        <div className="contact-address  flex align-middle justify-start gap-2 items-center">
+        <MdLocationCity /> <p className="">West bengal, India</p>
       </div>
         {/* <Link
           href={"https://www.linkedin.com/in/kishor-sarkar/"}

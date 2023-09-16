@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
         <body className={sourceSansPro.className}>
           <main className="bg-light w-full min-h-screen text-dark">
             <Navbar />
-            <div className="content px-32">{children}</div>
+            <div className="content px-32 print:px-0">{children}</div>
           </main>
         </body>
       </html>

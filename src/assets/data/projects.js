@@ -45,7 +45,7 @@ export const projects = {
           "DJs and Live producers need the interface to their music software to be as fluid as possible. Standardized controllers, such as what is currently availble on the market, cause this interface to fall short. Basilar was started to allow artists to choose what they need in their controller to best interact with their media. Using our simple drag and drop interface users can create their own controller layout. After picking a design the user would be able to share their designs or order the controller direclty from Basilar.",
         image: {
           style: "width:500px; border-style:none; background-color:white;",
-          url: "https://s3.amazonaws.com/prue-cdn/portfolio/Basilar/Basilar-Logo.png",
+          url: "https://dev-portfolio-mayankagarwal09.vercel.app/images/projects/portfolio-poster.png",
         },
       },
       {
