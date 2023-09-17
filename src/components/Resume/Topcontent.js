@@ -11,9 +11,9 @@ const LeftContent = () => {
   return (
     <div className="topcontent  flex flex-col justify-between items-center w-full bg-blue-100 text-dark">
       <div className="name-image">
-        <div className="name text-center py-10 text-white  bg-[#442fb9]">
-          <h1 className="text-4xl font-bold">Kishor Sarkar</h1>
-          <h3 className="text-xl space-x-1">Front-End Developer</h3>
+        <div className="name text-center print:px-5 py-10 text-white  bg-[#442fb9]">
+          <h1 className="text-4xl print:text-3xl font-bold">Kishor Sarkar</h1>
+          <h3 className="text-xl print:text-lg space-x-1">Front-End Developer</h3>
         </div>
         <div className="image pt-5 p-3  rounded-b-full bg-[#442fb9]">
           <div className="profile-img bg-white  p-3 rounded-full ">

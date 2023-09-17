@@ -281,19 +281,18 @@ export const resumeContent = {
     data: [
       {
         id: 1,
-        grade: 5.81,
-        college_name: "IIT, Bangalore",
+        grade: 7.52,
+        college_name: "CGEC",
         department: "Computer Science",
         degree: "B.E",
-        start_date: "2022-12-27 15:55:41",
-        end_date: "2022-10-17 14:37:52",
-        location: "17 Burrows Point",
+        start_date: "2017-09-01 15:55:41",
+        end_date: "2020-05-17 14:37:52",
+        location: "Coochbehar,India",
         coursework: [
-          "Web Development",
+          "Web application Development",
           "Client-side scripting",
           "Web architecture",
-          "Object-Oriented Programming",
-          "Mobile application development",
+          "Object-Oriented Programming"
         ],
       },
       {
@@ -482,29 +481,29 @@ export const resumeContent = {
     {
       keywords: [
         "HTML / JSX",
-        "SCSS / CSS / BEM / Styled Components",
+        "SCSS / CSS / Styled Components",
         "Javascript / Typescript",
-        "React / Next",
-        "Redux / Apollo",
+        "React.js / Next.js",
+        "Redux ",
       ],
-      level: "Senior",
+      level: "Entry Level",
       name: "Frontend",
     },
     {
-      keywords: ["Node", "Ruby", "Python", "Postgres", "Redis", "Serverless"],
-      level: "Senior",
+      keywords: ["Node.js", "Postgres", "MongoDb", "Serverless"],
+      level: "Entry Level",
       name: "Backend",
     },
     {
-      keywords: ["AWS", "G Cloud", "Heroku", "Caching"],
-      level: "Senior",
+      keywords: ["AWS", "Heroku", "Caching"],
+      level: "Entry Level",
       name: "Devops",
     },
   ],
   awards: [
     {
-      title: "Defender of the Internet",
-      awarder: "Fight For The Future",
+      title: "Spotlight of the Organization",
+      awarder: "2022",
     },
   ],
   work: [
@@ -541,7 +540,7 @@ export const resumeContent = {
       name: "Gardening",
     },
     {
-      name: "Music / Jamming",
+      name: "Travlling ",
     },
     {
       name: "Reading / Writing",
@@ -580,8 +579,19 @@ export const userInfo = {
     first: "Kishor",
     last: "Sarkar",
   },
-  image:
-  "https://avatars.githubusercontent.com/u/43110343?v=4",
+  contact: {
+    street: "123 Main Street",
+    city: "Kolkata",
+    country: "India",
+    email: "kishor.sarkar.in@gmail.com",
+    phone: "863-731-7273",
+    countryCode: "+91",
+    coordionate:{
+      "lon": 87.5275,
+      "lat": 23.9109
+  }
+  },
+  image: "https://avatars.githubusercontent.com/u/43110343?v=4",
   about:
     "Cuber and Self-Taught Front-end Software Developer, I enjoy building responsive web apps & designs using HTML5, CSS3, JavaScript, Next.js, React.js, Firebase, Restful APIs.., I have been working on the web for around 3 years building freelance/learning projects.",
 };

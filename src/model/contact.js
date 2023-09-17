@@ -19,7 +19,7 @@ const contactSchema = new Schema({
     },
     phone:{
         type:Number,
-        required:[true, "Phone is required"]
+        required:false
     },
     date: { type: Date, default: Date.now },
 })

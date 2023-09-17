@@ -4,14 +4,20 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { socialmedia, urls } from "@/assets/data/mock";
 import Logo from "./Logo";
+import { useState } from "react";
+import MobileMenu from "./mobileMenu";
+import { FaBars } from "react-icons/fa";
 
 const Navbar = () => {
   const pathname = usePathname();
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
  
   return (
-    <header className=" w-full px-32 py-8 font-medium flex item-center justify-between relative print:hidden">
-      <nav className="flex capitalize items-center gap-4">
+    <header className=" max-sm:hidden w-full px-32 py-8 font-medium flex item-center justify-between relative print:hidden">
+      <nav className="flex capitalize items-center gap-4 ">
         {urls.map((url) => (
           <Link href={`${url?.url}`} className={`relative group`} key={url.id}>
             {url?.text}
@@ -26,16 +32,23 @@ const Navbar = () => {
         ))}
       </nav>
 
-      <nav className="flex items-center gap-3">
+      <nav className="flex items-center gap-3 xs:hidden  md:flex">
         {socialmedia.map((social) => (
           <motion.a key={social.id} target="_blank" href={`${social.url}`} whileHover={{y:-2}} whileTap={{scale:0.9}}>
             {social.icon}
           </motion.a>
         ))}
       </nav>
-      <div className=" absolute left-[50%] top-2 translate-x-[-50%]">
+      <div className=" absolute left-[50%] top-2 translate-x-[-50%] ">
         <Logo />
       </div>
+      <div className="md:hidden ">
+    
+        <button onClick={toggleMenu}><FaBars/></button>
+
+      {isMenuOpen && <MobileMenu isOpen={isMenuOpen} toggleMenu={toggleMenu} />}
+     
+    </div>
     </header>
   );
 };

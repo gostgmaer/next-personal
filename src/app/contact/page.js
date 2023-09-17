@@ -1,5 +1,7 @@
 "use client";
+import { socialmedia, userInfo } from "@/assets/data/mock";
 import { invokeExternalAPI } from "@/helper/invokeAPI";
+import { motion } from "framer-motion";
 // import invokeExternalAPI from '../helper/invokeAPI.js'
 import React, { useState } from "react";
 // import { getContact, postContact } from "../api/contact/route";
@@ -15,10 +17,47 @@ const Index = () => {
         <div className="w-1/3">
           <div className="bg-blue-500 text-white px-4 py-2 rounded">
             <h2 className="text-lg font-semibold mb-2">Contact Information</h2>
-            <p className="mb-2">123 Main Street</p>
-            <p className="mb-2">City, Country</p>
-            <p className="mb-2">Email: contact@example.com</p>
-            <p className="mb-2">Phone: +1 123-456-7890</p>
+            <p className="mb-2">{userInfo.contact.street}</p>
+            <p className="mb-2">
+              {userInfo.contact.city}, {userInfo.contact.country}
+            </p>
+            <p className="mb-2">
+              {" "}
+              Email:{" "}
+              <a href={`mailto:${userInfo.contact.email}`}>
+                {userInfo.contact.email}
+              </a>
+            </p>
+            <p className="mb-2">
+              Phone:{" "}
+              <a
+                href={`tel:${
+                  userInfo.contact.countryCode
+                }${userInfo.contact.phone.replace(/-/g, "")}`}
+              >
+                {userInfo.contact.countryCode}-{userInfo.contact.phone}
+              </a>
+            </p>
+            <div className="socialMedia">
+              <h3 className=" font-medium mb-1 mt-2 text-lg">Social Media</h3>
+              <nav className="flex gap-1">
+                {socialmedia.map((social) => (
+                  <motion.a
+                    key={social.id}
+                    target="_blank"
+                    href={`${social.url}`}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    {social.icon}
+                  </motion.a>
+                ))}
+              </nav>
+            </div>
+            {/* <div className="Coordinate">
+              <h3 className=" font-medium mb-1 mt-2 text-lg">Coordinate</h3>
+             <p><span>{userInfo}</span></p>
+            </div> */}
           </div>
         </div>
       </div>
@@ -64,10 +103,10 @@ const ContatForm = (second) => {
       },
       {}
     );
-  setError(req.error);
-    setSuccess(req.data)
+    setError(req.error);
+    setSuccess(req.data);
     // console.log(req);
-    console.log(success);
+    // console.log(success);
     //     const res = await fetch('/api/contact', {
     //         method:"POST",
     //         headers:{
@@ -83,93 +122,100 @@ const ContatForm = (second) => {
     // console.log('formdata ', data,success,msg)
   };
   return (
-    <div className="forms max-w-sm bg-white  rounded-lg shadow-md w-full p-5">
-     {success?.status != "success" && <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label
-            htmlFor="name"
-            className="block text-gray-700 font-medium mb-2"
-          >
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            className="w-full border border-gray-300 p-2 rounded"
-            placeholder="Your Name"
-            required
-            onChange={handleChange}
-            value={formData.name}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-gray-700 font-medium mb-2"
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="w-full border border-gray-300 p-2 rounded"
-            placeholder="Your Email"
-            required
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-gray-700 font-medium mb-2"
-          >
-            Phone Number
-          </label>
-          <input
-            type="phone"
-            id="phone"
-            name="phone"
-            className="w-full border border-gray-300 p-2 rounded"
-            placeholder="Your phone"
-            required
-            value={formData.phone}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="message"
-            className="block text-gray-700 font-medium mb-2"
-          >
-            Message
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={4}
-            className="w-full border border-gray-300 p-2 rounded"
-            placeholder="Your Message"
-            required
-            value={formData.message}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-        <div className="text-center">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
-          >
-            Send Message
-          </button>
-        </div>
-      </form>}
+    <div className="forms  bg-white  rounded-lg shadow-md w-full p-5">
+      {success?.status != "success" && (
+        <form onSubmit={handleSubmit}>
+          <div className="flex justify-between gap-5">
+          <div className="mb-4 w-1/2">
+            <label
+              htmlFor="name"
+              className="block text-gray-700 font-medium mb-2"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="w-full border border-gray-300 p-2 rounded"
+              placeholder="Your Name"
+              required
+              onChange={handleChange}
+              value={formData.name}
+            />
+          </div>
+          <div className="mb-4 w-1/2">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 font-medium mb-2"
+            >
+              Phone Number(Optional)
+            </label>
+            <input
+              type="phone"
+              id="phone"
+              name="phone"
+              className="w-full border border-gray-300 p-2 rounded"
+              placeholder="Your phone"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+          </div>
+          </div>
+       
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 font-medium mb-2"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="w-full border border-gray-300 p-2 rounded"
+              placeholder="Your Email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+
+         
+          <div className="mb-4">
+            <label
+              htmlFor="message"
+              className="block text-gray-700 font-medium mb-2"
+            >
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={4}
+              className="w-full border border-gray-300 p-2 rounded"
+              placeholder="Your Message"
+              required
+              value={formData.message}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+          <div className="text-center">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
+            >
+              Send Message
+            </button>
+          </div>
+        </form>
+      )}
 
       <div className="message">
-
-      {success?.status=="success" ?  "Your Message is Send Successfully i will reponse shortly":""}
+        {success?.status == "success"
+          ? "Your Message is Send Successfully i will reponse shortly"
+          : ""}
       </div>
     </div>
   );

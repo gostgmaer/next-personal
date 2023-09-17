@@ -1,6 +1,7 @@
 "use client";
 import { projectArray } from "@/assets/data/projects";
 import Technologies from "@/components/projects/technologi";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -55,23 +56,25 @@ const Project = ({ project }) => {
   return (
     <Link href={`/portfolio/${project.name}`}>
       <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform hover:scale-105">
-        <img
+        <Image
           src={project.pictures[0].image.url}
           alt={project.name}
+          width={176}
+          height={320}
           className="w-full h-auto object-cover max-h-44"
         />
 
         <div className="p-4">
           <h2 className="text-2xl font-semibold mb-2">{project.name}</h2>
           <p className="text-gray-600 mb-4">
-            {project.intro.substring(0, 235) + "..."}
+            {project.intro.substring(0, 140) + "..."}
           </p>
 
           <div className="flex  flex-wrap gap-2 mb-4 justify-start">
-            {project.tags.map((tag, index) => (
+            {project.tags.splice(0,4).map((tag, index) => (
               <span
                 key={index}
-                className="bg-blue-500 text-white px-2 py-1 rounded"
+                className="bg-blue-500 text-white px-4 py-1 rounded"
               >
                 {tag}
               </span>

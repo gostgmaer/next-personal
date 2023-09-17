@@ -10,6 +10,7 @@ module.exports = {
       screens: {
         print: {raw: 'print'},
         screen: {raw: 'screen'},
+        
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
