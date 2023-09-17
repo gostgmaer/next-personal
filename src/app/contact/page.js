@@ -1,5 +1,6 @@
 "use client";
-
+import { invokeExternalAPI } from "@/helper/invokeAPI";
+// import invokeExternalAPI from '../helper/invokeAPI.js'
 import React, { useState } from "react";
 // import { getContact, postContact } from "../api/contact/route";
 
@@ -32,9 +33,11 @@ const ContatForm = (second) => {
     name: "",
     email: "",
     message: "",
+    phone: "",
   });
   const [error, setError] = useState([]);
   const [success, setSuccess] = useState(false);
+  const [response, setResponse] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,61 +47,42 @@ const ContatForm = (second) => {
     });
   };
 
-  
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    var myData = {
-     
-    }
-
-    const res = await fetch("api/contact", {
-      method: "POST",
-      headers: {
+    const data = {
+      fullname: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+    };
+    const req = await invokeExternalAPI(
+      "/contact",
+      "POST",
+      JSON.stringify(data),
+      {
         "Content-type": "application/json",
       },
-      body: JSON.stringify({
-        name:formData.name,
-        email:formData.email,
-        message:formData.message
-      }),
-    });
+      {}
+    );
 
-    const { msg, success } = await res.json();
-    setError(msg);
-    setSuccess(success);
-
-    if (success) {
-     formData.name=""
-     formData.email=""
-     formData.message=""
-    }
-    // try {
-    //   const response = await fetch("/api/submit", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(formData), // Send the form data as JSON
-    //   });
-
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     console.log(data); // Log the response from the backend
-    //     // Optionally, you can show a success message to the user
-    //   } else {
-    //     console.error("Form submission failed");
-    //     // Optionally, you can show an error message to the user
-    //   }
-    // } catch (error) {
-    //   console.error("Error submitting form:", error);
-    //   // Optionally, you can show an error message to the user
-    // }
+    console.log(req);
+    //     const res = await fetch('/api/contact', {
+    //         method:"POST",
+    //         headers:{
+    //             "Content-type":"application/json"
+    //         },
+    //         body:JSON.stringify(data)
+    //     });
+    //    const {msg, success} = await res.json();
+    //  //  const data1 = await res.json();
+    //    console.log(msg, success)
+    // setError(msg);
+    // setSuccess(success)
+    // console.log('formdata ', data,success,msg)
   };
   return (
     <div className="forms max-w-sm bg-white  rounded-lg shadow-md w-full p-5">
-      <form >
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
             htmlFor="name"
@@ -132,6 +116,24 @@ const ContatForm = (second) => {
             placeholder="Your Email"
             required
             value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="email"
+            className="block text-gray-700 font-medium mb-2"
+          >
+            Phone Number
+          </label>
+          <input
+            type="phone"
+            id="phone"
+            name="phone"
+            className="w-full border border-gray-300 p-2 rounded"
+            placeholder="Your phone"
+            required
+            value={formData.phone}
             onChange={handleChange}
           />
         </div>
