@@ -1,6 +1,6 @@
 import axios from "axios";
 // import { apiUrl } from "./setting";
- const baseURL = process.env.BASE_URL;
+ const baseURL = 'https://next-personal-seven.vercel.app/api';
 // const Authorization = {
 //   Authorization: `${BEARER} ${token}`,
 // };
