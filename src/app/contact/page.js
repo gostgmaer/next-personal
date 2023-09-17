@@ -35,8 +35,8 @@ const ContatForm = (second) => {
     message: "",
     phone: "",
   });
-  const [error, setError] = useState([]);
-  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const [response, setResponse] = useState(null);
 
   const handleChange = (e) => {
@@ -64,8 +64,10 @@ const ContatForm = (second) => {
       },
       {}
     );
-
-    console.log(req);
+  setError(req.error);
+    setSuccess(req.data)
+    // console.log(req);
+    console.log(success);
     //     const res = await fetch('/api/contact', {
     //         method:"POST",
     //         headers:{
@@ -82,7 +84,7 @@ const ContatForm = (second) => {
   };
   return (
     <div className="forms max-w-sm bg-white  rounded-lg shadow-md w-full p-5">
-      <form onSubmit={handleSubmit}>
+     {success?.status != "success" && <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
             htmlFor="name"
@@ -163,7 +165,12 @@ const ContatForm = (second) => {
             Send Message
           </button>
         </div>
-      </form>
+      </form>}
+
+      <div className="message">
+
+      {success?.status=="success" ?  "Your Message is Send Successfully i will reponse shortly":""}
+      </div>
     </div>
   );
 };
