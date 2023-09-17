@@ -58,7 +58,7 @@ const Interest = ({ data }) => {
   return (
     <div className="education">
       <p className="degree font-medium text-sm  flex gap-1">
-        <span className="language"> {data.name}</span>
+       , <span className="language"> {data.name}</span>
       </p>
     </div>
   );
