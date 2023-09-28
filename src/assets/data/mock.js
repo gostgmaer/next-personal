@@ -104,8 +104,8 @@ export const resumeContent = {
     data: [
       {
         id: 1,
-        position: "Research and Development",
-        company: "Tagchat",
+        position: "Froentend Developer",
+        company: "Inadev India",
         start_time: "2022-06-16 05:08:21",
         end_time: "2022-08-07 10:27:46",
         details: [
@@ -291,7 +291,7 @@ export const resumeContent = {
         coursework: [
           "Web application Development",
           "Client-side scripting",
-          "Web architecture",
+          "Computer Science",
           "Object-Oriented Programming"
         ],
       },
@@ -314,6 +314,24 @@ export const resumeContent = {
       },
     ],
   },
+  projects:[
+    {
+        "deployedUrl": "https://next-personal-seven.vercel.app/",
+        "description": "The Personal Portfolio Website built with Next.js is a dynamic and versatile web application designed to showcase your skills, achievements, and creative work to the world. This project leverages the power of Next.js, a popular React framework, to create a seamless and highly responsive web experience that not only impresses visitors but also highlights your unique talents and expertise.",
+        "overview": "This project is for for me as a UI developer",
+        "projectTitle": "Personal Portfolio",
+        "repositoryUrl": "https://github.com/gostgmaer/next-personal",
+        "title": ""
+    },
+    {
+        "deployedUrl": "https://next-resume-builder-olive.vercel.app/",
+        "description": "This project is not yet done still working on this project",
+        "overview": "A resume Builder nextjs Application",
+        "projectTitle": "Resume Builder",
+        "repositoryUrl": "https://github.com/gostgmaer/next-resume-builder",
+        "title": ""
+    }
+],
   profile: {
     name: "Kishor Sarkar",
     contact: [
@@ -509,31 +527,14 @@ export const resumeContent = {
   work: [
     {
       summary:
-        "Tokenized is a Bitcoin wallet for issuing, managing and trading digital tokens. I built out the front end which was packaged as an electron app. It was a difficult frontend to build because we store the users keys locally and used them to sign transactions and contracts.",
-      website: "https://tokenized.com/",
-      name: "Tokenized",
-      location: "Melbourne",
-      position: "Senior Javascript Developer",
-      startDate: "2020-05-05",
-      highlights: ["React", "Redux", "SCSS", "Product"],
-    },
-    {
-      summary:
-        "Blockbid is an Australian crypto currency exchange. I started off on the frontend but eventually became lead tech and worked on every moving piece of the exchange. I really enjoyed working with liquidity providers and connecting their platforms to help us achieve liquid markets.",
-      website: "https://platform.blockbid.io",
-      name: "Blockbid",
-      location: "Melbourne",
-      position: "Senior Javascript Developer",
-      startDate: "2018-03-01",
-      endDate: "2020-01-01",
-      highlights: [
-        "React, Apollo, Styled Components",
-        "Node.js / Rails",
-        "Docker / Heroku / GCP",
-        "Used Figma for design and UX work",
-        "Optimizing markets with tens of millions of rows using SQL.",
-      ],
-    },
+        "Worked as a Product Configurator and UI developer write cross platform web applicaion, awarded two time as spotlight and kudos ",
+      website: "https://www.inadev.com/",
+      name: "Inadev India",
+      location: "Kolkata",
+      position: "Front End Developer",
+      startDate: "2021-08-02",
+      highlights: ["Css", "HTML5", "SCSS", "Ceebit","Javascript","Typescript","Angular"],
+    }
   ],
   interests: [
     {
@@ -552,14 +553,14 @@ export const resumeContent = {
   languages: [
     {
       language: "English",
-      fluency: "Native speaker",
+      fluency: "Intermediate",
       read: 1,
       write: 1,
       speak: 1,
     },
     {
       language: "Hindi",
-      fluency: "Native speaker",
+      fluency: "begineer",
       read: 0,
       write: 0,
       speak: 1,
