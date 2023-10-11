@@ -45,7 +45,7 @@ export const get = async (endpint, query, id) => {
   return response?.data ? response?.data : error; // or set initial value
 };
 
-export const getsingle = async (endpint, query, id) => {
+export const getsingle = async (endpint, id,query) => {
   const cookies = parseCookies();
   const token = cookies["accessToken"];
   const session = cookies["session"];
@@ -63,6 +63,36 @@ export const getsingle = async (endpint, query, id) => {
   let error;
   try {
     response = await instance.request(option);
+
+  
+  } catch (e) {
+    error = e.response.data;
+   
+
+    throw new Error(JSON.stringify(e.response.data));
+  }
+  return response?.data ? response?.data : error; // or set initial value
+};
+
+
+export const serverGetsingle = async (endpint, id,query) => {
+  const cookies = parseCookies();
+  const token = cookies["accessToken"];
+  const session = cookies["session"];
+
+  const option = {
+    method: "get",
+    url: baseURL + endpint + `/${id}`,
+    headers: {
+      Authorization: token,
+      session_id: session,
+    },
+    params: query,
+  };
+  let response;
+  let error;
+  try {
+    response = await axios.request(option);
 
   
   } catch (e) {

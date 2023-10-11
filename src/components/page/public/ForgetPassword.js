@@ -34,7 +34,7 @@ const ForgetPassword = () => {
 
   useEffect(() => {
     if (userId) {
-      router.push("/profile");
+      router.push("/dashboard");
     }
   }, [userId]);
 

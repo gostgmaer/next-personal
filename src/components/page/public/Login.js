@@ -53,7 +53,7 @@ const Login = () => {
 
   useEffect(() => {
     if (userId) {
-      router.push("/profile");
+      router.push("/dashboard");
     }
   }, [userId]);
 
@@ -130,7 +130,7 @@ const Login = () => {
             </button>
           </div>
         </div>
-        <p className="text-gray-700">
+        {/* <p className="text-gray-700">
           Don t have an account?{" "}
           <Link
             href={"/auth/register"}
@@ -138,7 +138,7 @@ const Login = () => {
           >
             Sign up here
           </Link>
-        </p>
+        </p> */}
       </div>
   
     </div>
