@@ -1,11 +1,18 @@
+"use client";
+
 import PrivateLayout from "@/components/global/privateLayout";
+import { useAxios } from "@/lib/interceptors";
 import React from "react";
 
 const Page = () => {
+  const [axios, spinner] = useAxios();
   return (
-    <PrivateLayout >
-      <h3>This is Profile</h3>
-    </PrivateLayout>
+    <>
+      <PrivateLayout>
+        <h3>This is Dashboard</h3>
+      </PrivateLayout>
+      {spinner}
+    </>
   );
 };
 
