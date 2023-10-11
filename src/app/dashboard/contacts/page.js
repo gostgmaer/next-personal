@@ -11,17 +11,14 @@ import { MdGridView } from "react-icons/md";
 const Page = () => {
   const [contact, setContact] = useState([]);
 
-const updateIfnotActive = async (id) => { 
-  
-  const res  = await patch("/contact",{acknoledge: true},id)
-  console.log(res);
-  if (res.statusCode ===200) {
-    const req = await get("/contact");
-    setContact(req.result);
-    
-  }
- }
-
+  const updateIfnotActive = async (id) => {
+    const res = await patch("/contact", { acknoledge: true }, id);
+    console.log(res);
+    if (res.statusCode === 200) {
+      const req = await get("/contact");
+      setContact(req.result);
+    }
+  };
 
   const loadContacts = async () => {
     // Handle form submission here, e.g., send data to an API
@@ -34,24 +31,12 @@ const updateIfnotActive = async (id) => {
   }, []);
 
   return (
-    <PrivateLayout heading={"Contacts"}>
+    <PrivateLayout>
       <div className="container p-2 mx-auto sm:p-4 dark:text-gray-100">
         <div className="overflow-x-auto">
           <table className="w-full p-6 text-xs text-left ">
             <thead>
               <tr className=" bg-gray-700">
-                {/* <th scope="col" className="p-4">
-                  <div className="flex items-center">
-                    <input
-                      id="checkbox-all-search"
-                      type="checkbox"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded ring-blue-500 focus:ring-blue-600 ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                    />
-                    <label htmlFor="checkbox-all-search" className="sr-only">
-                      checkbox
-                    </label>
-                  </div>
-                </th> */}
                 <th scope="col" className="px-6 py-3">
                   Name
                 </th>
@@ -113,7 +98,12 @@ const updateIfnotActive = async (id) => {
                     {moment(item.createdAt).calendar()}
                   </td>
                   <td className="p-3 flex justify-end">
-                    <button onClick={()=>updateIfnotActive(item._id)} className={`text-gray-40  hover:scale-110 hover:border-2  text-gray-200 p-2 border rounded-full  mx-2 ${item.acknoledge && 'text-green-600 border-green-600'}`}>
+                    <button
+                      onClick={() => updateIfnotActive(item._id)}
+                      className={`text-gray-40  hover:scale-110 hover:border-2  text-gray-200 p-2 border rounded-full  mx-2 ${
+                        item.acknoledge && "text-green-600 border-green-600"
+                      }`}
+                    >
                       <FaCheck />
                     </button>
                     <Link
@@ -132,6 +122,11 @@ const updateIfnotActive = async (id) => {
             </tbody>
             <tfoot className="w-full"></tfoot>
           </table>
+          {contact && (
+            <div className="bg-gray-900 text-white px-auto capitalize text-center py-40">
+              no content found{" "}
+            </div>
+          )}
           <div className="bg-gray-700 text-white px-4 py-2">
             <Pagination
               endpoint={undefined}
