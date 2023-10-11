@@ -4,8 +4,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import PasswordField from "@/components/global/fields/PasswordField";
 import { post } from "@/lib/http";
-import { useAuthContext } from "@/context/authContext";
+
 import { useAxios } from "@/lib/interceptors";
+import { useAuthContext } from "@/contex/authContext";
 const Signup = () => {
   const { handleLoginAuth, user, userId } = useAuthContext();
   const [axios, spinner] = useAxios();
@@ -208,7 +209,7 @@ const Signup = () => {
           </Link>
         </p>
       </div>
-      {spinner}
+ 
     </div>
   );
 };

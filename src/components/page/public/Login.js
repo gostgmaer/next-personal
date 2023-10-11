@@ -1,16 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import signIn from "@/config/firebase/auth/signin";
-import { useAuthContext } from "@/context/authContext";
 import Link from "next/link";
-import PasswordField from "@/components/global/fields/PasswordField";
-import { useGlobalAppContext } from "@/context/context";
-import Loader from "@/utils/loader/Loader";
 import { useAxios } from "@/lib/interceptors";
+import { useAuthContext } from "@/contex/authContext";
+import { useGlobalContext } from "@/contex/contextAPi";
+import PasswordField from "@/components/global/fields/PasswordField";
+
 const Login = () => {
   const { handleLoginAuth, user, userId } = useAuthContext();
-  const { loader, loaderFalse, loaderTrue } = useGlobalAppContext();
+  const { loader, loaderFalse, loaderTrue } = useGlobalContext();
   const [axios, spinner] = useAxios();
   const router = useRouter();
 
@@ -141,7 +140,7 @@ const Login = () => {
           </Link>
         </p>
       </div>
-      {spinner}
+  
     </div>
   );
 };

@@ -1,8 +1,10 @@
-import ForgetPassword from "@/components/Pages/public/ForgetPassword";
+import ForgetPassword from "@/components/page/public/ForgetPassword";
+import Link from "next/link";
 
 const Index = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+     <div className="mt-5"><Link href={'/'} >Go to Homepage</Link></div>
       <ForgetPassword/>
     </div>
   );

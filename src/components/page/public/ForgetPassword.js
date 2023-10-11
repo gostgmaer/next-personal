@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { post } from "@/lib/http";
-import { useAuthContext } from "@/context/authContext";
 import { useAxios } from "@/lib/interceptors";
+import { useAuthContext } from "@/contex/authContext";
 
 const ForgetPassword = () => {
   const { handleLoginAuth, user, userId } = useAuthContext();
@@ -81,7 +81,7 @@ const ForgetPassword = () => {
           </Link>
         </p>
       </div>
-      {spinner}
+     
     </div>
   );
 };

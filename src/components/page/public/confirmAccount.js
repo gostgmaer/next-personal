@@ -4,8 +4,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { post } from "@/lib/http";
 import { notifyerror } from "@/lib/notify/notice";
 import Link from "next/link";
-import { useAuthContext } from "@/context/authContext";
+
 import { useAxios } from "@/lib/interceptors";
+import { useAuthContext } from "@/contex/authContext";
 const ConfirmAccount = () => {
   const { handleLoginAuth, user, userId } = useAuthContext();
   const router = useRouter();
@@ -13,8 +14,6 @@ const ConfirmAccount = () => {
   const [userData, setUserData] = useState(undefined);
   const [error, setError] = useState(undefined);
   const param = useSearchParams();
-
-
   const confirmAccountAction = async (e) => {
     if (!param.getAll("token")[0]) {
       notifyerror("No Account Confirmation token found", 2000);
@@ -78,7 +77,7 @@ const ConfirmAccount = () => {
           )}
         </div>
       </div>
-      {spinner}
+      {/* {spinner} */}
     </div>
   );
 };

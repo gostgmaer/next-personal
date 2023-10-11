@@ -1,17 +1,14 @@
 // @ts-nocheck
-"use client"
+"use client";
 import React from "react";
 import Header from "./navbar/private/header";
 import { useAxios } from "@/lib/interceptors";
 
-const PrivateLayout = ({children, heading}) => {
-
-    const [spinner] = useAxios()
+const PrivateLayout = ({ children, heading }) => {
+  const [spinner] = useAxios();
 
   return (
     <div className="print:px-0">
-
-
       <Header />
       {heading && (
         <div className="bg-white shadow">
@@ -22,11 +19,9 @@ const PrivateLayout = ({children, heading}) => {
           </div>
         </div>
       )}
-      <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-         {children}
-        </div>
+      <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">{children}</div>
 
-        {spinner}
+      {spinner}
     </div>
   );
 };

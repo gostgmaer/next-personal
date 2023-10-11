@@ -27,7 +27,7 @@ function classNames(...classes) {
 
 export default function Header() {
 
-    const [currentPage, setCurrentPage] = useState('dashboard');
+  
 
   return (
     <div className="min-h-full">
@@ -36,15 +36,16 @@ export default function Header() {
           <>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex h-16 items-center justify-between">
-                <div className="flex items-center">
+                <div className="flex items-center text-white">
                   <div className="flex-shrink-0">
-                    <Image
+                    {/* <Image
                       className="h-8 w-8"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                       alt="Your Company"
                       width={100}
                       height={50}
-                    />
+                    /> */}
+                    <Link href={'/'} className=" text-2xl cursor-pointer rounded text-blue-200">Resumes</Link>
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
