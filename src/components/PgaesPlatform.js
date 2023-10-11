@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import Navbar from "./navbar";
+import Navbar from "./global/navbar/public/navbar";
 import Top from "./Top";
 import { useGlobalContext } from "@/contex/contextAPi";
 
-const Pagelayout = (pageElement) => {
+const PagePlatofrm = (pageElement) => {
   const { openLeft, setOpenLeft } = useGlobalContext();
   return (
     <main className="flex min-h-screen items-center justify-center overflow-hidden bg-[url('/assets/images/img1.jpg')] bg-cover bg-no-repeat bg-bottom">
@@ -17,4 +17,4 @@ const Pagelayout = (pageElement) => {
   );
 };
 
-export default Pagelayout;
+export default PagePlatofrm;

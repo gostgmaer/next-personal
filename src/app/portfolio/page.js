@@ -1,5 +1,6 @@
 "use client";
 import { projectArray } from "@/assets/data/projects";
+import PageLayout from "@/components/global/pageLayout";
 import Technologies from "@/components/projects/technologi";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +21,7 @@ const Index = () => {
     setCurrentPage(pageNumber);
   };
   return (
-    <div>
+    <PageLayout>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
         {currentProjects.map((project, index) => (
           <Project key={index} project={project} />
@@ -45,7 +46,7 @@ const Index = () => {
           )
         )}
       </div>
-    </div>
+    </PageLayout>
   );
 };
 
