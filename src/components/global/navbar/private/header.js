@@ -5,29 +5,39 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useAuthContext } from "@/contex/authContext";
 
-const user = {
-  name: "Kishor Sarkar",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
+// const user = {
+//   name: "Kishor Sarkar",
+//   email: "tom@example.com",
+//   imageUrl:
+//     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+// };
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", current: true ,iscurrent: true},
-  { name: "Contatcs", href: "/dashboard/contacts", current: false,iscurrent: true },
-  { name: "Projects", href: "/dashboard/projects", current: false ,iscurrent: true},
+  { name: "Dashboard", href: "/dashboard", current: true, iscurrent: true },
+  {
+    name: "Contatcs",
+    href: "/dashboard/contacts",
+    current: false,
+    iscurrent: true,
+  },
+  {
+    name: "Projects",
+    href: "/dashboard/projects",
+    current: false,
+    iscurrent: true,
+  },
 ];
-const userNavigation = [
-  { name: "Your Profile", href: "/dashboard/profile" }
-];
+const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Header() {
+  const { userId, Logout, user } = useAuthContext();
 
-  
+  console.log(user);
 
   return (
     <div className="min-h-full">
@@ -45,7 +55,12 @@ export default function Header() {
                       width={100}
                       height={50}
                     /> */}
-                    <Link href={'/'} className=" text-2xl cursor-pointer rounded text-blue-200">Resumes</Link>
+                    <Link
+                      href={"/"}
+                      className=" text-2xl cursor-pointer rounded text-blue-200"
+                    >
+                      Resumes
+                    </Link>
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
@@ -60,7 +75,6 @@ export default function Header() {
                             "rounded-md px-3 py-2 text-sm font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
-                       
                         >
                           {item.name}
                         </Link>
@@ -85,10 +99,12 @@ export default function Header() {
                         <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
-                          <img
+                          <Image
                             className="h-8 w-8 rounded-full"
-                            src={user.imageUrl}
+                            src={user?.user?.profilePicture}
                             alt=""
+                            width={50}
+                            height={50}
                           />
                         </Menu.Button>
                       </div>
@@ -117,9 +133,14 @@ export default function Header() {
                               )}
                             </Menu.Item>
                           ))}
-                          <Menu.Item >
-                             <span className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign out</span>
-                            </Menu.Item>
+                          <Menu.Item>
+                            <span
+                              onClick={Logout}
+                              className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
+                            >
+                              Sign out
+                            </span>
+                          </Menu.Item>
                         </Menu.Items>
                       </Transition>
                     </Menu>
@@ -162,18 +183,20 @@ export default function Header() {
               <div className="border-t border-gray-700 pb-3 pt-4">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
-                    <img
-                      className="h-10 w-10 rounded-full"
-                      src={user.imageUrl}
+                    <Image
+                      className="h-8 w-8 rounded-full"
+                      src={user?.user?.profilePicture}
                       alt=""
+                      width={50}
+                      height={50}
                     />
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">
-                      {user.name}
+                      {user?.user?.firstName}
                     </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
-                      {user.email}
+                      {user?.user?.email}
                     </div>
                   </div>
                   <button

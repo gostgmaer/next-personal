@@ -4,6 +4,7 @@ import React from "react";
 import Header from "./navbar/private/header";
 
 const PrivateLayout = ({ children }) => {
+  
   return (
     <div className="print:px-0">
       <Header />
