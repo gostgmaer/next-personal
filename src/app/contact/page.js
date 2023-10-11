@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { contactValidationSchema } from "@/util/validation/contact";
 import { get, post } from "@/lib/http";
+import { useAxios } from "@/lib/interceptors";
 // import { getContact, postContact } from "../api/contact/route";
 
 const Index = () => {
@@ -79,6 +80,7 @@ const Index = () => {
 export default Index;
 
 const ContatForm = (second) => {
+  const [axios, spinner] = useAxios();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -327,6 +329,7 @@ const ContatForm = (second) => {
           </div>
         </Form>
       </Formik>
+      {spinner}
     </div>
   );
 };

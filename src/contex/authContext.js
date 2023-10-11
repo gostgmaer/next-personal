@@ -27,7 +27,7 @@ export const AuthContextProvider = ({ children }) => {
       });
       setUser(res);
       setUserId({ ...res.user, user_id: res.user._id });
-      router.push("/profile");
+      router.push("/dashboard");
       return res;
     } catch (error) {}
   };
