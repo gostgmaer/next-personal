@@ -99,6 +99,7 @@ const ContatForm = (second) => {
     const req = await post("/contact/create", { ...values, subscribe: agreed });
     setSuccess(req);
     resetForm();
+    setAgreed(false);
   };
 
   function classNames(...classes) {

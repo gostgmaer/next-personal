@@ -3,7 +3,7 @@ import React from "react";
 
 const Page = () => {
   return (
-    <PrivateLayout heading={"Project:ID"}>
+    <PrivateLayout >
       <h3>This is Project</h3>
     </PrivateLayout>
   );

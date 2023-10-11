@@ -1,11 +1,12 @@
 import { userInfo } from "@/assets/data/mock";
-import Pagelayout from "@/components/PgaesPlatform";
+import PageLayout from "@/components/global/pageLayout";
+
 import Image from "next/image";
 import React from "react";
 
 const Index = () => {
   return (
-    <Pagelayout>
+    <PageLayout >
       <div className=" h-[calc(100vh-88px)] bg-gray-100 flex items-center justify-center">
         <div className="bg-white min-h-max p-8 rounded-lg shadow-md w-full  flex">
           <div className="w-2/3 pr-8">
@@ -50,7 +51,7 @@ const Index = () => {
           </div>
         </div>
       </div>
-    </Pagelayout>
+    </PageLayout>
   );
 };
 
