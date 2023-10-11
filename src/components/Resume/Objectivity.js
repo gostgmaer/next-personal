@@ -6,7 +6,7 @@ const Objectivity = () => {
   return (
     <div className="objectivity w-full pt-10 ">
       <h3 className="text-xl font-bold uppercase flex items-center gap-2 "> <MdPerson className=" bg-slate-800 h-6 w-6 text-white rounded-full p-1"/> About Me</h3>
-      <p className=" text-justify mt-2 print:text-xs">{resumeContent.profile.summery}</p>
+      <p className=" text-justify mt-2 print:text-xs text-sm">{resumeContent.profile.summery}</p>
     </div>
   );
 };

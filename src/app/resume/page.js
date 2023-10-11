@@ -4,11 +4,12 @@ import Experiances from "@/components/Resume/experiaces";
 import LeftContent from "@/components/Resume/Topcontent";
 import SkillSet from "@/components/Resume/Skilsset";
 import Languages from "@/components/Resume/Others/Languages";
-import DownloadResume from "@/components/Resume/Others/DownloadResume";
 import { resumeContent } from "@/assets/data/mock";
 import { FaAppStore, FaRProject } from "react-icons/fa";
 import { MdApps } from "react-icons/md";
 import Head from "next/head";
+import DownloadResume from "@/components/Resume/Others/DownloadResume";
+import PageLayout from "@/components/global/pageLayout";
 
 export async function generateMetadata({ params }) {
   return {
@@ -31,9 +32,9 @@ export async function generateMetadata({ params }) {
 
 const Index = () => {
   return (
-    <div className="">
+    <PageLayout >
       <DownloadResume />
-      <div className="resume w-full  flex flex-row print:mt-0 print:mb-0 gap-10 mt-10 mb-40 print:bg-blue-50  items-start bg-white ">
+      <div className="resume overflow-hidden flex flex-row print:mt-0 print:mb-0 gap-10 mt-10 mb-40 print:bg-blue-50  items-start bg-white ">
         <div className="left w-1/3 print:h-screen bg-blue-200">
           <LeftContent />
         </div>
@@ -41,17 +42,18 @@ const Index = () => {
           <Objectivity />
           <Experiances />
           <SkillSet />
-          <Projects projects={resumeContent.projects} />
+          <Projects/>
           <Languages />
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 
 export default Index;
 
-const Projects = ({ projects }) => {
+
+const Projects = () => {
   return (
     <div className=" my-2">
       <h3 className="text-2xl my-1 font-semibold flex gap-2 items-center print:text-xl">
@@ -60,7 +62,7 @@ const Projects = ({ projects }) => {
         PROJECTS
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {projects.map((project, index) => (
+        {resumeContent.projects.map((project, index) => (
           <div key={index} className="p-4 border rounded-lg shadow-md">
             <h2 className="text-xl font-semibold">{project.projectTitle}</h2>
             <p className="text-gray-600">
@@ -90,3 +92,8 @@ const Projects = ({ projects }) => {
     </div>
   );
 };
+
+
+
+
+

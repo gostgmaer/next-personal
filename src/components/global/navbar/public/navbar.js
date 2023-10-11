@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { socialmedia, urls } from "@/assets/data/mock";
-import Logo from "./Logo";
+import Logo from "../../../Logo";
 import { useState } from "react";
 import MobileMenu from "./mobileMenu";
 import { FaBars } from "react-icons/fa";
@@ -16,7 +16,7 @@ const Navbar = () => {
   };
  
   return (
-    <header className=" max-sm:hidden w-full px-32 py-8 font-medium flex item-center justify-between relative print:hidden">
+    <header className=" max-sm:hidden w-full py-8 font-medium flex item-center justify-between relative print:hidden">
       <nav className="flex capitalize items-center gap-4 ">
         {urls.map((url) => (
           <Link href={`${url?.url}`} className={`relative group`} key={url.id}>
