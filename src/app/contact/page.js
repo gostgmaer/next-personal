@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import { socialmedia, userInfo } from "@/assets/data/mock";
 import PageLayout from "@/components/global/pageLayout";

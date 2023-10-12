@@ -2,6 +2,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { AppProvider } from "@/contex/contextAPi";
 import { AuthContextProvider } from "@/contex/authContext";
+import { Suspense } from "react";
+import Spinner from "@/components/global/loader/Spinner";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
@@ -14,11 +16,13 @@ export default function RootLayout({ children }) {
     <AppProvider>
       <AuthContextProvider>
         <html lang="en">
-          <body className={inter.className} suppressHydrationWarning={true}>
-            <main className="bg-light w-full min-h-screen text-dark">
-              {children}
-            </main>
-          </body>
+          <Suspense fallback=<Spinner></Spinner>>
+            <body className={inter.className} suppressHydrationWarning={true}>
+              <main className="bg-light w-full min-h-screen text-dark">
+                {children}
+              </main>
+            </body>
+          </Suspense>
         </html>
       </AuthContextProvider>
     </AppProvider>

@@ -4,12 +4,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { post } from "@/lib/http";
 import { notifyerror } from "@/lib/notify/notice";
 import PasswordField from "@/components/global/fields/PasswordField";
-
 import { useAxios } from "@/lib/interceptors";
 import { useAuthContext } from "@/contex/authContext";
 const ResetPassword = () => {
   const { handleLoginAuth, user, userId } = useAuthContext();
-  const [axios, spinner] = useAxios();
   const router = useRouter();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
