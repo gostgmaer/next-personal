@@ -96,10 +96,7 @@ const ContatForm = (second) => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [agreed, setAgreed] = useState(false);
-
   var countryCode = codes;
-
-  console.log(countryCode);
   const handleSubmit = async (values, { resetForm }) => {
     // Handle form submission here, e.g., send data to an API
     const req = await post("/contact/create", { ...values, subscribe: agreed });

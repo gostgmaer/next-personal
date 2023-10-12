@@ -29,7 +29,7 @@ const Signup = () => {
 
   const handleRegistration = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
 
     const body = {
       firstName: formData.firstName,
@@ -53,7 +53,7 @@ const Signup = () => {
   const handleGoogleLogin = async () => {};
 
   const responseFacebook = (response) => {
-    console.log(response);
+  
   };
 
   useEffect(() => {

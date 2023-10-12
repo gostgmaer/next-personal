@@ -8,6 +8,7 @@ export default function Dashboard() {
   const { userId } = useAuthContext();
   const route = useRouter();
   const [axios, spinner] = useAxios();
+  
   if (!userId) {
     route.push("/auth/login");
   }

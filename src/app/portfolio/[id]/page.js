@@ -12,11 +12,11 @@ const Index = () => {
   const lastItem = parts[parts.length - 1];
 
   var actualName = decodeURIComponent(lastItem);
-  console.log(actualName);
+ 
 
   var project = projectArray.find((item) => item.name === actualName);
 
-  console.log(project);
+
 
   return (
     <PageLayout>

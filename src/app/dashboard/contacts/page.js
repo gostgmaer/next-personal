@@ -29,11 +29,11 @@ const Page = () => {
       { acknoledge: !data.acknoledge },
       data._id
     );
-    console.log(res);
+    
     if (res.statusCode === 200) {
       const req = await get("/contact", queryPrams);
       setContact(req.result);
-      console.log(req);
+    
     }
   };
 
