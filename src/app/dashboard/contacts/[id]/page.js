@@ -2,6 +2,7 @@
 import PrivateLayout from "@/components/global/privateLayout";
 import { getServerSingle, getsingle } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
+import { CountryProperty } from "country-codes-list";
 import moment from "moment";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -24,7 +25,7 @@ const Page = () => {
 
   return (
    <> <PrivateLayout>
-      <div className="bg-white shadow-md p-4 rounded-lg w-80">
+      <div className="bg-white shadow-md p-4 rounded-lg w-full">
         <h2 className=" text-2xl font-semibold text-blue-600">User Data</h2>
         {!contact ? (
           <div className=" mx-auto my-20 text-center">

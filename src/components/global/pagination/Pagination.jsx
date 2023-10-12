@@ -4,27 +4,18 @@ import axios from "axios";
 import { get } from "@/lib/http";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-const Pagination = ({ endpoint, items, pages }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10); // Default items per page
-  const [data, setData] = useState([]);
-  const [totalPages, setTotalPages] = useState(pages ? pages : 100);
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await get(endpoint, {
-  //       params: {
-  //         page: currentPage,
-  //         limit: itemsPerPage,
-  //       },
-  //     });
-  //     setData(response.result);
-  //     setTotalPages(Math.ceil(response.data.total_count / itemsPerPage));
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
-
+const Pagination = ({
+  endpoint,
+  items,
+  pages,
+  setData,
+  currentPage,
+  setCurrentPage,
+  itemsPerPage,
+  setItemsPerPage,
+  totalPages,
+  setTotalPages,
+}) => {
   const handleNextClick = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -56,8 +47,8 @@ const Pagination = ({ endpoint, items, pages }) => {
           className="border rounded-md px-2 py-1 bg-gray-700  "
         >
           {items
-            ? items.map(data, (index) => (
-                <option className=" " key={index} value={data}>
+            ? items.map((data) => (
+                <option className=" " key={data} value={data}>
                   {data}
                 </option>
               ))
