@@ -53,7 +53,7 @@ const Index = () => {
 export default Index;
 
 const Project = ({ project }) => {
-  console.log(project);
+
   return (
     <Link href={`/portfolio/${project.name}`}>
       <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform hover:scale-105">

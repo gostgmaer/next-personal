@@ -14,7 +14,6 @@ const Page = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
   const [totalPages, setTotalPages] = useState(100);
-  const [acknoledge, setAcknoledge] = useState(false);
 
   const [axios, spinner] = useAxios();
 
@@ -23,17 +22,15 @@ const Page = () => {
     page: currentPage,
   };
   const updateIfnotActive = async (data) => {
-    setAcknoledge(!data.acknoledge);
     const res = await patch(
       "/contact",
       { acknoledge: !data.acknoledge },
       data._id
     );
-    console.log(res);
+
     if (res.statusCode === 200) {
       const req = await get("/contact", queryPrams);
       setContact(req.result);
-      console.log(req);
     }
   };
 

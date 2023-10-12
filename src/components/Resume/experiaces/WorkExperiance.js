@@ -25,7 +25,7 @@ const WorkExperiance = ({ data }) => {
 
       <div className="organization  print:text-sm">
         <h5 className="company italic font-medium">
-          {data.name}, {data.location}
+          {data?.name}, {data?.location}
         </h5>
         <span>{data.website}</span>
       </div>

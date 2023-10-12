@@ -10,7 +10,7 @@ export const POST = async (req, res) => {
 
   try {
     const { username, password } = req.body;
-     console.log(req.body);
+
     await db.connect();
     const user = await User.findOne({ username });
   } catch (error) {

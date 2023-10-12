@@ -12,7 +12,7 @@ export const invokeExternalAPI = async (
   header,
   query
 ) => {
-  console.log(baseURL);
+
   const options = {
     method: method,
     url: baseURL+endpoint,

@@ -27,7 +27,7 @@ const ForgetPassword = () => {
 
     try {
       const res = await post("/user/auth/forget-password", body);
-      console.log(res);
+    
       return res;
     } catch (error) {}
   };

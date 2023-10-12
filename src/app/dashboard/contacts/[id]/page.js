@@ -7,7 +7,6 @@ import moment from "moment";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-export const GetData = () => {};
 
 const Page = () => {
   const [contact, setContact] = useState(undefined);
@@ -22,6 +21,8 @@ const Page = () => {
   useEffect(() => {
     getsinglecontactDetails();
   }, [id]);
+
+
 
   return (
    <> <PrivateLayout>
