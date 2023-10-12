@@ -11,25 +11,44 @@ import { MdGridView } from "react-icons/md";
 
 const Page = () => {
   const [contact, setContact] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+  const [totalPages, setTotalPages] = useState(100);
+  const [acknoledge, setAcknoledge] = useState(false);
+
   const [axios, spinner] = useAxios();
-  const updateIfnotActive = async (id) => {
-    const res = await patch("/contact", { acknoledge: true }, id);
+
+  const queryPrams = {
+    limit: itemsPerPage,
+    page: currentPage,
+  };
+  const updateIfnotActive = async (data) => {
+    setAcknoledge(!data.acknoledge);
+    const res = await patch(
+      "/contact",
+      { acknoledge: !data.acknoledge },
+      data._id
+    );
     console.log(res);
     if (res.statusCode === 200) {
-      const req = await get("/contact");
+      const req = await get("/contact", queryPrams);
       setContact(req.result);
+      console.log(req);
     }
   };
 
   const loadContacts = async () => {
     // Handle form submission here, e.g., send data to an API
-    const req = await get("/contact");
+    const req = await get("/contact", queryPrams);
     setContact(req.result);
+    setTotalPages(
+      req.total / itemsPerPage < 1 ? 1 : Math.ceil(req.total / itemsPerPage)
+    );
   };
 
   useEffect(() => {
     loadContacts();
-  }, []);
+  }, [currentPage, itemsPerPage]);
 
   return (
     <>
@@ -101,8 +120,8 @@ const Page = () => {
                     </td>
                     <td className="p-3 flex justify-end">
                       <button
-                        onClick={() => updateIfnotActive(item._id)}
-                        className={`text-gray-40  hover:scale-110 hover:border-2  text-gray-200 p-2 border rounded-full  mx-2 ${
+                        onClick={() => updateIfnotActive(item)}
+                        className={`text-gray-40  hover:text-green-600  text-gray-200 p-2 border rounded-full  mx-2 ${
                           item.acknoledge && "text-green-600 border-green-600"
                         }`}
                       >
@@ -131,9 +150,16 @@ const Page = () => {
             )}
             <div className="bg-gray-700 text-white px-4 py-2">
               <Pagination
-                endpoint={undefined}
-                items={undefined}
-                pages={undefined}
+                endpoint={"/contact"}
+                items={[5, 10, 15, 30, 50, 100]}
+                pages={2000}
+                setData={setContact}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                itemsPerPage={itemsPerPage}
+                setItemsPerPage={setItemsPerPage}
+                totalPages={totalPages}
+                setTotalPages={setTotalPages}
               />
             </div>
           </div>

@@ -10,10 +10,11 @@ import { motion } from "framer-motion";
 // import invokeExternalAPI from '../helper/invokeAPI.js'
 import React, { useState } from "react";
 import { contactValidationSchema } from "@/util/validation/contact";
+import codes from "country-calling-code";
 import { get, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 // import { getContact, postContact } from "../api/contact/route";
-
+import { continents, countries, languages } from "countries-list";
 const Index = () => {
   return (
     <PageLayout>
@@ -96,6 +97,9 @@ const ContatForm = (second) => {
   const [success, setSuccess] = useState(null);
   const [agreed, setAgreed] = useState(false);
 
+  var countryCode = codes;
+
+  console.log(countryCode);
   const handleSubmit = async (values, { resetForm }) => {
     // Handle form submission here, e.g., send data to an API
     const req = await post("/contact/create", { ...values, subscribe: agreed });
@@ -110,7 +114,6 @@ const ContatForm = (second) => {
 
   return (
     <div className="isolate bg-white px-6 py-5   sm:py-5 lg:px-8">
-      
       <div className="mx-auto  text-center">
         {success?.statusCode === 201 && "We received your contact request"}
       </div>
@@ -215,9 +218,9 @@ const ContatForm = (second) => {
                     name="country"
                     className="h-full rounded-md border-0 bg-transparent bg-none py-0 pl-2 pr-2 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
                   >
-                    <option>US</option>
-                    <option>CA</option>
-                    <option>EU</option>
+                    {countryCode.map((item) => (
+                      <option key={item.country}>{item.isoCode2}</option>
+                    ))}
                   </Field>
                 </div>
                 <Field
