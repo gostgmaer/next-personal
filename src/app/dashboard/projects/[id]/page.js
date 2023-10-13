@@ -8,8 +8,7 @@ import { CountryProperty } from "country-codes-list";
 import moment from "moment";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+
 
 
 
