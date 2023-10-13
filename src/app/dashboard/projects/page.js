@@ -10,7 +10,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaCheck, FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { MdGridView } from "react-icons/md";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 
 const Page = () => {
   const [contact, setContact] = useState(projectArray);
@@ -296,14 +296,14 @@ const ProjectCard = () => {
           <label className="block text-gray-700 mb-1" htmlFor="highlights">
             Highlights
           </label>
-          <ReactQuill
+          {/* <ReactQuill
             value={formData.highlights}
             className=" h-40 "
             onChange={(value) =>
               setFormData({ ...formData, highlights: value })
             }
             theme="snow"
-          />
+          /> */}
         </div>
         <div className="mt-4">
           <label className="block text-gray-700 mb-1" htmlFor="overview">
