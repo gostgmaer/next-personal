@@ -9,19 +9,17 @@ import {
   ref,
 } from "firebase/storage";
 
-import { useGlobalAppContext } from "@/context/context";
 import { firebaseStorage } from "@/config/firebase";
+import { useGlobalContext } from "@/contex/contextAPi";
 
 const ImageUpload = ({ imagePreview, setImagePreview }) => {
-  const { loader, loaderFalse, loaderTrue } = useGlobalAppContext();
   const [progrss, setProgrss] = useState(0);
   const [url, setUrl] = useState(undefined);
   const [file, setFile] = useState(undefined);
 
   const onFileUpload = () => {
-    loaderTrue();
     if (!file) return;
-    
+
     const storageRef = ref(firebaseStorage, `/Images/${file?.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -40,12 +38,9 @@ const ImageUpload = ({ imagePreview, setImagePreview }) => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           setUrl(url);
           setImagePreview(url);
-          loaderFalse();
         });
       }
     );
-    loaderFalse();
-   
   };
   const onFileChange = (e) => {
     e.preventDefault();

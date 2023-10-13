@@ -1,6 +1,7 @@
 "use client";
 
 import PrivateLayout from "@/components/global/privateLayout";
+import Personal from "@/components/page/profile/profileBlock";
 import { useAxios } from "@/lib/interceptors";
 import React from "react";
 
@@ -9,7 +10,7 @@ const Page = () => {
   return (
     <>
       <PrivateLayout>
-        <h3>This is Dashboard</h3>
+        <Personal />
       </PrivateLayout>
       {spinner}
     </>
