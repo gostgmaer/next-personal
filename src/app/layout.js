@@ -16,13 +16,13 @@ export default function RootLayout({ children }) {
     <AppProvider>
       <AuthContextProvider>
         <html lang="en">
-          <Suspense fallback=<Spinner></Spinner>>
-            <body className={inter.className} suppressHydrationWarning={true}>
+          <body className={inter.className} suppressHydrationWarning={true}>
+            <Suspense fallback=<Spinner></Spinner>>
               <main className="bg-light w-full min-h-screen text-dark">
                 {children}
               </main>
-            </body>
-          </Suspense>
+            </Suspense>
+          </body>
         </html>
       </AuthContextProvider>
     </AppProvider>
