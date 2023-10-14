@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  
   images: {
     domains: [
       "avatars0.githubusercontent.com",
@@ -9,12 +10,8 @@ const nextConfig = {
       "s3.amazonaws.com",
       "tailwindui.com"
     ],
-  },
-  //   experimental: { appDir: true },
-  //   webpack(config) {
-  //     config.experiments = { ...config.experiments, topLevelAwait: true };
-  //     return config;
-  //   },
+  }
+
 };
 
 module.exports = nextConfig;

@@ -183,8 +183,7 @@ const UserProfile = ({ data, setClose, setProfileInfo }) => {
         <div>
           <ImageUpload
             imagePreview={imagePreview}
-            setImagePreview={setimagePreview}
-          />
+            setImagePreview={setimagePreview} label={"profile Picture"}          />
         </div>
 
         <div className="col-span-2 mt-10">
