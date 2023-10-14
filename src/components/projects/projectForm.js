@@ -1,5 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
+import firebase from "firebase/app";
+
 import {
   getStorage,
   uploadBytesResumable,
@@ -7,19 +9,18 @@ import {
   ref,
 } from "firebase/storage";
 import { firebaseStorage } from "@/config/firebase";
-const formatFileSize = (bytes) => {
-  if (bytes === 0) return "0 Bytes";
+import ImageUpload from "../global/fields/ImageUpload";
+import MultiImageUploadr from "../global/fields/multiImageUploadr";
+import TaxonomyField from "../global/fields/Taxanomy";
 
-  const k = 1024;
-  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-};
 
 const ProjectForm = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
+  // const [file, setFile] = useState(undefined);
+  const [url, setUrl] = useState(undefined);
   const [technologies, setTechnologies] = useState([
     { category: "", name: "", description: "" },
   ]);
@@ -37,7 +38,6 @@ const ProjectForm = () => {
     ]);
   };
 
-
   // const handleUploadFiles = () => {
   //   const storageRef = firebaseStorage;
 
@@ -46,7 +46,6 @@ const ProjectForm = () => {
 
   //   });
   // };
-
 
   const addPicture = () => {
     setPictures([...pictures, { caption: "", imageUrl: "" }]);
@@ -64,47 +63,8 @@ const ProjectForm = () => {
     setPictures(updatedPictures);
   };
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-
-    // Validate file types and size if needed
-    const allowedTypes = [
-      "image/jpeg",
-      "image/png",
-      "image/gif",
-      "application/pdf",
-    ];
-    const maxSize = 5 * 1024 * 1024; // 5MB
-
-    const validFiles = files.every((file) => {
-      if (!allowedTypes.includes(file.type)) {
-        setErrorMessage(`File type not supported: ${file.name}`);
-        return false;
-      }
-      if (file.size > maxSize) {
-        setErrorMessage(`File size too large: ${file.name}`);
-        return false;
-      }
-      return true;
-    });
-
-    if (validFiles) {
-      setErrorMessage(null);
-      setSelectedFiles([...selectedFiles, ...files]);
-    }
-
-    e.target.value = null; // Clear the input field
-  };
-
-  const handleRemoveFile = (index) => {
-    const updatedFiles = [...selectedFiles];
-    updatedFiles.splice(index, 1);
-    setSelectedFiles(updatedFiles);
-  };
 
 
-
-  
   return (
     <div className="container mx-auto py-6">
       <form
@@ -130,80 +90,16 @@ const ProjectForm = () => {
             placeholder="Basilar"
             value="Basilar"
           />
+          
         </div>
+        <ImageUpload imagePreview={imagePreview} setImagePreview={setImagePreview} label={"Upload Main Project Image"}></ImageUpload>
 
         {/* File Upload */}
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            File Upload
-          </label>
-          <div className="relative border-dashed border-2 border-gray-300 bg-gray-100 p-4 rounded-md">
-            <input
-              type="file"
-              multiple
-              className=""
-              accept=".jpg, .jpeg, .png, .gif, .pdf"
-              onChange={handleFileChange}
-            />
-            <div className="text-center">
-              <svg
-                className="mx-auto h-12 w-12 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 48 48"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M20 6v3m0 6V6m0 6h8m6 2l-3 3m0 0l-3-3m3 3l3-3m-3 3v8H6V6h12zm3 6h-8m0 8h8m12-11l-3-3m0 0l-3 3m3-3l3 3"
-                ></path>
-              </svg>
-              <p className="text-xs text-gray-500">
-                Drag and drop files here or click to upload
-              </p>
-            </div>
-          </div>
-          {selectedFiles.length > 0 && (
-            <div className="mt-4">
-              <ul>
-                {selectedFiles.map((file, index) => (
-                  <li
-                    key={index}
-                    className="text-sm text-gray-700 flex justify-between rounded-md shadow-md p-3 items-start gap-2"
-                  >
-                    <div className="text-sm text-gray-700 flex justify-between  items-start gap-2">
-                      <Image
-                        key={index}
-                        className="rounded w-10 h-10 object-cover"
-                        width={50}
-                        height={50}
-                        alt={file.name}
-                        src={URL.createObjectURL(file)}
-                      ></Image>{" "}
-                      <p className="flex flex-col">
-                        {" "}
-                        {file.name} <span> {formatFileSize(file.size)}</span>{" "}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => handleRemoveFile(index)}
-                      className="ml-2 text-red-500 hover:text-red-700 focus:outline-none"
-                    >
-                      Remove
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {errorMessage && (
-            <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-          )}
-        </div>
+
+    <TaxonomyField></TaxonomyField>
 
         {/* Preview Images in an iframe */}
-      
+
         {/* Introduction */}
         <div className="mb-4">
           <label
@@ -481,6 +377,10 @@ const ProjectForm = () => {
             value="Hardware manufacturing requires immense capital to scale"
           />
           {/* Add an input field for more takeaways if needed */}
+        </div>
+
+        <div>
+          <MultiImageUploadr selectedFiles={selectedFiles} setSelectedFiles={setSelectedFiles}/>
         </div>
 
         {/* Submit Button */}

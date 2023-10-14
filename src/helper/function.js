@@ -1,10 +1,10 @@
-import moment from 'moment';
-import 'moment-duration-format';
+import moment from "moment";
+import "moment-duration-format";
 
 // Export the calculateTimeGap function with maxGap parameter
 export function calculateTimeGap(date1, date2, maxGap) {
-  const momentDate1 = moment(date1, 'YYYY-MM-DD HH:mm:ss');
-  const momentDate2 = date2?moment(date2, 'YYYY-MM-DD HH:mm:ss'):moment();
+  const momentDate1 = moment(date1, "YYYY-MM-DD HH:mm:ss");
+  const momentDate2 = date2 ? moment(date2, "YYYY-MM-DD HH:mm:ss") : moment();
 
   // Calculate the time gap duration
   const duration = moment.duration(momentDate2.diff(momentDate1));
@@ -19,16 +19,26 @@ export function calculateTimeGap(date1, date2, maxGap) {
   }
 
   // Format the duration based on the maxGap value
-  let formattedDuration = '';
+  let formattedDuration = "";
   if (years > 0) {
-    formattedDuration += `${years} year${years > 1 ? 's' : ''}`;
+    formattedDuration += `${years} year${years > 1 ? "s" : ""}`;
   }
   if (months > 0) {
     if (formattedDuration) {
-      formattedDuration += ' ';
+      formattedDuration += " ";
     }
-    formattedDuration += `${months} month${months > 1 ? 's' : ''}`;
+    formattedDuration += `${months} month${months > 1 ? "s" : ""}`;
   }
 
   return `${formattedDuration}`;
 }
+
+export const formatFileSize = (bytes) => {
+  if (bytes === 0) return "0 Bytes";
+
+  const k = 1024;
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+};
