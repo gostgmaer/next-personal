@@ -203,21 +203,7 @@ const ProjectForm = () => {
         </div>
 
         {/* Preview Images in an iframe */}
-        {selectedFiles.length > 0 && (
-          <div className="mb-4">
-            <h3 className="text-xl mb-2 font-semibold">Preview Images</h3>
-            {selectedFiles.map((dataFile, index) => (
-              <iframe
-                key={index}
-                title="Image Preview"
-                width="100%"
-                height="400"
-                frameBorder="0"
-                src={URL.createObjectURL(dataFile)}
-              ></iframe>
-            ))}
-          </div>
-        )}
+      
         {/* Introduction */}
         <div className="mb-4">
           <label
