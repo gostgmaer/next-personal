@@ -12,7 +12,7 @@ import {
 import { firebaseStorage } from "@/config/firebase";
 import { useGlobalContext } from "@/contex/contextAPi";
 
-const ImageUpload = ({ imagePreview, setImagePreview }) => {
+const ImageUpload = ({ imagePreview, setImagePreview,label }) => {
   const [progrss, setProgrss] = useState(0);
   const [url, setUrl] = useState(undefined);
   const [file, setFile] = useState(undefined);
@@ -52,10 +52,10 @@ const ImageUpload = ({ imagePreview, setImagePreview }) => {
   }, [file]);
 
   return (
-    <div className="">
+    <div className=" flex justify-start gap-5 ">
       <div>
         <label className=" block text-gray-600 font-semibold mb-2">
-          Upload an Image
+         {label?label: "Upload an Image"}
         </label>
         <div className="mt-2 flex items-center justify-start">
           <label
@@ -94,9 +94,9 @@ const ImageUpload = ({ imagePreview, setImagePreview }) => {
             <Image
               src={imagePreview}
               alt="Preview"
-              className="mt-2 w-24 h-24 rounded-lg"
-              width={100}
-              height={100}
+              className="mt-2 w-10 h-10 rounded-lg"
+              width={40}
+              height={40}
             />
           </div>
         )}

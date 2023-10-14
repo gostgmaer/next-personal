@@ -7,7 +7,7 @@ import 'firebase/auth';
 import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
-const config = {
+export const config = {
   apiKey: "AIzaSyB5K2i-ry0abSisdBPu88PrAYlfvU9fsAE",
   authDomain: "react-resume-builder-497bb.firebaseapp.com",
   databaseURL:
