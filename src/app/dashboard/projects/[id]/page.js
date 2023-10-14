@@ -6,6 +6,7 @@ import { getServerSingle, getsingle } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 import { CountryProperty } from "country-codes-list";
 import moment from "moment";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -61,9 +62,9 @@ export default Page;
 const ProjectCard = ({ project }) => {
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-      <img
+      <Image
         src={project?.pictures[0].image.url}
-        alt={project?.name}
+        alt={project?.name} width={100} height={100}
         className="w-full h-auto object-cover"
       />
       <div className="p-6">
@@ -106,7 +107,7 @@ const ProjectCard = ({ project }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
             {project?.pictures.map((picture, index) => (
               <div key={index} className="relative">
-                <img
+                <Image width={100} height={100}
                   className="w-full h-48 object-cover rounded-lg"
                   src={picture.image.url}
                   alt={picture?.caption}
