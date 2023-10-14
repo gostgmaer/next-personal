@@ -2,6 +2,7 @@
 import { projectArray } from "@/assets/data/projects";
 import Pagination from "@/components/global/pagination/Pagination";
 import PrivateLayout from "@/components/global/privateLayout";
+import ProjectForm from "@/components/projects/projectForm";
 import { get, patch, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 import moment from "moment";
@@ -164,7 +165,7 @@ const Page = () => {
             </div>
           </div>
         </div>
-        <ProjectCard></ProjectCard>
+        <ProjectForm></ProjectForm>
         {spinner}
       </PrivateLayout>
     </>
