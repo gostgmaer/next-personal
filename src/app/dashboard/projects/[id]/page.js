@@ -24,6 +24,7 @@ const Page = () => {
   const getsinglecontactDetails = async () => {
     var project = projectArray.find((item) => item.name === id);
 
+    console.log(project);
     setContact(project);
   };
 
