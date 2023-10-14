@@ -10,7 +10,7 @@ import {
 } from "firebase/storage";
 import { firebaseStorage } from "@/config/firebase";
 import { formatFileSize } from '@/helper/function';
-const MultiImageUploadr = ({selectedFiles, setSelectedFiles}) => {
+const MultiImageUploadr = ({selectedFiles, setSelectedFiles,label}) => {
     const [errorMessage, setErrorMessage] = useState(null);
 
     const handleFileChange = (e) => {
@@ -53,7 +53,7 @@ const MultiImageUploadr = ({selectedFiles, setSelectedFiles}) => {
 
       
   const onFileUpload = (file) => {
-    console.log(file);
+    // console.log(file);
     if (!file) return;
 
     const storageRef = ref(firebaseStorage, `/Images/${file?.name}`);
@@ -88,7 +88,7 @@ const MultiImageUploadr = ({selectedFiles, setSelectedFiles}) => {
       
     <div className="mb-4">
     <label className="block text-gray-700 text-sm font-bold mb-2">
-      File Upload
+     {label}
     </label>
     <div className="relative border-dashed border-2 border-gray-300 bg-gray-100 rounded-md">
       <input
@@ -106,9 +106,9 @@ const MultiImageUploadr = ({selectedFiles, setSelectedFiles}) => {
           viewBox="0 0 48 48"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M20 6v3m0 6V6m0 6h8m6 2l-3 3m0 0l-3-3m3 3l3-3m-3 3v8H6V6h12zm3 6h-8m0 8h8m12-11l-3-3m0 0l-3 3m3-3l3 3"
           ></path>
         </svg>
