@@ -5,9 +5,12 @@ import TaxonomyField from "../global/fields/Taxanomy";
 import { patch, post } from "@/lib/http";
 import { containerId, tableId } from "@/config/config";
 import ModalUI from "../global/modal/modal";
+import Interest from "./repeatable";
+import { arrayGroupbykey } from "@/helper/function";
 
 const ProjectForm = ({ id, setId, setOpen }) => {
   const [selectedFiles, setSelectedFiles] = useState(id ? id.images : []);
+  const [interests, setInterests] = useState([]);
   const [tags, setTags] = useState(id ? id.tags : []);
   const [imagePreview, setImagePreview] = useState(id ? id.main_image : "");
   const [modal, setModal] = useState(false);
@@ -47,12 +50,16 @@ const ProjectForm = ({ id, setId, setOpen }) => {
 
   const handleSave = (e) => {
     e.preventDefault();
+    const technology = arrayGroupbykey(interests, "category");
+    console.log(technology);
     const body = {
       ...formData,
-      main_image: imagePreview, 
+      main_image: imagePreview,
       images: selectedFiles,
       tags: tags,
+      technologies: technology,
     };
+
     handleSaveProjects(body);
   };
 
@@ -80,11 +87,8 @@ const ProjectForm = ({ id, setId, setOpen }) => {
 
   return (
     <div className="container p-2 mx-auto sm:p-4">
-      <form
-       
-        className=" mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-      >
-        <h2 className="text-2xl mb-4 font-semibold">Project Details</h2>
+      <form className=" mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h2 className="text-2xl mb-4 font-semibold">Add Project</h2>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {/* Project Name */}
@@ -214,7 +218,13 @@ const ProjectForm = ({ id, setId, setOpen }) => {
             label={"Upload project Images"}
           />
         </div>
-
+        <div className="">
+          <Interest
+            interests={interests}
+            setInterestes={setInterests}
+            label={"Add Technology"}
+          />
+        </div>
         {/* Submit Button */}
         <div className="flex items-center justify-between">
           {!id ? (
@@ -236,29 +246,6 @@ const ProjectForm = ({ id, setId, setOpen }) => {
           )}
         </div>
       </form>
-      {isUpdate && (
-        <ModalUI
-          title={"Project is Updated Success"}
-          open={modal}
-          setOpen={setModal}
-        >
-          <div></div>
-        </ModalUI>
-      )}
-      {isnew && (
-        <ModalUI
-          title={"Project is Add Success"}
-          open={modal}
-          setOpen={setModal}
-        >
-          <div></div>
-        </ModalUI>
-      )}
-      {iserror && (
-        <ModalUI title={"Error"} open={modal} setOpen={setModal}>
-          <div></div>
-        </ModalUI>
-      )}
     </div>
   );
 };

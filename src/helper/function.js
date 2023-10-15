@@ -42,3 +42,34 @@ export const formatFileSize = (bytes) => {
 
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
 };
+
+
+export const findIndex = (array, index) => {
+  const found = array.find(function (element, ind) {
+    return index === ind;
+  });
+  return found
+};
+
+
+export const arrayGroupbykey = (array,key)=>{
+
+      // @ts-ignore
+      const uniqueCategories = [...new Set(array.map(item => item[key]))];
+
+      // Create a function to filter the array based on a category
+      function filterByCategory(array, key) {
+        return array.filter(item => item.category === key);
+    }
+    
+    // Create an array to store filtered arrays
+    const filteredArrays = [];
+    
+    // Filter the array for each unique category and push the results into the filteredArrays array
+    uniqueCategories.forEach(key => {
+        const filteredArray = filterByCategory(array, key);
+        filteredArrays.push(filteredArray);
+    });
+    
+    return filteredArrays
+}
