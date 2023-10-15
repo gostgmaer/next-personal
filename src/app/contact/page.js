@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 import { socialmedia, userInfo } from "@/assets/data/mock";
-import PageLayout from "@/components/global/pageLayout";
+import PageLayout from "@/components/global/layout/pageLayout";
 import { Switch } from "@headlessui/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { motion } from "framer-motion";
@@ -14,6 +14,26 @@ import { get, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 // import { getContact, postContact } from "../api/contact/route";
 import { continents, countries, languages } from "countries-list";
+
+export async function generateMetadata({ params }) {
+  return {
+    title: "Kishor Sarkar Contact",
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
+  };
+}
+
 const Index = () => {
   return (
     <PageLayout>
@@ -81,17 +101,6 @@ export default Index;
 
 const ContatForm = (second) => {
   const [axios, spinner] = useAxios();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    name: "",
-    email: "",
-    message: "",
-    contactNumber: "",
-    company: "",
-    country: "",
-    subscribe: false,
-  });
   const [success, setSuccess] = useState(null);
   const [agreed, setAgreed] = useState(false);
   var countryCode = codes;

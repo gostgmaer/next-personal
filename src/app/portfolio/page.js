@@ -1,5 +1,5 @@
 "use client";
-import PageLayout from "@/components/global/pageLayout";
+import PageLayout from "@/components/global/layout/pageLayout";
 import Pagination from "@/components/global/pagination/Pagination";
 
 import { containerId, tableId } from "@/config/config";
@@ -9,6 +9,25 @@ import { useAxios } from "@/lib/interceptors";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+
+export async function generateMetadata({ params }) {
+  return {
+    title: "Kishor Sarkar Portfolio",
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
+  };
+}
 
 const Index = () => {
   const [projects, setProjects] = useState([]);

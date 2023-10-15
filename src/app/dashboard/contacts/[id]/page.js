@@ -1,5 +1,5 @@
 "use client";
-import PrivateLayout from "@/components/global/privateLayout";
+import PrivateLayout from "@/components/global/layout/privateLayout";
 import { contactTable, containerId } from "@/config/config";
 import { getServerSingle, getsingle } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";

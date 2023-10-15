@@ -1,7 +1,7 @@
 "use client";
 import { projectArray } from "@/assets/data/projects";
-import PageLayout from "@/components/global/pageLayout";
-import PrivateLayout from "@/components/global/privateLayout";
+import PageLayout from "@/components/global/layout/pageLayout";
+import PrivateLayout from "@/components/global/layout/privateLayout";
 import Technologies from "@/components/projects/technologi";
 import { containerId, tableId } from "@/config/config";
 import { getServerSingle, getsingle } from "@/lib/http";
@@ -11,6 +11,25 @@ import moment from "moment";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+
+export async function generateMetadata({ params }) {
+  return {
+    title: "Kishor Sarkar Portfolio",
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
+  };
+}
 
 const Page = () => {
   const [contact, setContact] = useState(undefined);

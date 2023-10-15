@@ -1,6 +1,6 @@
 "use client";
 import { projectArray } from "@/assets/data/projects";
-import PrivateLayout from "@/components/global/privateLayout";
+import PrivateLayout from "@/components/global/layout/privateLayout";
 import Technologies from "@/components/projects/technologi";
 import { containerId, tableId } from "@/config/config";
 import { getServerSingle, getsingle } from "@/lib/http";
