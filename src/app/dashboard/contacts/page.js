@@ -1,6 +1,7 @@
 "use client";
 import Pagination from "@/components/global/pagination/Pagination";
 import PrivateLayout from "@/components/global/privateLayout";
+import { contactTable, containerId, tableId } from "@/config/config";
 import { get, patch, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 import moment from "moment";
@@ -23,23 +24,30 @@ const Page = () => {
   };
   const updateIfnotActive = async (data) => {
     const res = await patch(
-      "/contact",
+      `/record/${containerId}/table/${contactTable}`,
       { acknoledge: !data.acknoledge },
       data._id
     );
 
     if (res.statusCode === 200) {
-      const req = await get("/contact", queryPrams);
+      const req = await get(
+        `/record/${containerId}/table/${contactTable}`,
+        queryPrams
+      );
       setContact(req.result);
     }
   };
 
   const loadContacts = async () => {
-    // Handle form submission here, e.g., send data to an API
-    const req = await get("/contact", queryPrams);
+    const req = await get(
+      `/record/${containerId}/table/${contactTable}`,
+      queryPrams
+    );
     setContact(req.result);
     setTotalPages(
-      req.total / itemsPerPage < 1 ? 1 : Math.ceil(req.total / itemsPerPage)
+      req.total / itemsPerPage < 1
+        ? 1
+        : Math.ceil(req.total_record / itemsPerPage)
     );
   };
 

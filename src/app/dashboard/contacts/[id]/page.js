@@ -1,5 +1,6 @@
 "use client";
 import PrivateLayout from "@/components/global/privateLayout";
+import { contactTable, containerId } from "@/config/config";
 import { getServerSingle, getsingle } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 import { CountryProperty } from "country-codes-list";
@@ -14,9 +15,16 @@ const Page = () => {
   const param = useParams();
   const id = param.id;
   const getsinglecontactDetails = async (params) => {
-    const res = await getsingle("/contact", id);
-    setContact(res.result);
+    const req = await getsingle(
+      `/record/${containerId}/table/${contactTable}`,id
+   
+    );
+    setContact(req.result);
   };
+
+
+ 
+
 
   useEffect(() => {
     getsinglecontactDetails();
