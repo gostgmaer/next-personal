@@ -2,12 +2,10 @@
 "use client";
 import { socialmedia, userInfo } from "@/assets/data/mock";
 import PageLayout from "@/components/global/pageLayout";
-import { invokeExternalAPI } from "@/helper/invokeAPI";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Switch } from "@headlessui/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { motion } from "framer-motion";
+import { contactTable, containerId, tableId } from "@/config/config";
 // import invokeExternalAPI from '../helper/invokeAPI.js'
 import React, { useState } from "react";
 import { contactValidationSchema } from "@/util/validation/contact";
@@ -94,14 +92,17 @@ const ContatForm = (second) => {
     country: "",
     subscribe: false,
   });
-  const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [agreed, setAgreed] = useState(false);
   var countryCode = codes;
   const handleSubmit = async (values, { resetForm }) => {
     // Handle form submission here, e.g., send data to an API
-    const req = await post("/contact/create", { ...values, subscribe: agreed });
-    setSuccess(req);
+
+    const request = await post(
+      `/record/${containerId}/table/${contactTable}`,
+      { ...values, subscribe: agreed }
+    );
+    setSuccess(request);
     resetForm();
     setAgreed(false);
   };

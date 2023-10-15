@@ -4,7 +4,7 @@ import Pagination from "@/components/global/pagination/Pagination";
 import PrivateLayout from "@/components/global/privateLayout";
 import ProjectForm from "@/components/projects/projectForm";
 import { containerId, tableId } from "@/config/config";
-import { get, patch, post } from "@/lib/http";
+import { del, get, patch, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 import moment from "moment";
 import Image from "next/image";
@@ -29,33 +29,23 @@ const Page = () => {
     page: currentPage,
   };
 
-  // const updateIfnotActive = async (data) => {
-  //   const res = await patch(
-  //     "/contact",
-  //     { acknoledge: !data.acknoledge },
-  //     data._id
-  //   );
-
-  //   if (res.statusCode === 200) {
-  //     const req = await get("/contact", queryPrams);
-  //     setContact(req.result);
-  //   }
-  // };
-
   const handleEdit = (id) => {
     setId(id);
     setOpen(true);
   };
 
-  const loadContacts = async () => {
-    // Handle form submission here, e.g., send data to an API
-    // const request = await post(`/record/${containerId}/table/${tableId}`, body);
-    // console.log(request);
+  const handleDelete = async (id) => {
+    const req = await del(`/record/${containerId}/table/${tableId}`, id);
+    if (req.statusCode ===200) {
+      loadprojects()
+    }
+  };
+
+  const loadprojects = async () => {
     const req = await get(
       `/record/${containerId}/table/${tableId}`,
       queryPrams
     );
-    console.log(req);
     setContact(req.result);
     setTotalPages(
       req.total / itemsPerPage < 1
@@ -65,7 +55,7 @@ const Page = () => {
   };
 
   useEffect(() => {
-    loadContacts();
+    loadprojects();
   }, [currentPage, itemsPerPage]);
 
   return (
@@ -88,12 +78,7 @@ const Page = () => {
                   <th scope="col" className="px-6 py-3">
                     Name
                   </th>
-                  {/* <th scope="col" className="px-6 py-3">
-                    Position
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    intro
-                  </th> */}
+      
 
                   <th scope="col" className="px-6 py-3">
                     Start Time
@@ -126,9 +111,7 @@ const Page = () => {
                       {item.name}
                     </th>
 
-                    {/* <td className="px-6 py-2">{item.role}</td>
-                    <td className="px-6 py-2">{item.intro}</td> */}
-
+                
                     <td className="px-6 py-2">
                       {moment(item.start_date).format("D MMM yyyy")}
                     </td>
@@ -136,6 +119,13 @@ const Page = () => {
                       {moment(item.end_date).format("D MMM yyyy")}
                     </td>
                     <td className="px-6 py-2 flex justify-end gap-3">
+                 
+                      <Link
+                        href={`/dashboard/projects/${item._id}`}
+                        className="text-gray-400 hover:text-gray-100 p-2 border rounded-full"
+                      >
+                        <FaEye />
+                      </Link>
                       <button
                         onClick={() => handleEdit(item)}
                         className={
@@ -144,12 +134,14 @@ const Page = () => {
                       >
                         <FaEdit />
                       </button>
-                      <Link
-                        href={`/dashboard/projects/${item._id}`}
-                        className="text-gray-400 hover:text-gray-100 p-2 border rounded-full"
+                      <button
+                        onClick={() => handleDelete(item._id)}
+                        className={
+                          "text-gray-400 hover:text-gray-100 p-2 border rounded-full "
+                        }
                       >
-                        <FaEye />
-                      </Link>
+                        <FaTrash />
+                      </button>
                     </td>
                   </tr>
                 ))}

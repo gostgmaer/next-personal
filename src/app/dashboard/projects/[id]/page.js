@@ -2,6 +2,7 @@
 import { projectArray } from "@/assets/data/projects";
 import PrivateLayout from "@/components/global/privateLayout";
 import Technologies from "@/components/projects/technologi";
+import { containerId, tableId } from "@/config/config";
 import { getServerSingle, getsingle } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 import { CountryProperty } from "country-codes-list";
@@ -10,26 +11,19 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-
-
-
-
-
 const Page = () => {
   const [contact, setContact] = useState(undefined);
   const [axios, spinner] = useAxios();
   const param = useParams();
   const id = param.id;
 
-  const getsinglecontactDetails = async () => {
-    var project = projectArray.find((item) => item.name === id);
-
-    console.log(project);
-    setContact(project);
+  const getSingleproject = async (params) => {
+    const req = await getsingle(`/record/${containerId}/table/${tableId}`, id);
+    setContact(req.result);
   };
 
   useEffect(() => {
-    getsinglecontactDetails();
+    getSingleproject();
   }, [id]);
 
   const p = {
@@ -47,7 +41,7 @@ const Page = () => {
     <>
       {" "}
       <PrivateLayout>
-        <div className="bg-white shadow-md p-4 rounded-lg w-full">
+        <div className="bg-white shadow-md  rounded-lg w-full">
           <ProjectCard project={contact} />
         </div>
 
@@ -64,8 +58,10 @@ const ProjectCard = ({ project }) => {
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden">
       <Image
-        src={project?.pictures[0].image.url}
-        alt={project?.name} width={100} height={100}
+        src={project?.main_image}
+        alt={project?.name}
+        width={500000}
+        height={100000}
         className="w-full h-auto object-cover"
       />
       <div className="p-6">
@@ -73,13 +69,27 @@ const ProjectCard = ({ project }) => {
         {/* <p className="text-gray-600 text-lg mb-4">{project?.intro}</p> */}
         <div
           className="text-gray-600 text-lg mb-4"
-          dangerouslySetInnerHTML={{ __html: project?.intro }}
+          dangerouslySetInnerHTML={{ __html: project?.overview }}
         />
         <div className="grid grid-cols-1 gap-4 p-5">
           <div>
             <h2 className="text-xl font-semibold">Technologies Used:</h2>
             <Technologies />
           </div>
+        </div>
+        <div className="grid grid-cols-1 gap-4 p-5">
+          {
+            <div>
+              <h2 className="text-xl font-semibold">tags:</h2>
+              <ul className=" flex justify-start gap-2">
+                {project?.tags?.map((item, index) => (
+                  <li key={index} className="text-gray-600">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          }
         </div>
         <div className="grid grid-cols-1 gap-4 p-5">
           {
@@ -106,16 +116,18 @@ const ProjectCard = ({ project }) => {
         <div className="mt-8">
           <h2 className="text-xl font-semibold">Project Pictures:</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-            {project?.pictures.map((picture, index) => (
+            {project?.images.map((picture, index) => (
               <div key={index} className="relative">
-                <Image width={100} height={100}
+                <Image
+                  width={5000}
+                  height={3000}
                   className="w-full h-48 object-cover rounded-lg"
-                  src={picture.image.url}
-                  alt={picture?.caption}
+                  src={picture.url}
+                  alt={picture?.name}
                 />
                 <div className="absolute inset-0 bg-black opacity-0 hover:opacity-50 transition-opacity">
                   <p className="text-white text-center absolute inset-x-0 bottom-4">
-                    {picture?.caption?.substring(0, 40) + "..."}
+                    {picture?.name?.substring(0, 40) + "..."}
                   </p>
                 </div>
               </div>
