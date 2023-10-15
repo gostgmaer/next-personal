@@ -6,33 +6,13 @@ import { Switch } from "@headlessui/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { motion } from "framer-motion";
 import { contactTable, containerId, tableId } from "@/config/config";
-// import invokeExternalAPI from '../helper/invokeAPI.js'
 import React, { useState } from "react";
 import { contactValidationSchema } from "@/util/validation/contact";
 import codes from "country-calling-code";
 import { get, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
-// import { getContact, postContact } from "../api/contact/route";
-import { continents, countries, languages } from "countries-list";
 
-export async function generateMetadata({ params }) {
-  return {
-    title: "Kishor Sarkar Contact",
-    description: "Full stack web developer",
-    openGraph: {
-      type: "website",
-      url: "l",
-      title: "My Website",
-      description: "My Website Description",
-      siteName: "My Website",
-      images: [
-        {
-          url: "https://example.com/og.png",
-        },
-      ],
-    },
-  };
-}
+
 
 const Index = () => {
   return (
