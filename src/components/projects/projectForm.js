@@ -4,7 +4,7 @@ import MultiImageUploadr from "../global/fields/multiImageUploadr";
 import TaxonomyField from "../global/fields/Taxanomy";
 import { patch, post } from "@/lib/http";
 import { containerId, tableId } from "@/config/config";
-import ModalUI from "../global/modal.js/modal";
+import ModalUI from "../global/modal/modal";
 
 const ProjectForm = ({ id, setId, setOpen }) => {
   const [selectedFiles, setSelectedFiles] = useState(id ? id.images : []);

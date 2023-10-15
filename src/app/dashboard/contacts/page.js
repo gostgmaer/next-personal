@@ -1,6 +1,6 @@
 "use client";
 import Pagination from "@/components/global/pagination/Pagination";
-import PrivateLayout from "@/components/global/privateLayout";
+import PrivateLayout from "@/components/global/layout/privateLayout";
 import { contactTable, containerId, tableId } from "@/config/config";
 import { get, patch, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";

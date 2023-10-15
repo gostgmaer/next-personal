@@ -1,5 +1,5 @@
 import { userInfo } from "@/assets/data/mock";
-import PageLayout from "@/components/global/pageLayout";
+import PageLayout from "@/components/global/layout/pageLayout";
 
 import Image from "next/image";
 import React from "react";

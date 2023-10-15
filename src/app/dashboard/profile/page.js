@@ -1,6 +1,6 @@
 "use client";
 
-import PrivateLayout from "@/components/global/privateLayout";
+import PrivateLayout from "@/components/global/layout/privateLayout";
 import Personal from "@/components/page/profile/profileBlock";
 import { useAxios } from "@/lib/interceptors";
 import React from "react";

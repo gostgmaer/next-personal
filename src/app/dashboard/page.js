@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import PrivateLayout from "@/components/global/privateLayout";
+import PrivateLayout from "@/components/global/layout/privateLayout";
 import { useAuthContext } from "@/contex/authContext";
 import { useRouter } from "next/navigation";
 import Tables from "@/components/page/dashboard/Tables";
