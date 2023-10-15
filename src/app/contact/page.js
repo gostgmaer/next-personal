@@ -12,24 +12,7 @@ import codes from "country-calling-code";
 import { get, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 
-export async function generateMetadata({ params }) {
-  return {
-    title: "Kishor Sarkar Contact",
-    description: "Full stack web developer",
-    openGraph: {
-      type: "website",
-      url: "l",
-      title: "My Website",
-      description: "My Website Description",
-      siteName: "My Website",
-      images: [
-        {
-          url: "https://example.com/og.png",
-        },
-      ],
-    },
-  };
-}
+
 
 const Index = () => {
   return (
