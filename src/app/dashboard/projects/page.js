@@ -1,5 +1,4 @@
 "use client";
-import { projectArray } from "@/assets/data/projects";
 import Pagination from "@/components/global/pagination/Pagination";
 import PrivateLayout from "@/components/global/layout/privateLayout";
 import ProjectForm from "@/components/projects/projectForm";
@@ -11,7 +10,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaCheck, FaEdit, FaEye, FaTrash } from "react-icons/fa";
-import { MdGridView } from "react-icons/md";
 // import ReactQuill from "react-quill";
 
 const Page = () => {
