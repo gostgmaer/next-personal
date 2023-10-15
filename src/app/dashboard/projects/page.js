@@ -65,7 +65,7 @@ const Page = () => {
               onClick={() => setOpen(!open)}
               className="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              {" "}
+            
               Add project
             </button>
           </div>

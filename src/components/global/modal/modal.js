@@ -2,11 +2,8 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
-export default function ModalUI({ children, title,open,setOpen }) {
-//   const [open, setOpen] = useState(true);
-
+export default function ModalUI({ children, title, open, setOpen }) {
   const cancelButtonRef = useRef(null);
-
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -48,19 +45,9 @@ export default function ModalUI({ children, title,open,setOpen }) {
                       {title}
                     </Dialog.Title>
                     <div className="mt-3 text-center sm:ml-4 text-gray-900 sm:mt-0 sm:text-left">
-                      <Dialog.Description>
-                        This will permanently deactivate your account
-                      </Dialog.Description>
-
-                      {children}
+                      <Dialog.Description>{children}</Dialog.Description>
                     </div>
                   </div>
-                  <button
-                    onClick={() => setOpen(false)}
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  >
-                    OK
-                  </button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
