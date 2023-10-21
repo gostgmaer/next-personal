@@ -86,37 +86,7 @@ const Pagination = ({
       </div>
     </div>
 
-    // <nav
-    //   className="flex items-center justify-between pt-4"
-    //   aria-label="Table navigation"
-    // >
-    //   <span className="text-sm font-normal text-black ">
-    //     Showing
-    //     <span className="mr-4">
-    //       Page {currentPage} of {totalPages}
-    //     </span>
-    //   </span>
-    //   <ul className="inline-flex -space-x-px text-sm h-8">
-    //     <button
-    //       onClick={handlePrevClick}
-    //       disabled={currentPage === 1}
-    //       className={`${
-    //         currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-    //       } btn`}
-    //     >
-    //       Previous
-    //     </button>
-    //     <button
-    //       onClick={handleNextClick}
-    //       disabled={currentPage === totalPages}
-    //       className={`${
-    //         currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-    //       } btn ml-2`}
-    //     >
-    //       Next
-    //     </button>
-    //   </ul>
-    // </nav>
+    
   );
 };
 
