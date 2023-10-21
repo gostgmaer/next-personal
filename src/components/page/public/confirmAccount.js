@@ -14,6 +14,7 @@ const ConfirmAccount = () => {
   const [userData, setUserData] = useState(undefined);
   const [error, setError] = useState(undefined);
   const param = useSearchParams();
+  
   const confirmAccountAction = async (e) => {
     if (!param.getAll("token")[0]) {
       notifyerror("No Account Confirmation token found", 2000);
