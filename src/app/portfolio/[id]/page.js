@@ -1,7 +1,7 @@
 "use client";
 import PageLayout from "@/components/global/layout/pageLayout";
 import Technologies from "@/components/projects/technologi";
-import { containerId, tableId } from "@/config/config";
+import { appId, contactContiner, containerId, tableId } from "@/config/config";
 import { getServerSingle, getsingle } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 import { CountryProperty } from "country-codes-list";
@@ -17,7 +17,7 @@ const Page = () => {
   const id = param.id;
 
   const getSingleproject = async (params) => {
-    const req = await getsingle(`/record/${containerId}/table/${tableId}`, id);
+    const req = await getsingle(`/record/${appId}/table/${contactContiner}`, id);
     setContact(req.result);
   };
 

@@ -2,11 +2,12 @@
 import { projectArray } from "@/assets/data/projects";
 import PrivateLayout from "@/components/global/layout/privateLayout";
 import Technologies from "@/components/projects/technologi";
-import { containerId, tableId } from "@/config/config";
+import { appId, containerId, projectContainer, tableId } from "@/config/config";
 import { getServerSingle, getsingle } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 import { CountryProperty } from "country-codes-list";
 import moment from "moment";
+import App from "next/app";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -21,7 +22,7 @@ const Page = () => {
   const id = param.id;
 
   const getSingleproject = async (params) => {
-    const req = await getsingle(`/record/${containerId}/table/${tableId}`, id);
+    const req = await getsingle(`/record/${appId}/container/${projectContainer}`, id);
     setContact(req.result);
   };
 
@@ -42,7 +43,6 @@ const Page = () => {
   };
   return (
     <>
-      {" "}
       <PrivateLayout>
         <div className="bg-white shadow-md  rounded-lg w-full">
           <ProjectCard project={contact} />
