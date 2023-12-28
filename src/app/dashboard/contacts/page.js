@@ -1,7 +1,7 @@
 "use client";
 import Pagination from "@/components/global/pagination/Pagination";
 import PrivateLayout from "@/components/global/layout/privateLayout";
-import { contactTable, containerId, tableId } from "@/config/config";
+import { appId, contactContiner, containerId, tableId } from "@/config/config";
 import { get, patch, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 import moment from "moment";
@@ -24,14 +24,14 @@ const Page = () => {
   };
   const updateIfnotActive = async (data) => {
     const res = await patch(
-      `/record/${containerId}/table/${contactTable}`,
+      `/record/${appId}/container/${contactContiner}`,
       { acknoledge: !data.acknoledge },
       data._id
     );
 
     if (res.statusCode === 200) {
       const req = await get(
-        `/record/${containerId}/table/${contactTable}`,
+        `/record/${appId}/container/${contactContiner}`,
         queryPrams
       );
       setContact(req.result);
@@ -40,7 +40,7 @@ const Page = () => {
 
   const loadContacts = async () => {
     const req = await get(
-      `/record/${containerId}/table/${contactTable}`,
+      `/record/${appId}/container/${contactContiner}`,
       queryPrams
     );
     setContact(req.result);

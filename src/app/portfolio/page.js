@@ -2,7 +2,7 @@
 import PageLayout from "@/components/global/layout/pageLayout";
 import Pagination from "@/components/global/pagination/Pagination";
 
-import { containerId, tableId } from "@/config/config";
+import { appId, containerId, projectContainer, tableId } from "@/config/config";
 import { get, } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 
@@ -25,7 +25,7 @@ const Index = () => {
 
   const loadprojects = async () => {
     const req = await get(
-      `/record/${containerId}/table/${tableId}`,
+      `/record/${appId}/container/${projectContainer}`,
       queryPrams
     );
     setProjects(req.result);

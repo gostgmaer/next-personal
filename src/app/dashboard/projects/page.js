@@ -2,7 +2,7 @@
 import Pagination from "@/components/global/pagination/Pagination";
 import PrivateLayout from "@/components/global/layout/privateLayout";
 import ProjectForm from "@/components/projects/projectForm";
-import { containerId, tableId } from "@/config/config";
+import { appId, containerId, projectContainer, tableId } from "@/config/config";
 import { del, get, patch, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 import moment from "moment";
@@ -33,7 +33,7 @@ const Page = () => {
   };
 
   const handleDelete = async (id) => {
-    const req = await del(`/record/${containerId}/table/${tableId}`, id);
+    const req = await del(`/record/${appId}/container/${projectContainer}`, id);
     if (req.statusCode ===200) {
       loadprojects()
     }
@@ -41,7 +41,7 @@ const Page = () => {
 
   const loadprojects = async () => {
     const req = await get(
-      `/record/${containerId}/table/${tableId}`,
+      `/record/${appId}/container/${projectContainer}`,
       queryPrams
     );
     setContact(req.result);
