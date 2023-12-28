@@ -5,4 +5,4 @@ export const projectContainer = process.env.NEXT_PUBLIC_CONTAINER_PROJECT
 export const resumeContainer = process.env.NEXT_PUBLIC_CONTAINER_RESUME
 export const mongourl = process.env.MONGODB_URI
 export const baseurl = process.env.NEXT_PUBLIC_BASE_URL
-export const appId = process.env.NEXT_APP_ID
+export const appId = process.env.NEXT_PUBLIC_APP_ID
