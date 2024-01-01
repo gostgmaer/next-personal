@@ -43,13 +43,6 @@ const Login = () => {
 
   };
 
-  const handleGoogleLogin = async () => {
-
-  };
-
-  const responseFacebook = async (response) => {
-  
-  };
 
   useEffect(() => {
     if (userId) {
@@ -113,7 +106,7 @@ const Login = () => {
             Forget Password?
           </Link>
         </p>
-        <div className="flex flex-col gap-2 mt-5">
+        {/* <div className="flex flex-col gap-2 mt-5">
           <h3>Login with </h3>
           <div className="mb-4 flex gap-2">
             <button
@@ -129,7 +122,7 @@ const Login = () => {
               Facebook
             </button>
           </div>
-        </div>
+        </div> */}
         {/* <p className="text-gray-700">
           Don t have an account?{" "}
           <Link

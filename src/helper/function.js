@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 import moment from "moment";
 import "moment-duration-format";
 
@@ -52,24 +54,70 @@ export const findIndex = (array, index) => {
 };
 
 
-export const arrayGroupbykey = (array,key)=>{
+export const arrayGroupbykey = (array, key) => {
 
-      // @ts-ignore
-      const uniqueCategories = [...new Set(array.map(item => item[key]))];
+  // @ts-ignore
+  const uniqueCategories = [...new Set(array.map(item => item[key]))];
 
-      // Create a function to filter the array based on a category
-      function filterByCategory(array, key) {
-        return array.filter(item => item.category === key);
-    }
-    
-    // Create an array to store filtered arrays
-    const filteredArrays = [];
-    
-    // Filter the array for each unique category and push the results into the filteredArrays array
-    uniqueCategories.forEach(key => {
-        const filteredArray = filterByCategory(array, key);
-        filteredArrays.push(filteredArray);
+  // Create a function to filter the array based on a category
+  function filterByCategory(array, key) {
+    return array.filter(item => item.category === key);
+  }
+
+  // Create an array to store filtered arrays
+  const filteredArrays = [];
+
+  // Filter the array for each unique category and push the results into the filteredArrays array
+  uniqueCategories.forEach(key => {
+    const filteredArray = filterByCategory(array, key);
+    filteredArrays.push(filteredArray);
+  });
+
+  return filteredArrays
+}
+
+
+
+
+export function storeCookiesOfObject(data) {
+  if (data) {
+    const userKeys = Object.keys(data);
+
+    userKeys.forEach(key => {
+      const value = data[key];
+      Cookies.set(key, value);
     });
-    
-    return filteredArrays
+  }
+}
+
+export const setToken = (name, value, days, type) => {
+  if (type === "ACCESS_TOKEN") {
+    const token = value.split(".");
+    setClientCookie("headerPayload", `${token[0]}.${token[1]}`, days);
+    setClientCookie("signature", `${token[2]}`, days);
+  } else {
+    setClientCookie(name, value, days);
+  }
+};
+
+export const setClientCookie = (name, value, timestamp) => {
+  const expirationDate = new Date(timestamp * 1000); // Convert Unix timestamp to milliseconds
+  Cookies.set(name, value, { expires: expirationDate });
+};
+
+
+export const saveCookies = (res) => {
+  const token = res["access_token"].split(".");
+  setToken("headerPayload", `${token[0]}.${token[1]}`, res["exp"]);
+  setToken("signature", `${token[2]}`, res["exp"]);
+
+  const access_token = jwtDecode(res["access_token"]);
+  const userInfo = jwtDecode(res["id_token"]);
+  const currObj = {
+    refreshToken: res["refresh_token"],
+    idToken: res["id_token"], id: access_token["user_id"], email: userInfo["email"], image: userInfo["profilePicture"], name: `${userInfo["firstName"]} ${userInfo["lastName"]}`
+  }
+  storeCookiesOfObject({ ...res, ...currObj })
+
+  return {userInfo,access_token}
 }

@@ -17,7 +17,7 @@ const Personal = () => {
   const getProfile = async () => {
     try {
       if (userId?.user_id) {
-        const res = await getsingle(`/user/profile`, userId.user_id);
+        const res = await get(`/authentication/user/current/profile`);
         setProfileInfo(res);
       }
     } catch (error) {
