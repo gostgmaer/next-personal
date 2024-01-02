@@ -3,12 +3,12 @@ import ImageUpload from "../global/fields/ImageUpload";
 import MultiImageUploadr from "../global/fields/multiImageUploadr";
 import TaxonomyField from "../global/fields/Taxanomy";
 import { patch, post } from "@/lib/http";
-import { containerId, tableId } from "@/config/config";
+import { appId, containerId, projectContainer, tableId } from "@/config/config";
 import ModalUI from "../global/modal/modal";
 import Interest from "./repeatable";
 import { arrayGroupbykey } from "@/helper/function";
 
-const ProjectForm = ({ id, setId, setOpen }) => {
+const ProjectForm = ({ id, setId, setOpen,loadprojects }) => {
   const [selectedFiles, setSelectedFiles] = useState(id ? id.images : []);
   const [interests, setInterests] = useState([]);
   const [tags, setTags] = useState(id ? id.tags : []);
@@ -36,12 +36,13 @@ const ProjectForm = ({ id, setId, setOpen }) => {
   const handleSaveProjects = async (body) => {
     try {
       const request = await post(
-        `/record/${containerId}/table/${tableId}`,
+        `/record/${appId}/container/${projectContainer}`,
         body
       );
       setId(undefined);
       setOpen(false);
       setIsnew(request);
+      loadprojects()
     } catch (error) {
       setIserror(error);
     }
@@ -72,13 +73,14 @@ const ProjectForm = ({ id, setId, setOpen }) => {
     };
     try {
       const res = await patch(
-        `/record/${containerId}/table/${tableId}`,
+        `/record/${appId}/container/${projectContainer}`,
         body,
         id._id
       );
       setId(undefined);
       setOpen(false);
       setIsUpdate(res);
+      loadprojects()
     } catch (error) {
       setIserror(error);
     }

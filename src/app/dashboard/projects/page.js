@@ -168,7 +168,7 @@ const Page = () => {
           </div>
         </div>
         {open && (
-          <ProjectForm id={id} setId={setId} setOpen={setOpen}></ProjectForm>
+          <ProjectForm id={id} setId={setId} setOpen={setOpen} loadprojects={loadprojects}></ProjectForm>
         )}
         {spinner}
       </PrivateLayout>
