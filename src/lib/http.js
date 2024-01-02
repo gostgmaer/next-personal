@@ -3,31 +3,20 @@
 
 import axios from "axios";
 import instance from '../lib/interceptors'
-import { parseCookies } from "nookies";
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL; // Replace with your Firebase URL
+import Cookies from "js-cookie";
+import { baseurl } from "@/config/config";
 
 
-// axios.defaults.withCredentials=true
+export const get = async (endpint, query) => {
 
+  const tokens = getCookiesData()
 
-export const get = async (endpint, query, id) => {
- 
-  const cookies = parseCookies();
-  const token = cookies["accessToken"];
-  const session = cookies["session"];
-  let reqUrl = undefined;
-  if (id) {
-    reqUrl = baseURL + endpint + `/${id}`;
-  }
-  if (!id) {
-    reqUrl = baseURL + endpint;
-  }
   const option = {
     method: "get",
-    url: reqUrl,
+    url: baseurl + endpint,
     headers: {
-      Authorization: token,
-      session_id: session,
+      Authorization: tokens.token,
+      session_id: tokens.session,
     },
     params: query,
   };
@@ -38,24 +27,22 @@ export const get = async (endpint, query, id) => {
 
   } catch (e) {
     error = e.response.data;
-   
+
 
     throw new Error(JSON.stringify(e.response.data));
   }
   return response?.data ? response?.data : error; // or set initial value
 };
 
-export const getsingle = async (endpint, id,query) => {
-  const cookies = parseCookies();
-  const token = cookies["accessToken"];
-  const session = cookies["session"];
+export const getsingle = async (endpint, id, query) => {
+  const tokens = getCookiesData()
 
   const option = {
     method: "get",
-    url: baseURL + endpint + `/${id}`,
+    url: baseurl + endpint + `/${id}`,
     headers: {
-      Authorization: token,
-      session_id: session,
+      Authorization: tokens.token,
+      session_id: tokens.session,
     },
     params: query,
   };
@@ -63,86 +50,26 @@ export const getsingle = async (endpint, id,query) => {
   let error;
   try {
     response = await instance.request(option);
-
-  
   } catch (e) {
     error = e.response.data;
-   
-
     throw new Error(JSON.stringify(e.response.data));
   }
   return response?.data ? response?.data : error; // or set initial value
 };
 
 
-export const serverGetsingle = async (endpint, id,query) => {
-  const cookies = parseCookies();
-  const token = cookies["accessToken"];
-  const session = cookies["session"];
 
-  const option = {
-    method: "get",
-    url: baseURL + endpint + `/${id}`,
-    headers: {
-      Authorization: token,
-      session_id: session,
-    },
-    params: query,
-  };
-  let response;
-  let error;
-  try {
-    response = await axios.request(option);
 
-  
-  } catch (e) {
-    error = e.response.data;
-   
-
-    throw new Error(JSON.stringify(e.response.data));
-  }
-  return response?.data ? response?.data : error; // or set initial value
-};
-
-export const getServerSingle = async (endpint, query, id) => {
-  const cookies = parseCookies();
-  const token = cookies["accessToken"];
-  const session = cookies["session"];
-
-  const option = {
-    method: "get",
-    url: baseURL + endpint + `/${id}`,
-    headers: {
-      Authorization: token,
-      session_id: session,
-    },
-    params: query,
-  };
-  let response;
-  let error;
-  try {
-    response = await axios.request(option);
-
-    
-  } catch (e) {
-    error = e.response.data;
-   
-
-    throw new Error(JSON.stringify(e.response.data));
-  }
-  return response?.data ? response?.data : error; // or set initial value
-};
 
 export const post = async (endpint, data) => {
-  const cookies = parseCookies();
-  const token = cookies["accessToken"];
-  const session = cookies["session"];
+  const tokens = getCookiesData()
+
   const option = {
     method: "post",
-    url: baseURL + endpint,
+    url: baseurl + endpint,
     headers: {
-      Authorization: token,
-      session_id: session,
+      Authorization: tokens.token,
+      session_id: tokens.session,
     },
     params: {},
     data: data,
@@ -151,10 +78,10 @@ export const post = async (endpint, data) => {
   let error;
   try {
     response = await instance.request(option);
-   
+
   } catch (e) {
     error = e.response.data;
-   
+
     throw new Error(JSON.stringify(e.response.data));
   }
 
@@ -162,40 +89,17 @@ export const post = async (endpint, data) => {
   return response?.data ? response?.data : error; // or set initial value
 };
 
-// export const put = async (endpint, id, data) => {
-//   const option = {
-//     method: "put",
-//     url: baseURL + endpint + `/${id}`,
-//     headers: {
-//       Authorization: token,
-//       session_id: session,
-//     },
-//     params: {},
-//     data: data,
-//   };
-//   let response;
-//   let error;
-//   try {
-//     response = await axios.request(option);
-//     notifySuccess(response.data.message, 2000);
-//   } catch (e) {
-//     error = e.response.data;
-//     notifyerror(e.response.data.message, 2000);
-//     throw new Error(JSON.stringify(e.response.data));
-//   }
-//   return response?.data ? response?.data : error; // or set initial value
-// };
+
 
 export const patch = async (endpint, data, id) => {
-  const cookies = parseCookies();
-  const token = cookies["accessToken"];
-  const session = cookies["session"];
+  const tokens = getCookiesData()
+
   const option = {
     method: "patch",
-    url: baseURL + endpint + `/${id}`,
+    url: baseurl + endpint + `/${id}`,
     headers: {
-      Authorization: token,
-      session_id: session,
+      Authorization: tokens.token,
+      session_id: tokens.session,
     },
     params: {},
     data: data,
@@ -204,26 +108,25 @@ export const patch = async (endpint, data, id) => {
   let error;
   try {
     response = await instance.request(option);
-    
+
   } catch (e) {
     error = e.response.data;
-   
+
     throw new Error(JSON.stringify(e.response.data));
   }
   return response?.data ? response?.data : error; // or set initial value
 };
 
 export const del = async (endpint, id) => {
-  const cookies = parseCookies();
-  const token = cookies["accessToken"];
-  const session = cookies["session"];
+  const tokens = getCookiesData()
+
 
   const option = {
     method: "delete",
-    url: baseURL + endpint + `/${id}`,
+    url: baseurl + endpint + `/${id}`,
     headers: {
-      Authorization: token,
-      session_id: session,
+      Authorization: tokens.token,
+      session_id: tokens.session,
     },
     params: {},
     data: {},
@@ -232,11 +135,43 @@ export const del = async (endpint, id) => {
   let error;
   try {
     response = await instance.request(option);
-  
+
   } catch (e) {
     error = e.response.data;
-   
+
     throw new Error(JSON.stringify(e.response.data));
   }
   return response?.data ? response?.data : error; // or set initial value
 };
+
+export const serverMethod = async (endpint, params) => {
+  const option = {
+    method: params.method,
+    url: baseurl + endpint,
+    headers: {
+      Authorization: params?.token && "Bearer " + params.token,
+    },
+    params: params?.query,
+    data: params?.data,
+  };
+  let response;
+  let error;
+  try {
+    response = await axios.request(option);
+  } catch (e) {
+    error = e.response;
+
+    //  throw new Error(JSON.stringify(e.response.data));
+  }
+  return response?.data ? response?.data : error; // or set initial value
+};
+
+const getCookiesData = (second) => {
+  const cookiesData = Cookies.get();
+  const token =   "bearer "+  cookiesData["headerPayload"] + "." + cookiesData["signature"];
+  const session = cookiesData["session"];
+
+  return {
+    token, session
+  }
+}

@@ -4,7 +4,7 @@ import moment from "moment";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaEye } from "react-icons/fa";
-import { containerId, tableId } from "@/config/config";
+import { appId, contactContiner, containerId, projectContainer, tableId } from "@/config/config";
 
 const Tables = () => {
   return (
@@ -34,7 +34,8 @@ const ContactsTable = () => {
 
   const loadContacts = async () => {
     // Handle form submission here, e.g., send data to an API
-    const req = await get("/contact", queryPrams);
+    // `/record/${appId}/container/${contactContiner}`,
+    const req = await get(`/record/${appId}/container/${contactContiner}`, queryPrams);
     setContact(req.result);
     setTotalPages(
       req.total / itemsPerPage < 1 ? 1 : Math.ceil(req.total / itemsPerPage)
@@ -143,7 +144,7 @@ const ProjectContacts = () => {
 
   const loadContacts = async () => {
     const req = await get(
-      `/record/${containerId}/table/${tableId}`,
+      `/record/${appId}/container/${projectContainer}`,
       queryPrams
     );
     console.log(req);
