@@ -16,13 +16,13 @@ const Navbar = () => {
   };
  
   return (
-    <header className=" max-sm:hidden w-full py-8 font-medium flex item-center justify-between relative print:hidden">
+    <header className=" max-sm:hidden w-full px-20 py-5 text-white font-medium flex item-center justify-between relative print:hidden bg-gray-600">
       <nav className="flex capitalize items-center gap-4 ">
         {urls.map((url) => (
           <Link href={`${url?.url}`} className={`relative group`} key={url.id}>
             {url?.text}
             <span
-              className={`h-[1px] inline-block bg-dark absolute left-0 -bottom-0.5 group-hover:w-full transition-[width] ease-in duration-300 ${
+              className={`h-[1px] inline-block bg-white absolute left-0 -bottom-0.5 group-hover:w-full transition-[width] ease-in duration-300 ${
                 pathname === url.url ? "w-full" : "w-0"
               }`}
             >

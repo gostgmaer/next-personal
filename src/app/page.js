@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
 export default function Home() {
   return (
     <PageLayout>
-      <div className="max-w-7xl m-auto">
+      <div className="">
         <div className="py-12 px-2 w-full m-auto sm:pt-24">
           <h2 className="flex justify-start items-center gap-2 text-xl font-bold text-slate-700 mb-4 sm:text-2xl">
             <span>Hello there</span>
@@ -71,6 +71,7 @@ export default function Home() {
                 <li title={item.name} key={item.id}>
                   <a
                     href={item.url}
+                    target="_blank"
                     className="text-gray-500 text-md ease-in-out duration-150 hover:text-gray-800"
                   >
                     {item.icon}
