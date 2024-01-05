@@ -29,7 +29,7 @@ export const ContatForm = (second) => {
     }
   
     return (
-      <div className="isolate bg-white px-6 py-5   sm:py-5 lg:px-8">
+      <div className="isolate bg-white px-6 py-5  rounded-lg  sm:py-5 lg:px-8">
         <div className="mx-auto  text-center">
           {success?.statusCode === 201 && "We received your contact request"}
         </div>
@@ -237,7 +237,7 @@ export const ContatForm = (second) => {
             </div>
           </Form>
         </Formik>
-        {spinner}
+     
       </div>
     );
   };

@@ -27,7 +27,7 @@ export default function Home() {
     <PageLayout>
       <div className="">
         <div className="py-12 px-2 w-full m-auto sm:pt-24">
-          <h2 className="flex justify-start items-center gap-2 text-xl font-bold text-slate-700 mb-4 sm:text-2xl">
+          <h2 className="flex justify-start items-center gap-2 text-xl font-bold text-slate-600 mb-4 sm:text-2xl">
             <span>Hello there</span>
             <SiHey />
             <span>I am</span>
@@ -65,7 +65,7 @@ export default function Home() {
             </button>
           </div>
           <div className="flex flex-col justify-start items-start gap-3 mt-20">
-            <h4 className="text-xl text-gray-500 font-bold">Find me on :</h4>
+            <h4 className="text-xl text-gray-700 font-bold">Find me on :</h4>
             <ul className="flex justify-start items-center flex-wrap gap-4">
               {socialmedia.map((item) => (
                 <li title={item.name} key={item.id}>
