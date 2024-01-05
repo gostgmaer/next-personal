@@ -55,7 +55,7 @@ export default Page;
 // components/ProjectCard.js
 const ProjectCard = ({ project }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden my-5">
       <Image
         src={project?.main_image}
         alt={project?.name}

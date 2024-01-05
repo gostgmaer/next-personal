@@ -36,13 +36,13 @@ const Index = () => {
 
   return (
     <PageLayout>
-      <div className="rounded-[20px] h-full  shadow-md m-auto bg-gray-100 flex items-center justify-center flex-col">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
+      <div className="rounded-[20px] h-full py-10 gap-10 pb-0  shadow-md m-auto bg-gray-100 flex items-center justify-center flex-col">
+        <div className=" flex justify-start items-center flex-wrap w-full gap-5 px-10 ">
           {projects?.result?.map((project, index) => (
             <Project key={index} project={project} />
           ))}
         </div>
-        <div className="bg-gray-700 text-white py-1">
+        <div className="bg-gray-700 text-white py-1 w-full">
           <PaginationBlock totalItems={projects?.total_record} limit={itemsPerPage} currentPage={currentPage} onPageChange={setCurrentPage} onItemsPerPageChange={setItemsPerPage} />
         </div>
       </div>
@@ -55,7 +55,7 @@ export default Index;
 
 const Project = ({ project }) => {
   return (
-    <Link href={`/portfolio/${project._id}`}>
+    <Link href={`/portfolio/${project._id}`} className=" w-80">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform hover:scale-105">
         <Image
           src={project?.main_image}

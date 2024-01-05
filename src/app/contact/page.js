@@ -7,8 +7,8 @@ import PageLayout from "@/components/global/layout/pageLayout";
 const Index = () => {
   return (
     <PageLayout>
-      <div className="  min-h-[calc(100vh-88px)] bg-gray-100 w-full flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-md w-full  flex">
+      <div className="  rounded-[20px]  shadow-md m-auto bg-gray-100 flex items-center justify-center my-5">
+        <div className="min-h-max p-8 w-full flex">
           <div className="w-2/3 pr-8 ">
             <h1 className="text-2xl font-semibold mb-4">Contact Us</h1>
             <ContatForm />
