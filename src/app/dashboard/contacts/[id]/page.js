@@ -23,9 +23,6 @@ const Page = () => {
   };
 
 
- 
-
-
   useEffect(() => {
     getsinglecontactDetails();
   }, [id]);
