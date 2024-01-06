@@ -8,35 +8,25 @@ import { contactValidationSchema } from "@/util/validation/contact";
 import codes from "country-calling-code";
 import { get, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
-// import RichTextEditor from "../global/fields/RichtextEditor";
 
 export const ContatForm = (second) => {
     const [axios, spinner] = useAxios();
     const [success, setSuccess] = useState(null);
     const [agreed, setAgreed] = useState(false);
-    const [richTextValue, setRichTextValue] = useState('');
-
     var countryCode = codes;
     const handleSubmit = async (values, { resetForm }) => {  
       const request = await post(
         `/record/${appId}/container/${contactContiner}`,
-        { ...values, subscribe: agreed,message:richTextValue }
+        { ...values, subscribe: agreed }
       );
       setSuccess(request);
       resetForm()
-      setRichTextValue("")
       setAgreed(false);
     };
   
     function classNames(...classes) {
       return classes.filter(Boolean).join(" ");
     }
-
-
-    const handleRichTextChange = (value) => {
-      setRichTextValue(value);
-    };
-
   
     return (
       <div className="isolate bg-white px-6 py-5  rounded-lg  sm:py-5 lg:px-8">
@@ -82,7 +72,6 @@ export const ContatForm = (second) => {
                   />
                 </div>
               </div>
-           
               <div>
                 <label
                   htmlFor="lastName"
@@ -190,14 +179,19 @@ export const ContatForm = (second) => {
                   Message
                 </label>
                 <div className="mt-2.5">
-                {/* <RichTextEditor value={richTextValue} onChange={handleRichTextChange} /> */}
+                  <Field
+                    name="message"
+                    as="textarea"
+                    id="message"
+                    rows={4}
+                    className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
                   <ErrorMessage
                     name="message"
                     component="p"
                     className="text-red-600"
                   />
                 </div>
-               
               </div>
               <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
                 <div className="flex h-6 items-center">
