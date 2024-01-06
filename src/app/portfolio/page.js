@@ -12,6 +12,26 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 
+export async function generateMetadata({ params }) {
+  return {
+    title: "Kishor Sarkar Portfolio",
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
+  };
+}
+
+
 const Index = () => {
   const [projects, setProjects] = useState(undefined);
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,9 +87,9 @@ const Project = ({ project }) => {
 
         <div className="p-4">
           <h2 className="text-2xl font-semibold mb-2">{project.name}</h2>
-          <p className="text-gray-600 mb-4">
+         {project?.overview && <p className="text-gray-600 mb-4">
             {project?.overview?.substring(0, 140) + '...'}
-          </p>
+          </p>}
 
           <div className="flex  flex-wrap gap-2 mb-4 justify-start">
             {project.tags.splice(0, 4).map((tag, index) => (

@@ -1,30 +1,53 @@
-"use client";
 import PageLayout from "@/components/global/layout/pageLayout";
 import Technologies from "@/components/projects/technologi";
-import { appId, contactContiner, containerId, projectContainer, tableId } from "@/config/config";
-import {  getsingle } from "@/lib/http";
-import { useAxios } from "@/lib/interceptors";
-import { CountryProperty } from "country-codes-list";
-import moment from "moment";
+import { appId, projectContainer } from "@/config/config";
+import { serverMethod } from "@/lib/servermethod";
+import Head from "next/head";
 import Image from "next/image";
-import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+// import { useParams } from "next/navigation";
 
-const Page = () => {
-  const [contact, setContact] = useState(undefined);
-  const [axios, spinner] = useAxios();
-  const param = useParams();
-  const id = param.id;
+const getSingleData = async (id) => {
 
-  const getSingleproject = async (params) => {
-    const req = await getsingle(`/record/${appId}/container/${projectContainer}`, id);
-    setContact(req.result);
+  const params = {
+    method: "get",
+  }
+  const request = await serverMethod(`/record/${appId}/container/${projectContainer}/${id}`, params)
+  return request
+}
+
+
+
+
+
+export async function generateMetadata({ params }) {
+  const data = await getSingleData(params.id)
+
+  return {
+    title: data.result.name,
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
   };
+}
 
-  useEffect(() => {
-    getSingleproject();
-  }, [id]);
 
+
+
+
+const Page = async ({ params }) => {
+
+  const data = await getSingleData(params.id)
+  console.log(data);
   const p = {
     name: "project1",
     startDate: null,
@@ -41,10 +64,10 @@ const Page = () => {
       {" "}
       <PageLayout>
         <div className="bg-white shadow-md rounded-lg w-full">
-          <ProjectCard project={contact} />
+          <ProjectCard project={data.result} />
         </div>
 
-        {spinner}
+
       </PageLayout>
     </>
   );
@@ -66,10 +89,10 @@ const ProjectCard = ({ project }) => {
       <div className="p-6">
         <h1 className="text-2xl font-semibold mb-4">{project?.name}</h1>
         {/* <p className="text-gray-600 text-lg mb-4">{project?.intro}</p> */}
-        <div
+      { project?.overview && <div
           className="text-gray-600 text-lg mb-4"
           dangerouslySetInnerHTML={{ __html: project?.overview }}
-        />
+        />}
         <div className="grid grid-cols-1 gap-4 p-5">
           <div>
             <h2 className="text-xl font-semibold">Technologies Used:</h2>

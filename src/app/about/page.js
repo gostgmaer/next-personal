@@ -4,6 +4,27 @@ import PageLayout from "@/components/global/layout/pageLayout";
 import Image from "next/image";
 import React from "react";
 
+
+export async function generateMetadata({ params }) {
+  return {
+    title: "Kishor Sarkar About ",
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
+  };
+}
+
+
 const Index = () => {
   return (
     <PageLayout >

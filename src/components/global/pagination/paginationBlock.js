@@ -48,14 +48,14 @@ const PaginationBlock = ({ totalItems, limit, currentPage, onPageChange, onItems
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="ml-2  rounded-full  bg-transparent hover:bg-gray-700 text-black disabled:bg-gray-50 flex gap-2 items-center"
+          className="ml-2  rounded-full  bg-transparent hover:bg-gray-700  disabled:text-gray-500 text-black disabled:bg-gray-50 flex gap-2 items-center"
         >
           <FaArrowAltCircleLeft className='w-6 h-6' /> 
         </button>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="ml-2  rounded-full  bg-transparent hover:bg-gray-700 text-black disabled:bg-gray-50 flex gap-2 items-center"
+          className="ml-2   rounded-full  bg-transparent hover:bg-gray-700 disabled:text-gray-500 text-black disabled:bg-gray-50 flex gap-2 items-center"
         >
           <FaArrowAltCircleRight className='w-6 h-6' />
         </button>
