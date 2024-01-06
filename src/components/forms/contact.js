@@ -8,7 +8,7 @@ import { contactValidationSchema } from "@/util/validation/contact";
 import codes from "country-calling-code";
 import { get, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
-import RichTextEditor from "../global/fields/RichtextEditor";
+// import RichTextEditor from "../global/fields/RichtextEditor";
 
 export const ContatForm = (second) => {
     const [axios, spinner] = useAxios();
@@ -190,7 +190,7 @@ export const ContatForm = (second) => {
                   Message
                 </label>
                 <div className="mt-2.5">
-                <RichTextEditor value={richTextValue} onChange={handleRichTextChange} />
+                {/* <RichTextEditor value={richTextValue} onChange={handleRichTextChange} /> */}
                   <ErrorMessage
                     name="message"
                     component="p"
