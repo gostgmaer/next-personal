@@ -2,7 +2,24 @@ import { socialmedia, userInfo } from "@/assets/data/mock";
 import { ContatForm } from "@/components/forms/contact";
 import PageLayout from "@/components/global/layout/pageLayout";
 
-
+export async function generateMetadata({ params }) {
+  return {
+    title: "Kishor Sarkar Contact",
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
+  };
+}
 
 const Index = () => {
   return (
