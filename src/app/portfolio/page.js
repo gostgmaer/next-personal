@@ -6,30 +6,31 @@ import PaginationBlock from "@/components/global/pagination/paginationBlock";
 import { appId, containerId, projectContainer, tableId } from "@/config/config";
 import { get, } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
+import Head from "next/head";
 
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 
-export async function generateMetadata({ params }) {
-  return {
-    title: "Kishor Sarkar Portfolio",
-    description: "Full stack web developer",
-    openGraph: {
-      type: "website",
-      url: "l",
-      title: "My Website",
-      description: "My Website Description",
-      siteName: "My Website",
-      images: [
-        {
-          url: "https://example.com/og.png",
-        },
-      ],
-    },
-  };
-}
+// export async function generateMetadata({ params }) {
+//   return {
+//     title: "Kishor Sarkar Portfolio",
+//     description: "Full stack web developer",
+//     openGraph: {
+//       type: "website",
+//       url: "l",
+//       title: "My Website",
+//       description: "My Website Description",
+//       siteName: "My Website",
+//       images: [
+//         {
+//           url: "https://example.com/og.png",
+//         },
+//       ],
+//     },
+//   };
+// }
 
 
 const Index = () => {
@@ -56,6 +57,9 @@ const Index = () => {
 
   return (
     <PageLayout>
+      <Head>
+        <title>Kishor Sarkar Portfolio</title>
+      </Head>
       <div className="rounded-[20px] my-5 py-10 gap-10 pb-0  shadow-md m-auto bg-gray-100 flex items-center justify-center flex-col">
         <div className=" flex justify-start items-center flex-wrap w-full gap-5 px-10 ">
           {projects?.result?.map((project, index) => (
