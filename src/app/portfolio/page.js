@@ -36,7 +36,7 @@ const Index = () => {
 
   return (
     <PageLayout>
-      <div className="rounded-[20px] h-full py-10 gap-10 pb-0  shadow-md m-auto bg-gray-100 flex items-center justify-center flex-col">
+      <div className="rounded-[20px] my-5 py-10 gap-10 pb-0  shadow-md m-auto bg-gray-100 flex items-center justify-center flex-col">
         <div className=" flex justify-start items-center flex-wrap w-full gap-5 px-10 ">
           {projects?.result?.map((project, index) => (
             <Project key={index} project={project} />
