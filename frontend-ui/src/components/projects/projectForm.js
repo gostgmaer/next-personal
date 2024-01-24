@@ -3,12 +3,10 @@ import ImageUpload from "../global/fields/ImageUpload";
 import MultiImageUploadr from "../global/fields/multiImageUploadr";
 import TaxonomyField from "../global/fields/Taxanomy";
 import { patch, post } from "@/lib/http";
-import { appId, containerId, projectContainer, tableId } from "@/config/config";
-import ModalUI from "../global/modal/modal";
 import Interest from "./repeatable";
 import { arrayGroupbykey } from "@/helper/function";
 
-const ProjectForm = ({ id, setId, setOpen,loadprojects }) => {
+const ProjectForm = ({ id, setId, setOpen, loadprojects }) => {
   const [selectedFiles, setSelectedFiles] = useState(id ? id.images : []);
   const [interests, setInterests] = useState([]);
   const [tags, setTags] = useState(id ? id.tags : []);
@@ -17,7 +15,7 @@ const ProjectForm = ({ id, setId, setOpen,loadprojects }) => {
   const [formData, setFormData] = useState({
     descriptions: id?.descriptions,
     overview: id?.overview,
-    name: id?.name,
+    title: id?.name,
     role: id?.role,
     inspiration: id?.inspiration,
     start_date: id?.start_date,
@@ -36,13 +34,16 @@ const ProjectForm = ({ id, setId, setOpen,loadprojects }) => {
   const handleSaveProjects = async (body) => {
     try {
       const request = await post(
-        `/record/${appId}/container/${projectContainer}`,
+        `/projects`,
         body
       );
-      setId(undefined);
-      setOpen(false);
-      setIsnew(request);
-      loadprojects()
+      if (request.statusCode === 201) {
+        setId(undefined);
+        setOpen(false);
+        setIsnew(request);
+        loadprojects()
+      }
+
     } catch (error) {
       setIserror(error);
     }
@@ -73,7 +74,7 @@ const ProjectForm = ({ id, setId, setOpen,loadprojects }) => {
     };
     try {
       const res = await patch(
-        `/record/${appId}/container/${projectContainer}`,
+        `/projects`,
         body,
         id._id
       );
@@ -106,7 +107,7 @@ const ProjectForm = ({ id, setId, setOpen,loadprojects }) => {
               id="name"
               name="name"
               onChange={handleChange}
-              value={formData.name}
+              value={formData.title}
               autoComplete="off"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="Basilar"

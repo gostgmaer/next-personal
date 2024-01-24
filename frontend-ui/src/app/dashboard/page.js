@@ -1,27 +1,44 @@
-"use client";
-import React, { useEffect } from "react";
 import PrivateLayout from "@/components/global/layout/privateLayout";
-import { useAuthContext } from "@/contex/authContext";
-import { useRouter } from "next/navigation";
 import Tables from "@/components/page/dashboard/Tables";
+import { serverMethod } from "@/lib/servermethod";
 
-const Page = () => {
-  const { userId } = useAuthContext();
-  const route = useRouter();
 
-  useEffect(() => {
-    if (!userId) {
-      route.push("/auth/login");
-    }
-  }, [userId?.user_id]);
+const Page = async (props) => {
+  const results = await getAllRecord(props.searchParams)
+
+
+
   return (
     <PrivateLayout>
       <div className="text-white">
         <div className=" py-4  text-4xl capitalize"> Dashboard</div>
-        <Tables />
+        <Tables data={results} />
       </div>
     </PrivateLayout>
   );
 };
 
 export default Page;
+
+
+
+export const getAllRecord = async (query) => {
+
+  const params = {
+    method: "get",
+    header: {},
+    query: { ...query },
+  };
+  const contacts = await serverMethod(
+    `/contacts`,
+    params
+  );
+  const projects = await serverMethod(
+    `/projects`,
+    params
+  );
+
+
+  return { contacts, projects }
+
+}

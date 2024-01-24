@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import moment from "moment";
 import "moment-duration-format";
-
+import XLSX from "xlsx";
 // Export the calculateTimeGap function with maxGap parameter
 export function calculateTimeGap(date1, date2, maxGap) {
   const momentDate1 = moment(date1, "YYYY-MM-DD HH:mm:ss");
@@ -79,16 +79,7 @@ export const arrayGroupbykey = (array, key) => {
 
 
 
-export function storeCookiesOfObject(data) {
-  if (data) {
-    const userKeys = Object.keys(data);
 
-    userKeys.forEach(key => {
-      const value = data[key];
-      Cookies.set(key, value);
-    });
-  }
-}
 
 export const setToken = (name, value, days, type) => {
   if (type === "ACCESS_TOKEN") {
@@ -120,4 +111,98 @@ export const saveCookies = (res) => {
   storeCookiesOfObject({ ...res, ...currObj })
 
   return {userInfo,access_token}
+}
+
+
+
+
+
+export function generateUrlFromNestedObject(nestedObject) {
+  const queryParams = [];
+
+  const processNestedObject = (obj, prefix = '') => {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const value = obj[key];
+
+        if (typeof value === 'object' && value !== null) {
+          processNestedObject(value, prefix + key + '.');
+        } else {
+          queryParams.push(`${encodeURIComponent(prefix + key)}=${encodeURIComponent(value)}`);
+        }
+      }
+    }
+  };
+
+  processNestedObject(nestedObject);
+
+  if (queryParams.length > 0) {
+    return '?' + queryParams.join('&');
+  } else {
+    return '';
+  }
+}
+
+export function parseUrlWithQueryParams(url) {
+  const queryString = url.split('?')[1];
+  if (!queryString) {
+    return {};
+  }
+
+  const params = new URLSearchParams(queryString);
+  const nestedObject = {};
+
+  params.forEach((value, key) => {
+    const keys = key.split('.');
+    let currentLevel = nestedObject;
+
+    for (let i = 0; i < keys.length - 1; i++) {
+      currentLevel[keys[i]] = currentLevel[keys[i]] || {};
+      currentLevel = currentLevel[keys[i]];
+    }
+
+    // Check for empty or undefined values before decoding
+    const decodedValue = value === 'undefined' ? undefined : decodeURIComponent(value);
+    currentLevel[keys[keys.length - 1]] = decodedValue;
+  });
+
+  return nestedObject;
+}
+
+export function storeCookiesOfObject(data) {
+  if (data) {
+    const userKeys = Object.keys(data);
+
+    userKeys.forEach(key => {
+      const value = data[key];
+      Cookies.set(key, value);
+    });
+  }
+}
+
+
+export const exportData = (data, filename) => {
+  const worksheet = XLSX.utils.json_to_sheet(data);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+  return XLSX.writeFile(workbook, `${filename}_${Date.now()}.xlsx`);
+};
+
+
+export const exportExcelFile = (data, columnobj, filename) => {
+
+  var xlsdata = [];
+
+  xlsdata = data.map(item => {
+    const newItem = {};
+    for (const key in columnobj) {
+      newItem[columnobj[key]] = item[key];
+    }
+    return newItem;
+  });
+
+
+  exportData(xlsdata, filename);
+
 }

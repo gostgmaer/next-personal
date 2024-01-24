@@ -3,7 +3,7 @@ import { projectArray } from "@/assets/data/projects";
 import PrivateLayout from "@/components/global/layout/privateLayout";
 import Technologies from "@/components/projects/technologi";
 import { appId, containerId, projectContainer, tableId } from "@/config/config";
-import { getServerSingle, getsingle } from "@/lib/http";
+import { getsingle } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 import { CountryProperty } from "country-codes-list";
 import moment from "moment";
