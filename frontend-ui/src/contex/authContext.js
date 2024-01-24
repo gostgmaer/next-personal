@@ -6,24 +6,25 @@ import { post } from "@/lib/http";
 import { saveCookies, setToken, storeCookiesOfObject } from "@/helper/function";
 import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
+import { useSession } from "next-auth/react";
 // import { useSession } from "next-auth/react";
 export const AuthContext = React.createContext(null);
 
 export const AuthContextProvider = ({ children }) => {
 
 
-  // const { data: session, status } = useSession();
+  const { data: session, status } = useSession();
 
-  // useEffect(() => {
-  //   if (session) {
-  //     if (session.user["accessToken"]) {
-  //       const token = session.user["accessToken"].split(".");
-  //       setToken("headerPayload", `${token[0]}.${token[1]}`, session.user["exp"]);
-  //       setToken("signature", `${token[2]}`, session.user["exp"]);
-  //     }
-  //     storeCookiesOfObject(session["user"])
-  //   }
-  // }, [session]);
+  useEffect(() => {
+    if (session) {
+      if (session.user["accessToken"]) {
+        const token = session.user["accessToken"].split(".");
+        setToken("headerPayload", `${token[0]}.${token[1]}`, session.user["exp"]);
+        setToken("signature", `${token[2]}`, session.user["exp"]);
+      }
+      storeCookiesOfObject(session["user"])
+    }
+  }, [session]);
 
 
 
@@ -71,26 +72,26 @@ export const AuthContextProvider = ({ children }) => {
     } catch (error) { }
   };
 
-  const unsubscribe = async () => {
-    const cookiesData = Cookies.get();
-    try {
+  // const unsubscribe = async () => {
+  //   const cookiesData = Cookies.get();
+  //   try {
      
-      if (cookiesData.access_token) {
-        const decodedToken = jwtDecode(cookiesData.access_token);
-        setUserId(decodedToken);
-        if (decodedToken["user_id"]) {
-          const res = await post("/authentication/user/verify/auth-token");
-          setUser(res);
-        }
-      }
-    } catch (error) {
-      setUser(undefined);
-      setUserId(undefined);
-    }
-  };
-  React.useEffect(() => {
-    unsubscribe();
-  }, []);
+  //     if (cookiesData.access_token) {
+  //       const decodedToken = jwtDecode(cookiesData.access_token);
+  //       setUserId(decodedToken);
+  //       if (decodedToken["user_id"]) {
+  //         const res = await post("/authentication/user/verify/auth-token");
+  //         setUser(res);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     setUser(undefined);
+  //     setUserId(undefined);
+  //   }
+  // };
+  // React.useEffect(() => {
+  //   unsubscribe();
+  // }, []);
 
   return (
     <AuthContext.Provider value={{ user, handleLoginAuth, Logout, userId }}>

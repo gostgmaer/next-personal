@@ -6,13 +6,11 @@ import { serverMethod } from "@/lib/servermethod";
 const Page = async (props) => {
   const results = await getAllRecord(props.searchParams)
 
-
-
   return (
     <PrivateLayout>
       <div className="text-white">
-        <div className=" py-4  text-4xl capitalize"> Dashboard</div>
-        <Tables data={results} />
+        <div className=" py-4  text-4xl capitalize text-gray-900"> Dashboard</div>
+        {/* <Tables data={results} /> */}
       </div>
     </PrivateLayout>
   );

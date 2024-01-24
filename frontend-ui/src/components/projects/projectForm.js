@@ -97,15 +97,15 @@ const ProjectForm = ({ id, setId, setOpen, loadprojects }) => {
           {/* Project Name */}
           <div className="">
             <label
-              htmlFor="name"
+              htmlFor="title"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
               Project Name
             </label>
             <input
               type="text"
-              id="name"
-              name="name"
+              id="title"
+              name="title"
               onChange={handleChange}
               value={formData.title}
               autoComplete="off"

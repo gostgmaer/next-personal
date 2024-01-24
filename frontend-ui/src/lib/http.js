@@ -145,7 +145,7 @@ export const del = async (endpint, id) => {
 
 const getCookiesData = (second) => {
   const cookiesData = Cookies.get();
-  const token =   "bearer "+  cookiesData["headerPayload"] + "." + cookiesData["signature"];
+  const token =   "Bearer "+  cookiesData["headerPayload"] + "." + cookiesData["signature"];
   const session = cookiesData["session"];
 
   return {

@@ -842,13 +842,6 @@ const update = async (req, res) => {
     const userdata = await User.findById(user);
     if (userdata) {
       try {
-        // const result = await User.findOneAndUpdate(
-        //   {_id: user},
-        //   { $set: req.body },
-        //   { returnOriginal: false }
-        // );
-
-        // // const body = { ...req.body };
         User.findOneAndUpdate({_id: user}, { $set: req.body }, { upsert: true },{ returnOriginal: false }).then(
           (data, err) => {
             if (err)
