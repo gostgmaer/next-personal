@@ -1,20 +1,39 @@
-"use client";
 
+import { cookies } from 'next/headers'
 import PrivateLayout from "@/components/global/layout/privateLayout";
 import Personal from "@/components/page/dashboard/profile/profileBlock";
-import { useAxios } from "@/lib/interceptors";
 import React from "react";
+import { serverMethod } from '@/lib/servermethod';
 
-const Page = () => {
-  const [axios, spinner] = useAxios();
+const Page = async (props) => {
+
+  const requestData= await fetchCurrentProfile()
+
+
   return (
     <>
       <PrivateLayout>
-        <Personal />
+        <Personal data= {requestData} />
       </PrivateLayout>
-      {spinner}
+
     </>
   );
 };
 
 export default Page;
+
+
+
+export const fetchCurrentProfile = async () => {
+
+  const cookieStore = cookies()
+  const tokendata = "Bearer " + cookieStore.get("headerPayload").value + "." + cookieStore.get("signature").value;
+  const param = {
+    method: "get",
+    header: {
+      Authorization: tokendata,
+    },
+  }
+  const result = await serverMethod(`/authentication/user/current/profile`, param)
+  return result
+}
