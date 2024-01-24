@@ -1,32 +1,12 @@
-"use client";
 import PrivateLayout from "@/components/global/layout/privateLayout";
-import { appId, contactContiner, containerId } from "@/config/config";
-import { getsingle } from "@/lib/http";
-import { useAxios } from "@/lib/interceptors";
-import { CountryProperty } from "country-codes-list";
+import { serverMethod } from "@/lib/servermethod";
 import moment from "moment";
-import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
 
 
-const Page = () => {
-  const [contact, setContact] = useState(undefined);
-  const [axios, spinner] = useAxios();
-  const param = useParams();
-  const id = param.id;
-  const getsinglecontactDetails = async (params) => {
-    const req = await getsingle(
-      `/contacts`,id
-   
-    );
-    setContact(req.result);
-  };
+const Page = async (props) => {
 
-
-  useEffect(() => {
-    getsinglecontactDetails();
-  }, [id]);
-
+  const results = await getRecord(props.params.id)
+  const contact = results.result
 
 
   return (
@@ -72,10 +52,30 @@ const Page = () => {
           </ul>
         )}
       </div>
-      {spinner}
+    
+      <div></div>
     </PrivateLayout>
     </>
   );
 };
 
 export default Page;
+
+
+export const getRecord = async (id) => {
+
+  const params = {
+    method: "get",
+    header: {},
+    query: { },
+  };
+  const contacts = await serverMethod(
+    `/contacts/${id}`,
+    params
+  );
+
+
+
+  return contacts
+
+}
