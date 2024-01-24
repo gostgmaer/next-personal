@@ -1,3 +1,4 @@
+"use client";
 import Pagination from "@/components/global/pagination/Pagination";
 import { get } from "@/lib/http";
 import moment from "moment";
@@ -5,8 +6,12 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { appId, contactContiner, containerId, projectContainer, tableId } from "@/config/config";
+import { useRouter } from "next/navigation";
 
-const Tables = () => {
+const Tables = (props) => {
+  const route = useRouter();
+
+
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
       <div className=" col-span-1">

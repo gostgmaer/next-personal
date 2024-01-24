@@ -10,9 +10,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaCheck, FaEdit, FaEye, FaTrash } from "react-icons/fa";
+import { serverMethod } from "@/lib/servermethod";
 // import ReactQuill from "react-quill";
 
-const Page = () => {
+const Page = async (props) => {
+
+  const proj = await getAllRecord(props.searchParams)
+
+
   const [contact, setContact] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
@@ -177,3 +182,22 @@ const Page = () => {
 };
 
 export default Page;
+
+
+
+export const getAllRecord = async (query) => {
+
+  const params = {
+    method: "get",
+    header: {},
+    query: { ...query },
+  };
+  const projects = await serverMethod(
+    `/projects`,
+    params
+  );
+
+
+  return projects
+
+}
