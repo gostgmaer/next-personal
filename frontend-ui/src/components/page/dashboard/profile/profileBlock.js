@@ -1,34 +1,16 @@
 "use client";
 import ImageUpload from "@/components/global/fields/ImageUpload";
-import SelectField from "@/components/global/fields/SelectField";
 import { useAuthContext } from "@/contex/authContext";
-import { useGlobalContext } from "@/contex/contextAPi";
-import { get, getsingle, patch } from "@/lib/http";
-import { countries } from "countries-list";
+import { patch } from "@/lib/http";
+
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 
-const Personal = () => {
-  const { user, userId } = useAuthContext();
-  const [profileInfo, setProfileInfo] = useState(undefined);
+const Personal = (props) => {
+
+  const profileInfo = props.data
   const [close, setClose] = useState(true);
-
-  const getProfile = async () => {
-    try {
-      if (userId?.user_id) {
-        const res = await get(`/authentication/user/current/profile`);
-        setProfileInfo(res);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getProfile();
-  }, []);
-
   return (
     <div className="container mx-auto py-8 text-black">
       <div className=" flex justify-between items-center">
@@ -51,7 +33,6 @@ const Personal = () => {
         <UserProfile
           data={profileInfo.result}
           setClose={setClose}
-          setProfileInfo={setProfileInfo}
         />
       )}
     </div>
@@ -60,29 +41,19 @@ const Personal = () => {
 
 export default Personal;
 
-const UserProfile = ({ data, setClose, setProfileInfo }) => {
-  const { user, userId } = useAuthContext();
+const UserProfile = ({ data, setClose }) => {
   const [formData, setFormData] = useState({
     firstName: data?.firstName,
     lastName: data.lastName,
     profilePicture: data?.profilePicture,
     contactNumber: data?.contactNumber,
+    resume_id:data?.resume_id
   });
-  const [address, setAddress] = useState({
-    street: data?.address?.street,
-    city: data?.address?.city,
-    state: data?.address?.state,
-    postalCode: data?.address?.postalCode,
-    country: data?.address?.country,
-  });
+
   const [imagePreview, setimagePreview] = useState(data?.profilePicture);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
-  const handleChangeAddress = (e) => {
-    const { name, value } = e.target;
-    setAddress({ ...address, [name]: value });
   };
 
   const UpdateProfile = async (e) => {
@@ -90,33 +61,20 @@ const UserProfile = ({ data, setClose, setProfileInfo }) => {
 
     const recordData = {
       ...formData,
-      address: address,
       profilePicture: imagePreview,
     };
 
     try {
-      const res = await patch(`/user`, recordData, userId.user_id);
+      const res = await patch(`/authentication/user/current/profile/update`, recordData, data["user_id"]);
 
-      if (res) {
+      if (res.statusCode ===200) {
         setClose(true);
-        const userInfoDaa = await getsingle(`/user/profile`, userId.user_id);
-        setProfileInfo(userInfoDaa);
       } else {
       }
     } catch (error) {}
   };
 
-  var countryArray = [];
-  Object.keys(countries).forEach((code) => {
-    const country = countries[code];
-    const obj = {
-      ...country,
-      countryCode: code,
-      value: code,
-      label: country.name,
-    };
-    countryArray.push(obj);
-  });
+
 
   return (
     <form className="bg-gray-50 p-4 rounded-lg shadow-md">
@@ -185,91 +143,25 @@ const UserProfile = ({ data, setClose, setProfileInfo }) => {
             imagePreview={imagePreview}
             setImagePreview={setimagePreview} label={"profile Picture"}          />
         </div>
-
-        <div className="col-span-2 mt-10">
-          <h2 className="block text-gray-600 font-semibold mb-2 text-2xl">
-            Address:
-          </h2>
-        </div>
-
         <div>
           <label
-            htmlFor="street"
+            htmlFor="resume_id"
             className="block text-gray-600 font-semibold mb-2"
           >
-            Street:
+            Resume ID:
           </label>
           <input
             type="text"
-            name="street"
-            id="street"
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
-            value={address.street}
-            onChange={handleChangeAddress}
+            name="resume_id"
+            id="resume_id"
+            className="w-full  read-only:bg-slate-100 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
+            value={formData.resume_id}
+            onChange={handleChange}
           />
         </div>
+       
 
-        <div>
-          <label
-            htmlFor="city"
-            className="block text-gray-600 font-semibold mb-2"
-          >
-            City:
-          </label>
-          <input
-            type="text"
-            name="city"
-            id="city"
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
-            value={address.city}
-            onChange={handleChangeAddress}
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="state"
-            className="block text-gray-600 font-semibold mb-2"
-          >
-            State:
-          </label>
-          <input
-            type="text"
-            name="state"
-            id="state"
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
-            value={address.state}
-            onChange={handleChangeAddress}
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="postalCode"
-            className="block text-gray-600 font-semibold mb-2"
-          >
-            Postal Code:
-          </label>
-          <input
-            type="text"
-            name="postalCode"
-            id="postalCode"
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
-            value={address.postalCode}
-            onChange={handleChangeAddress}
-          />
-        </div>
-
-        {
-          <SelectField
-            options={countryArray}
-            value={address.country}
-            onChange={handleChangeAddress}
-            id={"country"}
-            label={"Country"}
-            placeholder={undefined}
-          />
-        }
+      
       </div>
       <div className="col-span-1 mt-4 flex justify-end">
         <button
@@ -323,61 +215,13 @@ const UserprofileDetails = ({ userData, setClose }) => {
           <span className="text-gray-800">{userData.role}</span>
         </div>
 
-        {userData?.address?.city && (
-          <div className="col-span-2">
-            <label
-              className="text-gray-700 font-bold text-lg mb-4 pb-4"
-              htmlFor="address"
-            >
-              Address:
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <label
-                  className="text-gray-700 font-bold mb-2"
-                  htmlFor="street"
-                >
-                  Street:
-                </label>
-                <span className="text-gray-800">{userData.address.street}</span>
-              </div>
-              <div>
-                <label className="text-gray-700 font-bold mb-2" htmlFor="city">
-                  City:
-                </label>
-                <span className="text-gray-800">{userData.address.city}</span>
-              </div>
-              <div>
-                <label className="text-gray-700 font-bold mb-2" htmlFor="state">
-                  State:
-                </label>
-                <span className="text-gray-800">{userData.address.state}</span>
-              </div>
-              <div>
-                <label
-                  className="text-gray-700 font-bold mb-2"
-                  htmlFor="postalCode"
-                >
-                  Postal Code:
-                </label>
-                <span className="text-gray-800">
-                  {userData.address.postalCode}
-                </span>
-              </div>
-              <div>
-                <label
-                  className="text-gray-700 font-bold mb-2"
-                  htmlFor="country"
-                >
-                  Country:
-                </label>
-                <span className="text-gray-800">
-                  {userData.address.country}
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
+        <div className=" col-span-full">
+          <label className="text-gray-700 font-bold mb-2" htmlFor="role">
+            Resume Id:
+          </label>
+          <span className="text-gray-800">{userData.role}</span>
+        </div>
+       
 
         <div className=" col-span-2 flex justify-end">
           <button
