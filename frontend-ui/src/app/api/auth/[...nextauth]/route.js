@@ -1,15 +1,14 @@
+
 import CredentialsProvider from "next-auth/providers/credentials";
 import Cookies from 'js-cookie';
-
 import NextAuth from 'next-auth'
+import { baseurl } from "@/config/config";
 import jwtDecode from "jwt-decode";
-import { baseurl, secret } from "@/config/config";
-
-export default NextAuth({
+export const handler = NextAuth({
   providers: [
     CredentialsProvider({
       id: 'credentials',
-      name: 'my-project',
+      name: 'credentials',
       credentials: {
         email: {
           label: 'email',
@@ -47,9 +46,12 @@ export default NextAuth({
     }),
     // ...add more providers here
   ],
-  secret: secret,
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/auth/signin',
+  },
+  session: {
+    strategy: "jwt",
   },
   callbacks: {
     async jwt({ token, user, account }) {
@@ -83,3 +85,6 @@ export default NextAuth({
   // Enable debug messages in the console if you are having problems
   debug: process.env.NODE_ENV === 'development',
 })
+
+
+export { handler as GET, handler as POST }

@@ -37,6 +37,10 @@ const userSchema = new mongoose.Schema(
     resetTokenExpiration: Date,
     session: [{}],
     created_by: String,
+    resume: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Resume",
+    },
     updated_by: String,
     created_user_id: String,
     updated_user_id: String,
@@ -59,7 +63,7 @@ const userSchema = new mongoose.Schema(
         },
       },
     ],
- 
+
   },
   { timestamps: true }
 );

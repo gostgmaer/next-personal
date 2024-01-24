@@ -4,6 +4,7 @@ import { AppProvider } from "@/contex/contextAPi";
 import { AuthContextProvider } from "@/contex/authContext";
 import { Suspense } from "react";
 import Spinner from "@/components/global/loader/Spinner";
+import NextAuthProvider from "@/contex/sessionContext";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
@@ -13,18 +14,20 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <AppProvider>
-      <AuthContextProvider>
-        <html lang="en">
-          <body className={inter.className} suppressHydrationWarning={true}>
-            <Suspense fallback={<Spinner></Spinner>} >
-              <main className="bg-light w-full min-h-screen text-dark">
-                {children}
-              </main>
-            </Suspense>
-          </body>
-        </html>
-      </AuthContextProvider>
-    </AppProvider>
+    <NextAuthProvider>
+      <AppProvider>
+        <AuthContextProvider>
+          <html lang="en">
+            <body className={inter.className} suppressHydrationWarning={true}>
+              <Suspense fallback={<Spinner></Spinner>} >
+                <main className="bg-light w-full min-h-screen text-dark">
+                  {children}
+                </main>
+              </Suspense>
+            </body>
+          </html>
+        </AuthContextProvider>
+      </AppProvider>
+    </NextAuthProvider>
   );
 }
