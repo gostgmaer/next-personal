@@ -11,7 +11,7 @@ export const ProjectTable = (props) => {
  
    
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+    const [itemsPerPage, setItemsPerPage] = useState(10); // Default items per page
 
     const [id, setId] = useState(undefined);
     const [open, setOpen] = useState(false);
@@ -44,11 +44,11 @@ export const ProjectTable = (props) => {
         loadprojects();
     }, [currentPage, itemsPerPage]);
 
-
+    
     const columns = React.useMemo(
         () => [
             { Header: "ID", accessor: "_id", isSortable: true },
-
+            { Header: "Name", accessor: "title" },
         ],
         []
     );

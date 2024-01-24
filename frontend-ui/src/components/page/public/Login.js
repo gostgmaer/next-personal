@@ -6,55 +6,61 @@ import { useAxios } from "@/lib/interceptors";
 import { useAuthContext } from "@/contex/authContext";
 import { useGlobalContext } from "@/contex/contextAPi";
 import PasswordField from "@/components/global/fields/PasswordField";
+import { signIn } from "next-auth/react";
+import { notifyerror } from "@/lib/notify/notice";
+import { useFormik } from "formik";
+import { loginValidationSchema } from "@/util/validation/contact";
+import Input from "@/components/global/fields/input";
 
 const Login = () => {
   const { handleLoginAuth, user, userId } = useAuthContext();
-  const { loader, loaderFalse, loaderTrue } = useGlobalContext();
-  const [axios, spinner] = useAxios();
-  const router = useRouter();
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const route = useRouter();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    // setResume({ ...resume, [name]: value });
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginValidationSchema,
+    onSubmit: async (values,{setSubmitting}) => {
+      setSubmitting(true)
+      const res = await signIn("credentials", {
+        redirect: false,
+        ...values,
+      });
 
-  const handleLogin = async (e) => {
-  
-    e.preventDefault();
-    const body = {
-      email: formData.email,
-      password: formData.password,
-    };
+      if (res.ok) {
+        setSubmitting(false)
+        if (res.url) {
+          const parsedUrl = new URL(res.url);
+          const callbackUrlParam = parsedUrl.searchParams.get("callbackUrl");
 
-    try {
-      const res = await handleLoginAuth(body);
-      if (res) {
-       
+          if (callbackUrlParam) {
+            const decodedCallbackUrl = callbackUrlParam
+              ? decodeURIComponent(callbackUrlParam)
+              : "/";
+
+            route.push(decodedCallbackUrl);
+          } else {
+            route.push("/dashboard");
+          }
+
+        } else {
+          route.push("/home");
+        }
+      } else {
+        setSubmitting(false)
+        notifyerror(res.error, 5000)
       }
-    } catch (error) {
-     
-    }
-
-  };
-
-
-  useEffect(() => {
-    if (userId) {
-      router.push("/dashboard");
-    }
-  }, [userId]);
+    },
+  });
 
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-md w-96 text-black">
         <h2 className="text-2xl font-semibold mb-4">Login</h2>
-        <form onSubmit={handleLogin} action="post">
+        <form onSubmit={formik.handleSubmit} action="post">
           <div className="mb-4 text-black">
             <label
               htmlFor="email"
@@ -68,29 +74,19 @@ const Login = () => {
               name="email"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
               placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              required
+              {...formik.getFieldProps('email')}
             />
           </div>
           <div className="mb-4 text-black">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 font-semibold"
-            >
-              Password
-            </label>
-            <PasswordField
-              value={formData.password}
-              handleChange={handleChange}
-              placeholder={"Enter Your password"}
-              name={"password"}
-            />
+            <Input label={"Password"} type={"password"} additionalAttrs={{
+              ...formik.getFieldProps("password"),
+              placeholder: "Password",
+            }} classes={undefined} icon={undefined} id={"password"} />
           </div>
           <div className="mb-4 mt-10">
             <button
               type="submit"
-              disabled={loader}
+              disabled={formik.isSubmitting}
               className="w-full bg-blue-500 disabled:bg-blue-200  text-white font-semibold py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
             >
               Login
@@ -106,34 +102,9 @@ const Login = () => {
             Forget Password?
           </Link>
         </p>
-        {/* <div className="flex flex-col gap-2 mt-5">
-          <h3>Login with </h3>
-          <div className="mb-4 flex gap-2">
-            <button
-              onClick={handleGoogleLogin}
-              className="w-full bg-red-600 text-white font-semibold py-2 rounded-md hover:bg-red-700 focus:outline-none focus:bg-red-700"
-            >
-              Google
-            </button>
-            <button
-              onClick={responseFacebook}
-              className="w-full bg-blue-800 text-white font-semibold py-2 rounded-md hover:bg-blue-900 focus:outline-none focus:bg-blue-900"
-            >
-              Facebook
-            </button>
-          </div>
-        </div> */}
-        {/* <p className="text-gray-700">
-          Don t have an account?{" "}
-          <Link
-            href={"/auth/register"}
-            className="text-blue-500 hover:underline"
-          >
-            Sign up here
-          </Link>
-        </p> */}
+
       </div>
-  
+
     </div>
   );
 };

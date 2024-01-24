@@ -23,7 +23,7 @@ export const handler = NextAuth({
           password: credentials.password,
         }
 
-        const res = await fetch(baseurl + `/user/auth/login`, {
+        const res = await fetch(baseurl + `/authentication/user/signin`, {
           method: 'POST',
           body: JSON.stringify(payload),
           headers: {
@@ -48,7 +48,7 @@ export const handler = NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/auth/signin',
+    signIn: '/auth/login',
   },
   session: {
     strategy: "jwt",

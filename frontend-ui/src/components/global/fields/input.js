@@ -19,7 +19,7 @@ const Input = ({ label, type, additionalAttrs, classes, icon, id }) => {
             icon && "border pl-3.5 h-10 leading-[40px]"
           }  ${type === "password" && "border h-10 leading-[40px]"}`}
         >
-          {icon && <button className="  pr-1">{icon}</button>}
+          {icon && <button className="pr-1">{icon}</button>}
           <input
             className={` rounded w-full  leading-tight focus:outline-none  border px-3.5 h-10 ${
               type === "password" && "pr-0"

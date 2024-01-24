@@ -4,16 +4,18 @@ import { useAuthContext } from "@/contex/authContext";
 import { patch } from "@/lib/http";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 
 const Personal = (props) => {
 
+  console.log(props);
   const profileInfo = props.data
   const [close, setClose] = useState(true);
   return (
     <div className="container mx-auto py-8 text-black">
-      <div className=" flex justify-between items-center">
+      <div className=" flex justify-between items-center my-5">
         <h1 className="text-3xl font-semibold mb-4">My Profile</h1>
         {profileInfo?.result?.profilePicture && (
           <Image
@@ -23,6 +25,7 @@ const Personal = (props) => {
             src={profileInfo.result.profilePicture}
             style={{ borderRadius: "50%", height: "100px" }}
             alt=""
+            className=""
           />
         )}
       </div>
@@ -47,9 +50,9 @@ const UserProfile = ({ data, setClose }) => {
     lastName: data.lastName,
     profilePicture: data?.profilePicture,
     contactNumber: data?.contactNumber,
-    resume_id:data?.resume_id
+    resume:data?.resume
   });
-
+const router = useRouter()
   const [imagePreview, setimagePreview] = useState(data?.profilePicture);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,16 +61,15 @@ const UserProfile = ({ data, setClose }) => {
 
   const UpdateProfile = async (e) => {
     e.preventDefault();
-
     const recordData = {
       ...formData,
       profilePicture: imagePreview,
     };
 
     try {
-      const res = await patch(`/authentication/user/current/profile/update`, recordData, data["user_id"]);
-
+      const res = await patch(`/authentication/user/current/profile/update`, recordData, data["_id"]);
       if (res.statusCode ===200) {
+        router.push('/dashboard/profile')
         setClose(true);
       } else {
       }
@@ -155,7 +157,7 @@ const UserProfile = ({ data, setClose }) => {
             name="resume_id"
             id="resume_id"
             className="w-full  read-only:bg-slate-100 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500"
-            value={formData.resume_id}
+            value={formData.resume}
             onChange={handleChange}
           />
         </div>
@@ -215,13 +217,13 @@ const UserprofileDetails = ({ userData, setClose }) => {
           <span className="text-gray-800">{userData.role}</span>
         </div>
 
-        <div className=" col-span-full">
-          <label className="text-gray-700 font-bold mb-2" htmlFor="role">
+      { userData.resume && <div className=" col-span-full">
+          <label className="text-gray-700 font-bold mb-2" htmlFor="resume">
             Resume Id:
           </label>
-          <span className="text-gray-800">{userData.role}</span>
+          <span className="text-gray-800">{userData.resume}</span>
         </div>
-       
+       }
 
         <div className=" col-span-2 flex justify-end">
           <button
