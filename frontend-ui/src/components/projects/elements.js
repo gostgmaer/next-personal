@@ -48,7 +48,7 @@ export const PortfolioBlock = (props) => {
 
     const route = useRouter()
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(5);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
     const loadprojects = () => {
         const query = {
             limit: itemsPerPage,
