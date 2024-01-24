@@ -4,15 +4,12 @@ const projectSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
-      required: true,
     },
     startDate: {
       type: Date,
-      required: true,
     },
     endDate: Date,
     technologies: [String],
@@ -24,14 +21,14 @@ const projectSchema = new mongoose.Schema(
     ],
     status: {
       type: String,
-      enum: ["Planning", "In Progress", "Completed"],
+      enum: ["Planning", "In Progress", "Completed","pending","ACTIVE"],
       default: "Planning",
     },
     tasks: [
       {
         title: {
           type: String,
-          required: true,
+       
         },
         description: String,
         status: {
