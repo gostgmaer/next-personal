@@ -34,8 +34,6 @@ const contactUsSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Open', 'Closed', 'Pending'],
-    default: 'Open'
   },
   userAgent: {
     type: String

@@ -712,8 +712,8 @@ const profile = async (req, res) => {
         "contactNumber",
         "profilePicture",
         "phoneNumber",
-        "dateOfBirth",
-      ]);
+        "dateOfBirth", "resume", "address"
+      ]).populate("address").populate("orders").populate('resume');
 
       if (userId.id) {
         return res.status(StatusCodes.OK).json({
@@ -842,7 +842,7 @@ const update = async (req, res) => {
     const userdata = await User.findById(user);
     if (userdata) {
       try {
-        User.findOneAndUpdate({_id: user}, { $set: req.body }, { upsert: true },{ returnOriginal: false }).then(
+        User.findOneAndUpdate({ _id: user }, { $set: req.body }, { upsert: true }, { returnOriginal: false }).then(
           (data, err) => {
             if (err)
               res.status(StatusCodes.NOT_MODIFIED).json({
@@ -853,7 +853,7 @@ const update = async (req, res) => {
               });
             else {
 
-              const {id} =data
+              const { id } = data
               res.status(StatusCodes.OK).json({
                 message: "Profile is  Update Successfully",
                 status: ReasonPhrases.OK,

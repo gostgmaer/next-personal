@@ -1,8 +1,6 @@
 "use client"
 import { Switch } from "@headlessui/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { motion } from "framer-motion";
-import {appId, contactContiner } from "@/config/config";
 import React, { useState } from "react";
 import { contactValidationSchema } from "@/util/validation/contact";
 import codes from "country-calling-code";
@@ -10,7 +8,7 @@ import { get, post } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
 
 export const ContatForm = (second) => {
-    const [axios, spinner] = useAxios();
+
     const [success, setSuccess] = useState(null);
     const [agreed, setAgreed] = useState(false);
     var countryCode = codes;
