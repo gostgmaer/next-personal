@@ -12,7 +12,16 @@ const projectSchema = new mongoose.Schema(
       type: Date,
     },
     endDate: Date,
-    technologies: [String],
+    technologiesUsed: [
+      {
+        category: String, // Additional key for categorizing the technology
+        name: String,
+        description: String,
+        proficiency: String,
+        version: String,
+        documentationLink: String,
+      },
+    ],
     teamMembers: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -21,8 +30,7 @@ const projectSchema = new mongoose.Schema(
     ],
     status: {
       type: String,
-      enum: ["Planning", "In Progress", "Completed","pending","ACTIVE"],
-      default: "Planning",
+     
     },
     current_status:String,
     tasks: [
@@ -104,6 +112,16 @@ const projectSchema = new mongoose.Schema(
     },
     repository: String,
     deploymentURL: String,
+    toolsUsed: [
+      {
+        category: String, // Additional key for categorizing the tool
+        name: String,
+        description: String,
+        proficiency: String,
+        version: String,
+        documentationLink: String,
+      },
+    ],
     collaborators: [
       {
         type: mongoose.Schema.Types.ObjectId,
