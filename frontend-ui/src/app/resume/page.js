@@ -25,6 +25,7 @@ import Link from "next/link";
 import moment from "moment";
 import { calculateTimeGap } from "@/helper/function";
 import DownloadResume from "@/components/Resume/Others/DownloadResume";
+import ResumeIndex from "@/components/page/my-resume";
 
 export async function generateMetadata({ params }) {
   return {
@@ -47,9 +48,9 @@ export async function generateMetadata({ params }) {
 
 const Index = () => {
   return (
-    <PageLayout>
+    <div className=" container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
       <DownloadResume />
-      <div className="resume overflow-hidden flex flex-row print:mt-0 print:mb-0 gap-10 mt-10 mb-40 print:bg-blue-50  items-start bg-white ">
+      {/* <div className="resume overflow-hidden flex flex-row print:mt-0 print:mb-0 gap-10 mt-10 mb-40 print:bg-blue-50  items-start bg-white ">
         <div className="left w-1/3 print:h-screen bg-blue-200">
           <LeftContent />
         </div>
@@ -60,8 +61,9 @@ const Index = () => {
           <Projects />
           <Others />
         </div>
-      </div>
-    </PageLayout>
+      </div> */}
+      <ResumeIndex/>
+    </div>
   );
 };
 

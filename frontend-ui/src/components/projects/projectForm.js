@@ -5,6 +5,7 @@ import TaxonomyField from "../global/fields/Taxanomy";
 import { patch, post } from "@/lib/http";
 import Interest from "./repeatable";
 import { arrayGroupbykey } from "@/helper/function";
+import { useFormik } from "formik";
 
 const ProjectForm = ({ id, setId, setOpen, loadprojects }) => {
   const [selectedFiles, setSelectedFiles] = useState(id ? id.images : []);
@@ -87,6 +88,21 @@ const ProjectForm = ({ id, setId, setOpen, loadprojects }) => {
     }
     setModal(true);
   };
+
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    // validationSchema: loginValidationSchema,
+    onSubmit: async (values,{setSubmitting,resetForm}) => {
+      
+    },
+  });
+
+
+
 
   return (
     <div className="container p-2 mx-auto sm:p-4">

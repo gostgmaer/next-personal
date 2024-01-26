@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backend",
+    "\\frontend-ui",
+    "\\frontend-ui\\src",
+    "\\frontend-ui\\src\\lib",
+    "\\frontend-ui\\src\\lib\\notify"
+  ],
+  "SelectedNode": "\\backend\\app.js",
+  "PreviewInSolutionExplorer": false
+}

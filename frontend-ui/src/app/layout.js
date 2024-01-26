@@ -17,10 +17,10 @@ export default function RootLayout({ children }) {
     <NextAuthProvider>
       <AppProvider>
         <AuthContextProvider>
-          <html lang="en">
+          <html lang="en" className="print:mt-5">
             <body className={inter.className} suppressHydrationWarning={true}>
               <Suspense fallback={<Spinner></Spinner>} >
-                <main className="bg-light w-full min-h-screen text-dark">
+                <main className="bg-light print:bg-white w-full min-h-screen text-dark">
                   {children}
                 </main>
               </Suspense>
