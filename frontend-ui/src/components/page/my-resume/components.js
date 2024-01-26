@@ -1,6 +1,5 @@
 import { resumeData } from "@/helper/data";
 import Link from "next/link";
-import { FaGlobe } from "react-icons/fa";
 import { MdLocationPin, MdMail, MdPhone } from "react-icons/md";
 
 export const ProjectCard = (props) => {
@@ -71,7 +70,7 @@ export const EducationCard = (props) => {
         </p>
       </div>
       <div className="text-pretty font-mono text-md text-muted-foreground mt-2">
-        <p>Bachelor's Degree in Control systems engineering and Robotics</p>
+        <p>Bachelor&lsquo;s Degree in Control systems engineering and Robotics</p>
       </div>
     </div>
   );
@@ -94,7 +93,7 @@ export const Resumeheading = (props) => {
         </p>
         <ul className="flex gap-x-2 pt-1 font-mono text-md text-muted-foreground print:hidden">
           {resumeData.contact.social.map((item, index) => (
-            <li className="w-4 h-4">
+            <li className="w-4 h-4" key={index}>
               <Link href={item.url} className="w-5 h-5">{item.icon}</Link>
             </li>
           ))}
