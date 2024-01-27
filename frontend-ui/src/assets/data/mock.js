@@ -314,24 +314,24 @@ export const resumeContent = {
       },
     ],
   },
-  projects:[
+  projects: [
     {
-        "deployedUrl": "https://next-personal-seven.vercel.app/",
-        "description": "The Personal Portfolio Website built with Next.js is a dynamic and versatile web application designed to showcase your skills, achievements, and creative work to the world. This project leverages the power of Next.js, a popular React framework, to create a seamless and highly responsive web experience that not only impresses visitors but also highlights your unique talents and expertise.",
-        "overview": "This project is for for me as a UI developer",
-        "projectTitle": "Personal Portfolio",
-        "repositoryUrl": "https://github.com/gostgmaer/next-personal",
-        "title": ""
+      "deployedUrl": "https://next-personal-seven.vercel.app/",
+      "description": "The Personal Portfolio Website built with Next.js is a dynamic and versatile web application designed to showcase your skills, achievements, and creative work to the world. This project leverages the power of Next.js, a popular React framework, to create a seamless and highly responsive web experience that not only impresses visitors but also highlights your unique talents and expertise.",
+      "overview": "This project is for for me as a UI developer",
+      "projectTitle": "Personal Portfolio",
+      "repositoryUrl": "https://github.com/gostgmaer/next-personal",
+      "title": ""
     },
     {
-        "deployedUrl": "https://next-resume-builder-olive.vercel.app/",
-        "description": "This project is not yet done still working on this project",
-        "overview": "A resume Builder nextjs Application",
-        "projectTitle": "Resume Builder",
-        "repositoryUrl": "https://github.com/gostgmaer/next-resume-builder",
-        "title": ""
+      "deployedUrl": "https://next-resume-builder-olive.vercel.app/",
+      "description": "This project is not yet done still working on this project",
+      "overview": "A resume Builder nextjs Application",
+      "projectTitle": "Resume Builder",
+      "repositoryUrl": "https://github.com/gostgmaer/next-resume-builder",
+      "title": ""
     }
-],
+  ],
   profile: {
     name: "Kishor Sarkar",
     contact: [
@@ -533,7 +533,7 @@ export const resumeContent = {
       location: "Kolkata",
       position: "Front End Developer",
       startDate: "2021-08-02",
-      highlights: ["Css", "HTML5", "SCSS", "Ceebit","Javascript","Typescript","Angular"],
+      highlights: ["Css", "HTML5", "SCSS", "Ceebit", "Javascript", "Typescript", "Angular"],
     }
   ],
   interests: [
@@ -587,12 +587,134 @@ export const userInfo = {
     email: "kishor.sarkar.in@gmail.com",
     phone: "863-731-7273",
     countryCode: "+91",
-    coordionate:{
+    coordionate: {
       "lon": 87.5275,
       "lat": 23.9109
-  }
+    }
   },
   image: "https://avatars.githubusercontent.com/u/43110343?v=4",
   about:
     "Cuber and Self-Taught Front-end Software Developer, I enjoy building responsive web apps & designs using HTML5, CSS3, JavaScript, Next.js, React.js, Firebase, Restful APIs.., I have been working on the web for around 3 years building freelance/learning projects.",
 };
+
+export const techCate = [
+  {
+    "id": 1,
+    "name": "Frontend Development",
+    "considerations": [
+      {"id": 1, "name": "UI Design"},
+      {"id": 2, "name": "UX Design"},
+      {"id": 3, "name": "HTML/CSS/JavaScript"}
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Backend Development",
+    "considerations": [
+      {"id": 4, "name": "Server-side Programming"},
+      {"id": 5, "name": "Database Design and Management"},
+      {"id": 6, "name": "API Development"}
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Infrastructure",
+    "considerations": [
+      {"id": 7, "name": "Hosting"},
+      {"id": 8, "name": "Deployment"},
+      {"id": 9, "name": "Scalability"}
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Security",
+    "considerations": [
+      {"id": 10, "name": "Authentication and Authorization"},
+      {"id": 11, "name": "Data Encryption"},
+      {"id": 12, "name": "Input Validation"}
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Performance",
+    "considerations": [
+      {"id": 13, "name": "Optimization"},
+      {"id": 14, "name": "Caching"},
+      {"id": 15, "name": "Monitoring"}
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Testing",
+    "considerations": [
+      {"id": 16, "name": "Unit Testing"},
+      {"id": 17, "name": "Integration Testing"},
+      {"id": 18, "name": "End-to-End Testing"}
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Accessibility",
+    "considerations": [
+      {"id": 19, "name": "Compliance"},
+      {"id": 20, "name": "Keyboard Navigation"},
+      {"id": 21, "name": "Screen Reader Compatibility"}
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Documentation",
+    "considerations": [
+      {"id": 22, "name": "Code Documentation"},
+      {"id": 23, "name": "User Documentation"}
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Version Control",
+    "considerations": [
+      {"id": 24, "name": "Git"},
+      {"id": 25, "name": "Branching and Merging"}
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Project Management",
+    "considerations": [
+      {"id": 26, "name": "Agile/Scrum"},
+      {"id": 27, "name": "Task Management"}
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Legal and Compliance",
+    "considerations": [
+      {"id": 28, "name": "Privacy Policies"},
+      {"id": 29, "name": "Terms of Service"}
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Localization and Internationalization",
+    "considerations": [
+      {"id": 30, "name": "Localization"},
+      {"id": 31, "name": "Internationalization"}
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Analytics and Monitoring",
+    "considerations": [
+      {"id": 32, "name": "Usage Analytics"},
+      {"id": 33, "name": "Error Monitoring"}
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Feedback and Iteration",
+    "considerations": [
+      {"id": 34, "name": "User Feedback"},
+      {"id": 35, "name": "Iterative Development"}
+    ]
+  }
+]

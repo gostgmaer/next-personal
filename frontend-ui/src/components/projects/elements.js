@@ -8,7 +8,7 @@ import { generateUrlFromNestedObject } from "@/helper/function";
 
 export const Project = ({ project }) => {
     return (
-        <Link href={`/portfolio/${project._id}`} className=" w-80">
+        <Link href={`/portfolio/${project._id}`} className="">
             <div className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform hover:scale-105">
                 <Image
                     src={project?.main_image}
@@ -64,8 +64,8 @@ export const PortfolioBlock = (props) => {
 
 
     return (
-        <div className="rounded-[20px] my-5 py-10 gap-10 pb-0  shadow-md m-auto bg-gray-100 flex items-center justify-center flex-col">
-            <div className=" flex justify-start items-center flex-wrap w-full gap-5 px-10 ">
+        <div className="rounded-[20px] my-5 py-10 gap-10 pb-0  shadow-md m-auto bg-gray-100 flex items-center justify-center flex-col w-full ">
+            <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-center w-full px-10 ">
                 {props.projects?.result?.map((project, index) => (
                     <Project key={index} project={project} />
                 ))}

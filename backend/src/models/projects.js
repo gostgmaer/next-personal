@@ -8,6 +8,7 @@ const projectSchema = new mongoose.Schema(
     description: {
       type: String,
     },
+    team_role: String,
     startDate: {
       type: Date,
     },
@@ -30,14 +31,12 @@ const projectSchema = new mongoose.Schema(
     ],
     status: {
       type: String,
-     
     },
-    current_status:String,
+    current_status: String,
     tasks: [
       {
         title: {
           type: String,
-       
         },
         description: String,
         status: {
@@ -70,12 +69,7 @@ const projectSchema = new mongoose.Schema(
         dueDate: Date,
       },
     ],
-    attachments: [
-      {
-        fileName: String,
-        url: String,
-      },
-    ],
+    attachments: [],
     notes: String,
     risks: [
       {
@@ -139,6 +133,7 @@ const projectSchema = new mongoose.Schema(
       field2: Number,
       field3: Boolean,
     },
+    main_image: {},
   },
   { timestamps: true }
 );

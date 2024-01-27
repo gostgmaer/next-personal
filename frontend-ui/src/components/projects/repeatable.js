@@ -1,7 +1,10 @@
 import { findIndex } from "@/helper/function";
 import React, { useState } from "react";
+import { Select } from "../global/fields/SelectField";
+import { techCate } from "@/assets/data/mock";
+import Input from "../global/fields/input";
 
-const Interest = ({ interests, setInterestes,label }) => {
+const Interest = ({ interests, setInterestes, label }) => {
   const [formData, setFormData] = useState({
     category: "",
     description: "",
@@ -60,42 +63,22 @@ const Interest = ({ interests, setInterestes,label }) => {
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="">
-              <label
-                htmlFor="category"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Category
-              </label>
-              <input
-                type="text"
-                id="category"
-                name="category"
-                onChange={handleChange}
-                value={formData.category}
-                autoComplete="off"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="UI"
+           
+              <Select
+                label={"Category"}
+                id={"category"}
+                options={techCate}
+                optionkeys={{ key: "id", value: "name" }}
+                placeholder={undefined}
+                additionalAttrs={{ onChange: handleChange, value: formData.category }}
               />
             </div>
 
             <div className="">
-              <label
-                htmlFor="name"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                onChange={handleChange}
-                value={formData.name}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Lead Engineer Lead Developer"
-              />
+              <Input label={"Name"} type={"text"}   additionalAttrs={{ onChange: handleChange, value: formData.name }} classes={undefined} icon={undefined} id={"name"}/>
+             
             </div>
-            <div className="">
+            {/* <div className="">
               <label
                 htmlFor="icon"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -111,7 +94,7 @@ const Interest = ({ interests, setInterestes,label }) => {
                 value={formData.icon}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-            </div>
+            </div> */}
 
             <div className=" col-span-2 grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>

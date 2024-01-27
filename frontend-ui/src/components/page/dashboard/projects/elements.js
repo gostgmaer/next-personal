@@ -3,6 +3,7 @@ import Table from '@/components/global/fields/Table';
 import ProjectForm from '@/components/projects/projectForm';
 import { generateUrlFromNestedObject } from '@/helper/function';
 import { del } from '@/lib/http';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { MdDelete, MdEdit, MdPageview } from 'react-icons/md';
@@ -13,15 +14,10 @@ export const ProjectTable = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10); // Default items per page
 
-    const [id, setId] = useState(undefined);
-    const [open, setOpen] = useState(false);
     const route = useRouter()
 
 
-    const handleEdit = (id) => {
-        setId(id);
-        setOpen(true);
-    };
+  
 
     const handleDelete = async (id) => {
         const req = await del(`/projects`, id);
@@ -56,14 +52,12 @@ export const ProjectTable = (props) => {
         {
             label: <MdEdit className=" w-5 h-5" />,
             onClick: (property) => {
-                route.push(`/dashboard/listing/${property._id}/update`);
+                route.push(`/dashboard/projects/${property._id}/edit`);
             },
         },
         {
             label: <MdPageview className=" w-5 h-5" />,
-            onClick: (property) => {
-                handleEdit(property._id)
-            },
+          
         },
         {
             label: <MdDelete className=" w-5 h-5" />,
@@ -80,13 +74,13 @@ export const ProjectTable = (props) => {
         <div>
             <div className="container p-2 mx-auto sm:p-4 dark:text-gray-100">
                 <div className="overflow-x-auto w-full  py-4 text-md  text-black text-right">
-                    <button
-                        onClick={() => setOpen(!open)}
+                    <Link href={'/dashboard/projects/create'}
+                        // onClick={() => setOpen(!open)}
                         className="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     >
 
                         Add project
-                    </button>
+                    </Link>
                 </div>
                 <div className="overflow-x-auto">
 
@@ -104,9 +98,9 @@ export const ProjectTable = (props) => {
                     />
                 </div>
             </div>
-            {open && (
+            {/* {open && (
                 <ProjectForm id={id} setId={setId} setOpen={setOpen} loadprojects={loadprojects}></ProjectForm>
-            )}
+            )} */}
 
         </div>
     )
