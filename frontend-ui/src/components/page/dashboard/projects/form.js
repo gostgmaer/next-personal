@@ -12,7 +12,7 @@ import Input from "@/components/global/fields/input";
 import { notifySuccess } from "@/lib/notify/notice";
 
 const ProjectForm = ({ initialValues }) => {
-    console.log(initialValues);
+
     const params = useParams();
     const router = useRouter();
     const id = params["id"];
