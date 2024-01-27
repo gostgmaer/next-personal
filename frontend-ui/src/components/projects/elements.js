@@ -19,9 +19,9 @@ export const Project = ({ project }) => {
                 />
 
                 <div className="p-4">
-                    <h2 className="text-2xl font-semibold mb-2">{project.name}</h2>
-                    {project?.overview && <p className="text-gray-600 mb-4">
-                        {project?.overview?.substring(0, 140) + '...'}
+                    <h2 className="text-2xl font-semibold mb-2">{project.title}</h2>
+                    {project?.summery && <p className="text-gray-600 mb-4">
+                        {project?.summery?.substring(0, 140) + '...'}
                     </p>}
 
                     <div className="flex  flex-wrap gap-2 mb-4 justify-start">
