@@ -48,20 +48,8 @@ export async function generateMetadata({ params }) {
 
 const Index = () => {
   return (
-    <div className=" container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-12 md:p-16">
+    <div className=" container relative mx-auto scroll-my-12 overflow-auto p-4 print:py-12 md:p-16 ">
       <DownloadResume />
-      {/* <div className="resume overflow-hidden flex flex-row print:mt-0 print:mb-0 gap-10 mt-10 mb-40 print:bg-blue-50  items-start bg-white ">
-        <div className="left w-1/3 print:h-screen bg-blue-200">
-          <LeftContent />
-        </div>
-        <div className="right w-2/3 pr-10 flex flex-col gap-5 print:gap-4 print:pr-4 ">
-          <Objectivity />
-          <Experiances />
-          <SkillSet />
-          <Projects />
-          <Others />
-        </div>
-      </div> */}
       <ResumeIndex/>
     </div>
   );

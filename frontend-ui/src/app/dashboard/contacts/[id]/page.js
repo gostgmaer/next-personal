@@ -73,9 +73,6 @@ export const getRecord = async (id) => {
     `/contacts/${id}`,
     params
   );
-
-
-
   return contacts
 
 }

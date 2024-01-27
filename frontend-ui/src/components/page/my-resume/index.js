@@ -9,11 +9,11 @@ import { resumeData } from "@/helper/data";
 
 const ResumeIndex = () => {
   return (
-    <div className="mx-auto w-full max-w-4xl space-y-8  print:space-y-6 print:bg-white">
+    <div className="mx-auto w-full max-w-4xl  bg-white p-5  print:bg-white">
       <div>
         <Resumeheading data={resumeData} />
       </div>
-      <div>
+      <div className="my-3">
         <h2 className="text-xl font-bold">About</h2>
         <p className="text-pretty font-mono text-sm text-muted-foreground">
           As a Full Stack Engineer, I have successfully taken multiple products
@@ -23,7 +23,7 @@ const ResumeIndex = () => {
           experience in working remotely with companies all around the world.
         </p>
       </div>
-      <div>
+      <div className="my-3">
         <h2 className="text-xl font-bold">Work Experience</h2>
         <div className=" grid grid-cols-1 gap-y-3">
           {resumeData.work.map((item, index) => (
@@ -31,7 +31,7 @@ const ResumeIndex = () => {
           ))}
         </div>
       </div>
-      <div className="flex min-h-0 flex-col gap-y-3">
+      <div className="flex min-h-0 flex-col gap-y-3 my-3">
         <h2 className="text-xl font-bold">Skills</h2>
         <div>
           <ul className="flex flex-wrap gap-1">
