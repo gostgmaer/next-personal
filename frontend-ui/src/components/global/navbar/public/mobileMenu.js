@@ -5,6 +5,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Logo from '@/components/Logo'
 import { socialmedia } from '@/assets/data/mock'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
@@ -18,6 +20,8 @@ function classNames(...classes) {
 }
 
 export default function NavbarPublic() {
+  const { data: session } = useSession()
+
   return (
     <Disclosure as="nav" className="bg-gray-600">
       {({ open }) => (
@@ -40,7 +44,7 @@ export default function NavbarPublic() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         href={item.href}
                         className={classNames(
@@ -50,8 +54,16 @@ export default function NavbarPublic() {
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
+                   {session && <Link
+
+                      href={'/dashboard'}
+                      className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+
+                    >
+                      Dashboard
+                    </Link>}
                   </div>
                 </div>
                 <div className=" sm:absolute sm:left-[50%] sm:top-2 sm:translate-x-[-50%] ">

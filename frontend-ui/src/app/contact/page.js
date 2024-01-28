@@ -25,12 +25,12 @@ const Index = () => {
   return (
     <PageLayout>
       <div className="  rounded-[20px]  shadow-md m-auto bg-gray-100 flex items-center justify-center my-5">
-        <div className="min-h-max p-8 w-full flex">
-          <div className="w-2/3 pr-8 ">
+        <div className="min-h-max sm:p-8 p-4 w-full sm:flex">
+          <div className="sm:w-2/3 sm:pr-8 ">
             <h1 className="text-2xl font-semibold mb-4">Contact Us</h1>
             <ContatForm />
           </div>
-          <div className="w-1/3">
+          <div className="sm:w-1/3 mt-5 sm:mt-0">
             <div className="bg-blue-500 text-white px-4 py-2 rounded">
               <h2 className="text-lg font-semibold mb-2">
                 Contact Information
