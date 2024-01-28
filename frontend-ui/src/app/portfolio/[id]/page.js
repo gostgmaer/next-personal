@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
   const data = await getSingleData(params.id)
 
   return {
-    title: data.result.title,
+    title: data?.result?.title,
     description: "Full stack web developer",
     openGraph: {
       type: "website",
