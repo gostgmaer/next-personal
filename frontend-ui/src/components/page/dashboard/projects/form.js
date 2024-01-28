@@ -12,7 +12,7 @@ import Input from "@/components/global/fields/input";
 import { notifySuccess } from "@/lib/notify/notice";
 
 const ProjectForm = ({ initialValues }) => {
-    console.log(initialValues);
+
     const params = useParams();
     const router = useRouter();
     const id = params["id"];
@@ -88,7 +88,7 @@ const ProjectForm = ({ initialValues }) => {
     return (
         <div className="container p-2 mx-auto sm:p-4">
             <form className=" mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"     onSubmit={formik.handleSubmit}>
-                <h2 className="text-2xl mb-4 font-semibold">Add Project</h2>
+                <h2 className="text-2xl mb-4 font-semibold">{id?"Update":"Add"} Project</h2>
 
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     {/* Project Name */}

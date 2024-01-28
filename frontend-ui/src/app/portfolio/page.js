@@ -3,7 +3,24 @@ import { PortfolioBlock } from "@/components/projects/elements";
 import { serverMethod } from "@/lib/servermethod";
 import Head from "next/head";
 
-
+export async function generateMetadata({ params }) {
+  return {
+    title: "Kishor Sarkar Portfolio",
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
+  };
+}
 
 const Index = async (props) => {
   const projects = await getAllRecord(props.searchParams)

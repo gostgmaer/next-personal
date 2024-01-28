@@ -3,6 +3,26 @@ import Tables from "@/components/page/dashboard/Tables";
 import { serverMethod } from "@/lib/servermethod";
 
 
+export async function generateMetadata({ params }) {
+  return {
+    title: "Portfolio Dashboard",
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
+  };
+}
+
+
 const Page = async (props) => {
   const results = await getAllRecord(props.searchParams)
 

@@ -10,7 +10,7 @@ import { MdClose } from "react-icons/md";
 
 const Personal = (props) => {
 
-  console.log(props);
+
   const profileInfo = props.data
   const [close, setClose] = useState(true);
   return (

@@ -28,9 +28,9 @@ export async function generateMetadata({ params }) {
 const Index = () => {
   return (
     <PageLayout >
-      <div className=" rounded-[20px]  shadow-md m-auto bg-gray-100 flex items-center justify-center">
-        <div className="min-h-max p-8 w-full flex">
-          <div className="w-2/3 pr-8">
+      <div className=" rounded-[20px] m-5 sm:m-auto  shadow-md  bg-gray-100 flex items-center justify-center">
+        <div className="min-h-max p-4 sm:p-8 w-full sm:flex">
+          <div className=" sm:w-2/3 pr-8">
             <h1 className="text-2xl font-semibold mb-4">About Me</h1>
             <p className="mb-4">
               I am a passionate and dedicated web developer with years of
@@ -59,7 +59,7 @@ const Index = () => {
               freelance/learning projects.
             </p>
           </div>
-          <div className="w-1/3">
+          <div className="sm:w-1/3">
             <div className="bg-gray-100 text-white px-4 py-2 h-96 rounded">
               <Image
                 src={userInfo.image} // Replace with the actual path to your image

@@ -1,18 +1,30 @@
 "use client";
-import { projectArray } from "@/assets/data/projects";
 import PrivateLayout from "@/components/global/layout/privateLayout";
 import Technologies from "@/components/projects/technologi";
-import { appId, containerId, projectContainer, tableId } from "@/config/config";
 import { getsingle } from "@/lib/http";
 import { useAxios } from "@/lib/interceptors";
-import { CountryProperty } from "country-codes-list";
-import moment from "moment";
-import App from "next/app";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-
+// export async function generateMetadata(props) {
+//   return {
+//     title: "Portfolio Details",
+//     description: "Full stack web developer",
+//     openGraph: {
+//       type: "website",
+//       url: "l",
+//       title: "My Website",
+//       description: "My Website Description",
+//       siteName: "My Website",
+//       images: [
+//         {
+//           url: "https://example.com/og.png",
+//         },
+//       ],
+//     },
+//   };
+// }
 
 
 const Page = () => {
@@ -141,3 +153,5 @@ const ProjectCard = ({ project }) => {
     </div>
   );
 };
+
+

@@ -57,6 +57,9 @@ export const ProjectTable = (props) => {
         },
         {
             label: <MdPageview className=" w-5 h-5" />,
+            onClick: (property) => {
+                route.push(`/dashboard/projects/${property._id}`);
+            },
           
         },
         {
