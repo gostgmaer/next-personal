@@ -20,11 +20,11 @@ export const Project = ({ project }) => {
 
                 <div className="p-4">
                     <h2 className="text-2xl font-semibold mb-2">{project.title}</h2>
-                    {project?.summery && <p className="text-gray-600 mb-4">
+                    {/* {project?.summery && <p className="text-gray-600 mb-4">
                         {project?.summery?.substring(0, 140) + '...'}
-                    </p>}
+                    </p>} */}
 
-                    <div className="flex  flex-wrap gap-2 mb-4 justify-start">
+                    {/* <div className="flex  flex-wrap gap-2 mb-4 justify-start">
                         {project.tags.splice(0, 4).map((tag, index) => (
                             <span
                                 key={index}
@@ -33,9 +33,9 @@ export const Project = ({ project }) => {
                                 {tag}
                             </span>
                         ))}
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-2 text-gray-600 mb-4"></div>
+                    </div> */}
+{/* 
+                    <div className="grid grid-cols-2 gap-2 text-gray-600 mb-4"></div> */}
                 </div>
             </div>
         </Link>

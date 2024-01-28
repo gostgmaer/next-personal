@@ -141,3 +141,22 @@ const ProjectCard = ({ project }) => {
     </div>
   );
 };
+
+export async function generateMetadata({ params }) {
+  return {
+    title: "  Portfolio Details",
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
+  };
+}

@@ -76,3 +76,23 @@ export const getRecord = async (id) => {
   return contacts
 
 }
+
+
+export async function generateMetadata({ params }) {
+  return {
+    title: " Contact Details",
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
+  };
+}

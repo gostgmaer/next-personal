@@ -103,6 +103,27 @@ const initialValue = {
   team_role: ''
 }
 
+
+export async function generateMetadata({ params }) {
+  return {
+    title: " Create Portfolio",
+    description: "Full stack web developer",
+    openGraph: {
+      type: "website",
+      url: "l",
+      title: "My Website",
+      description: "My Website Description",
+      siteName: "My Website",
+      images: [
+        {
+          url: "https://example.com/og.png",
+        },
+      ],
+    },
+  };
+}
+
+
 const Page = () => {
   return (
     <PrivateLayout>

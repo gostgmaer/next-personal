@@ -5,7 +5,6 @@ import moment from "moment";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaEye } from "react-icons/fa";
-import { appId, contactContiner, containerId, projectContainer, tableId } from "@/config/config";
 import { useRouter } from "next/navigation";
 
 const Tables = (props) => {

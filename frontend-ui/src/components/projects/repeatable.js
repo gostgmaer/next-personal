@@ -78,23 +78,6 @@ const Interest = ({ interests, setInterestes, label }) => {
               <Input label={"Name"} type={"text"}   additionalAttrs={{ onChange: handleChange, value: formData.name }} classes={undefined} icon={undefined} id={"name"}/>
              
             </div>
-            {/* <div className="">
-              <label
-                htmlFor="icon"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Icon
-              </label>
-
-              <input
-                type="text"
-                id="icon"
-                name="icon"
-                onChange={handleChange}
-                value={formData.icon}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div> */}
 
             <div className=" col-span-2 grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
