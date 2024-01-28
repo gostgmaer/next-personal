@@ -15,10 +15,6 @@ const getSingleData = async (id) => {
   return request
 }
 
-
-
-
-
 export async function generateMetadata({ params }) {
   const data = await getSingleData(params.id)
 
