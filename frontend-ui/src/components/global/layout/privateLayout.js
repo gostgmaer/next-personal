@@ -1,11 +1,12 @@
 
+"use client"
 import React from "react";
 import Header from "../navbar/private/header";
 import { handler } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
 import { getServerSession } from "next-auth/next";
 const PrivateLayout = async ({ children }) => {
-  const session = await getServerSession(handler.GET)
+  const session = true
 
   if (!session) {
     return (

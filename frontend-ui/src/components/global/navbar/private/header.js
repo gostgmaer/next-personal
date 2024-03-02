@@ -25,6 +25,12 @@ const navigation = [
     current: false,
     iscurrent: true,
   },
+  {
+    name: "Expenses",
+    href: "/dashboard/expenses",
+    current: false,
+    iscurrent: true,
+  },
 ];
 const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }];
 
