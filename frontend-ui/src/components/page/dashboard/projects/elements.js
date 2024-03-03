@@ -97,8 +97,7 @@ export const ProjectTable = (props) => {
                             limit: itemsPerPage,
                             page: currentPage,
                             total: props?.data?.total_record,
-                        }}
-                    />
+                        }} ispagination={true}                    />
                 </div>
             </div>
             {/* {open && (

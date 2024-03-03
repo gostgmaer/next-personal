@@ -85,8 +85,7 @@ export const ContactTable = (props) => {
                     limit: itemsPerPage,
                     page: currentPage,
                     total: props?.data?.total_record,
-                }}
-            />
+                }} ispagination={true}               />
         </div>
     );
 };

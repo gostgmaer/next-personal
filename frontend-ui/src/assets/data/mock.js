@@ -602,119 +602,233 @@ export const techCate = [
     "id": 1,
     "name": "Frontend Development",
     "considerations": [
-      {"id": 1, "name": "UI Design"},
-      {"id": 2, "name": "UX Design"},
-      {"id": 3, "name": "HTML/CSS/JavaScript"}
+      { "id": 1, "name": "UI Design" },
+      { "id": 2, "name": "UX Design" },
+      { "id": 3, "name": "HTML/CSS/JavaScript" }
     ]
   },
   {
     "id": 2,
     "name": "Backend Development",
     "considerations": [
-      {"id": 4, "name": "Server-side Programming"},
-      {"id": 5, "name": "Database Design and Management"},
-      {"id": 6, "name": "API Development"}
+      { "id": 4, "name": "Server-side Programming" },
+      { "id": 5, "name": "Database Design and Management" },
+      { "id": 6, "name": "API Development" }
     ]
   },
   {
     "id": 3,
     "name": "Infrastructure",
     "considerations": [
-      {"id": 7, "name": "Hosting"},
-      {"id": 8, "name": "Deployment"},
-      {"id": 9, "name": "Scalability"}
+      { "id": 7, "name": "Hosting" },
+      { "id": 8, "name": "Deployment" },
+      { "id": 9, "name": "Scalability" }
     ]
   },
   {
     "id": 4,
     "name": "Security",
     "considerations": [
-      {"id": 10, "name": "Authentication and Authorization"},
-      {"id": 11, "name": "Data Encryption"},
-      {"id": 12, "name": "Input Validation"}
+      { "id": 10, "name": "Authentication and Authorization" },
+      { "id": 11, "name": "Data Encryption" },
+      { "id": 12, "name": "Input Validation" }
     ]
   },
   {
     "id": 5,
     "name": "Performance",
     "considerations": [
-      {"id": 13, "name": "Optimization"},
-      {"id": 14, "name": "Caching"},
-      {"id": 15, "name": "Monitoring"}
+      { "id": 13, "name": "Optimization" },
+      { "id": 14, "name": "Caching" },
+      { "id": 15, "name": "Monitoring" }
     ]
   },
   {
     "id": 6,
     "name": "Testing",
     "considerations": [
-      {"id": 16, "name": "Unit Testing"},
-      {"id": 17, "name": "Integration Testing"},
-      {"id": 18, "name": "End-to-End Testing"}
+      { "id": 16, "name": "Unit Testing" },
+      { "id": 17, "name": "Integration Testing" },
+      { "id": 18, "name": "End-to-End Testing" }
     ]
   },
   {
     "id": 7,
     "name": "Accessibility",
     "considerations": [
-      {"id": 19, "name": "Compliance"},
-      {"id": 20, "name": "Keyboard Navigation"},
-      {"id": 21, "name": "Screen Reader Compatibility"}
+      { "id": 19, "name": "Compliance" },
+      { "id": 20, "name": "Keyboard Navigation" },
+      { "id": 21, "name": "Screen Reader Compatibility" }
     ]
   },
   {
     "id": 8,
     "name": "Documentation",
     "considerations": [
-      {"id": 22, "name": "Code Documentation"},
-      {"id": 23, "name": "User Documentation"}
+      { "id": 22, "name": "Code Documentation" },
+      { "id": 23, "name": "User Documentation" }
     ]
   },
   {
     "id": 9,
     "name": "Version Control",
     "considerations": [
-      {"id": 24, "name": "Git"},
-      {"id": 25, "name": "Branching and Merging"}
+      { "id": 24, "name": "Git" },
+      { "id": 25, "name": "Branching and Merging" }
     ]
   },
   {
     "id": 10,
     "name": "Project Management",
     "considerations": [
-      {"id": 26, "name": "Agile/Scrum"},
-      {"id": 27, "name": "Task Management"}
+      { "id": 26, "name": "Agile/Scrum" },
+      { "id": 27, "name": "Task Management" }
     ]
   },
   {
     "id": 11,
     "name": "Legal and Compliance",
     "considerations": [
-      {"id": 28, "name": "Privacy Policies"},
-      {"id": 29, "name": "Terms of Service"}
+      { "id": 28, "name": "Privacy Policies" },
+      { "id": 29, "name": "Terms of Service" }
     ]
   },
   {
     "id": 12,
     "name": "Localization and Internationalization",
     "considerations": [
-      {"id": 30, "name": "Localization"},
-      {"id": 31, "name": "Internationalization"}
+      { "id": 30, "name": "Localization" },
+      { "id": 31, "name": "Internationalization" }
     ]
   },
   {
     "id": 13,
     "name": "Analytics and Monitoring",
     "considerations": [
-      {"id": 32, "name": "Usage Analytics"},
-      {"id": 33, "name": "Error Monitoring"}
+      { "id": 32, "name": "Usage Analytics" },
+      { "id": 33, "name": "Error Monitoring" }
     ]
   },
   {
     "id": 14,
     "name": "Feedback and Iteration",
     "considerations": [
-      {"id": 34, "name": "User Feedback"},
-      {"id": 35, "name": "Iterative Development"}
+      { "id": 34, "name": "User Feedback" },
+      { "id": 35, "name": "Iterative Development" }
     ]
   }
 ]
+
+export const expenseData = {
+  savings: [
+    {
+      name: "January Savings 1",
+      category: "Emergency Fund",
+      amount: 1000,
+      date: "2024-01-05",
+      description: "Transfer to emergency fund"
+    },
+    {
+      name: "January Savings 2",
+      category: "Retirement",
+      amount: 500,
+      date: "2024-01-15",
+      description: "Contribution to retirement savings"
+    },
+    {
+      name: "January Savings 3",
+      category: "Travel Fund",
+      amount: 200,
+      date: "2024-01-25",
+      description: "Savings for upcoming travel"
+    }
+  ],
+  incomes: [
+    {
+      name: "January Income 1",
+      category: "Salary",
+      amount: 3000,
+      date: "2024-01-05",
+      description: "First payment of the month"
+    },
+    {
+      name: "January Income 2",
+      category: "Salary",
+      amount: 2000,
+      date: "2024-01-15",
+      description: "Second payment of the month"
+    },
+    {
+      name: "January Income 3",
+      category: "Bonus",
+      amount: 1500,
+      date: "2024-01-25",
+      description: "Year-end bonus payment"
+    },
+    {
+      name: "January Income 4",
+      category: "Freelance",
+      amount: 1000,
+      date: "2024-01-10",
+      description: "Payment for freelance project"
+    },
+    {
+      name: "January Income 5",
+      category: "Investment",
+      amount: 500,
+      date: "2024-01-20",
+      description: "Dividend income"
+    }
+  ], expenses: [
+    {
+      name: "January Expense 1",
+      category: "Rent",
+      amount: 1500,
+      date: "2024-01-05",
+      description: "Monthly rent payment"
+    },
+    {
+      name: "January Expense 2",
+      category: "Groceries",
+      amount: 300,
+      date: "2024-01-10",
+      description: "Grocery shopping for the month"
+    },
+    {
+      name: "January Expense 3",
+      category: "Utilities",
+      amount: 200,
+      date: "2024-01-15",
+      description: "Utility bills payment"
+    },
+    {
+      name: "January Expense 4",
+      category: "Transportation",
+      amount: 100,
+      date: "2024-01-20",
+      description: "Public transportation cost"
+    },
+    {
+      name: "January Expense 5",
+      category: "Entertainment",
+      amount: 50,
+      date: "2024-01-25",
+      description: "Movie night with friends"
+    },
+    {
+      name: "January Expense 6",
+      category: "Healthcare",
+      amount: 150,
+      date: "2024-01-08",
+      description: "Doctor's visit co-pay"
+    },
+    {
+      name: "January Expense 7",
+      category: "Dining Out",
+      amount: 80,
+      date: "2024-01-12",
+      description: "Dinner at a restaurant"
+    }
+  ],name:"March Expense",monyh:"March"
+
+}
