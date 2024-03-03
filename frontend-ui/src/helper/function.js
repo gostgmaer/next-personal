@@ -206,3 +206,8 @@ export const exportExcelFile = (data, columnobj, filename) => {
   exportData(xlsdata, filename);
 
 }
+export function arraySumByKey(array, key) {
+  return array.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue[key];
+  }, 0);
+}

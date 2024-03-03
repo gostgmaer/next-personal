@@ -71,6 +71,14 @@ const transactionSchema = new mongoose.Schema(
         },
       },
     ],
+    name:{
+      type: String,
+          required: true,
+    },
+    month:{
+      type: String,
+          required: true,
+    },
   },
   { timestamps: true }
 );
