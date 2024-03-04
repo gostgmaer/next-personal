@@ -12,87 +12,6 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { MdDelete, MdEdit, MdPageview } from "react-icons/md";
 import { v4 as uuidv4 } from 'uuid';
-export const ProjectTable = (props) => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10); // Default items per page
-
-    const route = useRouter();
-    const handleDelete = async (id) => {
-        const req = await del(`/projects`, id);
-        if (req.statusCode === 200) {
-            loadprojects();
-        }
-    };
-
-    const loadprojects = async () => {
-        const query = {
-            limit: itemsPerPage,
-            page: currentPage,
-        };
-        const checkQuerydata = generateUrlFromNestedObject({ ...query });
-        route.push(`/dashboard/projects${checkQuerydata}`);
-    };
-
-    useEffect(() => {
-        loadprojects();
-    }, [currentPage, itemsPerPage]);
-
-    const columns = React.useMemo(
-        () => [
-            { Header: "ID", accessor: "_id", isSortable: true },
-            { Header: "Name", accessor: "title" },
-        ],
-        []
-    );
-    const buttons = [
-        {
-            label: <MdEdit className=" w-5 h-5" />,
-            onClick: (property) => {
-                route.push(`/dashboard/projects/${property._id}/edit`);
-            },
-        },
-        {
-            label: <MdPageview className=" w-5 h-5" />,
-            onClick: (property) => {
-                route.push(`/dashboard/projects/${property._id}`);
-            },
-        },
-        {
-            label: <MdDelete className=" w-5 h-5" />,
-            onClick: (property) => {
-                handleDelete(property._id);
-            },
-        },
-    ];
-
-    return (
-        <div>
-            <div className="container p-2 mx-auto sm:p-4 dark:text-gray-100">
-                <div className="overflow-x-auto w-full  py-4 text-md  text-black text-right">
-                    <Link
-                        href={"/dashboard/projects/create"}
-                        // onClick={() => setOpen(!open)}
-                        className="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    >
-                        Add project
-                    </Link>
-                </div>
-                <div className="overflow-x-auto">
-                    <Table
-                        columns={columns}
-                        data={props?.data?.result}
-                        buttons={buttons}
-                        params={undefined}
-                        ispagination={false}
-                    />
-                </div>
-            </div>
-            {/* {open && (
-                <ProjectForm id={id} setId={setId} setOpen={setOpen} loadprojects={loadprojects}></ProjectForm>
-            )} */}
-        </div>
-    );
-};
 
 export const ExpenseSummery = (props) => {
     return (
@@ -218,7 +137,7 @@ export const IncomeTable = (props) => {
         onSubmit: (values) => {
             const currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense')) || { incomes: [] };
             const newExpense = { id: uuidv4(), ...values };
-            currentUserExpenses.incomes.push(newExpense);
+            currentUserExpenses["incomes"].push(newExpense);
             localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
         
         },
@@ -266,7 +185,8 @@ export const ExpenseTable = (props) => {
         onSubmit: (values) => {
             const currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense')) || { expenses: [] };
             const newExpense = { id: uuidv4(), ...values };
-            currentUserExpenses.expenses.push(newExpense);
+            console.log(currentUserExpenses);
+            currentUserExpenses["expenses"].push(newExpense);
             localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
         },
     });
@@ -339,10 +259,15 @@ export const SavingsTable = (props) => {
     const formik = useFormik({
         initialValues: { name: "", category: "", amount: "", description: "", date: "" },
         onSubmit: (values) => {
+           try {
             const currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense')) || { savings: [] };
             const newExpense = { id: uuidv4(), ...values };
-            currentUserExpenses.savings.push(newExpense);
+            console.log(currentUserExpenses);
+            currentUserExpenses["savings"].push(newExpense);
             localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
+           } catch (error) {
+            console.log(error);
+           }
         },
     });
 
