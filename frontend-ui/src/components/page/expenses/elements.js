@@ -6,11 +6,12 @@ import ProjectForm from "@/components/projects/projectForm";
 import { arraySumByKey, generateUrlFromNestedObject } from "@/helper/function";
 import { del } from "@/lib/http";
 import { Field, FieldArray, Form, Formik, useFormik } from "formik";
+import moment from "moment";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { MdDelete, MdEdit, MdPageview } from "react-icons/md";
-
+import { v4 as uuidv4 } from 'uuid';
 export const ProjectTable = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10); // Default items per page
@@ -144,22 +145,22 @@ export const ExpenseSummery = (props) => {
             </div>
             <div className=" grid grid-cols-3 gap-2">
                 <div className=" col-span-1 p-2 ">
-                    <h3>Monthly Income</h3>
+                    <h3 className=" text-xl font-semibold my-2 ">Monthly Income</h3>
                     <div className="">
                         <IncomeTable incomes={expenseData.incomes} />
 
                     </div>
                 </div>
                 <div className="col-span-1 p-2">
-                    <h3>Monthly Expenses</h3>
+                    <h3 className=" text-xl font-semibold my-2 ">Monthly Expenses</h3>
                     <div className=" ">
-                        <ExpenseTable incomes={expenseData.expenses} />
+                        <ExpenseTable expenses={expenseData.expenses} />
                     </div>
                 </div>
                 <div className=" col-span-1 p-2">
-                    <h3>Monthly Savings</h3>
+                    <h3 className=" text-xl font-semibold  my-2">Monthly Savings</h3>
                     <div className="">
-                        <SavingsTable incomes={expenseData.savings} />
+                        <SavingsTable savings={expenseData.savings} />
                     </div>
                 </div>
             </div>
@@ -168,42 +169,80 @@ export const ExpenseSummery = (props) => {
 };
 
 export const IncomeTable = (props) => {
+    const route = useRouter()
     const columns = React.useMemo(
         () => [
             //   { Header: "ID", accessor: "_id", isSortable: true },
             { Header: "Name", accessor: "name" },
             // { Header: "Category", accessor: "category" },
             { Header: "Amount", accessor: "amount" },
-            { Header: "Date", accessor: "date" },
+            {
+                Header: "Date", accessor: "date",
+                cell: props =>  moment(props.value).format('DD/MM') 
+            },
         ],
         []
     );
 
+    const handleDelete = async (id) => {
+        const req = await del(`/expenses/remove`, id);
+        // if (req.statusCode === 200) {
+        //     loadprojects()
+        // }
+    };
+    const buttons = [
+        {
+            label: <MdEdit className=" w-5 h-5" />,
+            onClick: (property) => {
+                route.push(`/dashboard/expenses/${property._id}/edit`);
+            },
+        },
+        // {
+        //     label: <MdPageview className=" w-5 h-5" />,
+        //     onClick: (property) => {
+        //         route.push(`/dashboard/projects/${property._id}`);
+        //     },
+
+        // },
+        {
+            label: <MdDelete className=" w-5 h-5" />,
+            onClick: (property) => {
+                handleDelete(property._id)
+            },
+        },
+
+    ];
+
     const formik = useFormik({
         initialValues: { name: "", category: "", amount: "", description: "", date: "" },
         onSubmit: (values) => {
-            console.log(values);
+            const currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense')) || { incomes: [] };
+            const newExpense = { id: uuidv4(), ...values };
+            currentUserExpenses.incomes.push(newExpense);
+            localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
+        
         },
     });
 
     return (
         <>
-            <div>
+            <div className="sm:h-64 overflow-y-auto">
                 <BasicTable
                     columns={columns}
                     data={props?.incomes}
-                    buttons={undefined}
+                    buttons={buttons}
                     params={undefined}
                     ispagination={false}
                 />
             </div>
-            <form onSubmit={formik.handleSubmit} className="w-full  grid grid-cols-1 gap-2 p-2">
+            <form onSubmit={formik.handleSubmit} className="w-full  grid grid-cols-1 gap-2 py-5">
+                <div><h4 className=" text-lg font-semibold  ">Add New Income</h4></div>
                 <div><Input label={undefined} type={'text'} additionalAttrs={{ ...formik.getFieldProps('name'), placeholder: "Name" }} classes={undefined} icon={undefined} id={"name"} /></div>
                 {/* <div><Input label={undefined} type={'text'} additionalAttrs={{ ...formik.getFieldProps('category') }} classes={undefined} icon={undefined} id={"category"} /></div> */}
                 <div><Input label={undefined} type={'text'} additionalAttrs={{ ...formik.getFieldProps('amount'), placeholder: "0.00" }} classes={undefined} icon={undefined} id={"amount"} /></div>
                 <div><Input label={undefined} type={'date'} additionalAttrs={{ ...formik.getFieldProps('date'), placeholder: "MM/DD/YYYY" }} classes={undefined} icon={undefined} id={"date"} /></div>
                 <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    Submit
+                    Add
                 </button>
             </form>
         </>
@@ -211,6 +250,7 @@ export const IncomeTable = (props) => {
 };
 
 export const ExpenseTable = (props) => {
+    const route = useRouter()
     const columns = React.useMemo(
         () => [
             //   { Header: "ID", accessor: "_id", isSortable: true },
@@ -224,26 +264,58 @@ export const ExpenseTable = (props) => {
     const formik = useFormik({
         initialValues: { name: "", category: "", amount: "", description: "", date: "" },
         onSubmit: (values) => {
-            console.log(values);
+            const currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense')) || { expenses: [] };
+            const newExpense = { id: uuidv4(), ...values };
+            currentUserExpenses.expenses.push(newExpense);
+            localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
         },
     });
+    const handleDelete = async (id) => {
+        const req = await del(`/projects`, id);
+        // if (req.statusCode === 200) {
+        //     loadprojects()
+        // }
+    };
+    const buttons = [
+        {
+            label: <MdEdit className=" w-5 h-5" />,
+            onClick: (property) => {
+                route.push(`/dashboard/projects/${property._id}/edit`);
+            },
+        },
+        // {
+        //     label: <MdPageview className=" w-5 h-5" />,
+        //     onClick: (property) => {
+        //         route.push(`/dashboard/projects/${property._id}`);
+        //     },
+
+        // },
+        {
+            label: <MdDelete className=" w-5 h-5" />,
+            onClick: (property) => {
+                handleDelete(property._id)
+            },
+        },
+
+    ];
     return (
-        <>    <div>
+        <>    <div className="sm:h-64 overflow-y-auto">
             <BasicTable
                 columns={columns}
                 data={props?.expenses}
-                buttons={undefined}
+                buttons={buttons}
                 params={undefined}
                 ispagination={false}
             />
         </div>
-            <form onSubmit={formik.handleSubmit} className="w-full  grid grid-cols-1 gap-2 p-2">
+            <form onSubmit={formik.handleSubmit} className="w-full  grid grid-cols-1 gap-2 py-5">
+                <div><h4 className=" text-lg font-semibold  ">Add New Expenses</h4></div>
                 <div><Input label={undefined} type={'text'} additionalAttrs={{ ...formik.getFieldProps('name'), placeholder: "Name" }} classes={undefined} icon={undefined} id={"name"} /></div>
                 {/* <div><Input label={undefined} type={'text'} additionalAttrs={{ ...formik.getFieldProps('category') }} classes={undefined} icon={undefined} id={"category"} /></div> */}
                 <div><Input label={undefined} type={'text'} additionalAttrs={{ ...formik.getFieldProps('amount'), placeholder: "0.00" }} classes={undefined} icon={undefined} id={"amount"} /></div>
                 <div><Input label={undefined} type={'date'} additionalAttrs={{ ...formik.getFieldProps('date'), placeholder: "MM/DD/YYYY" }} classes={undefined} icon={undefined} id={"date"} /></div>
                 <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    Submit
+                    Add
                 </button>
             </form>
         </>
@@ -252,6 +324,7 @@ export const ExpenseTable = (props) => {
 
 
 export const SavingsTable = (props) => {
+    const route = useRouter()
     const columns = React.useMemo(
         () => [
             //   { Header: "ID", accessor: "_id", isSortable: true },
@@ -266,27 +339,61 @@ export const SavingsTable = (props) => {
     const formik = useFormik({
         initialValues: { name: "", category: "", amount: "", description: "", date: "" },
         onSubmit: (values) => {
-            console.log(values);
+            const currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense')) || { savings: [] };
+            const newExpense = { id: uuidv4(), ...values };
+            currentUserExpenses.savings.push(newExpense);
+            localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
         },
     });
+
+    const handleDelete = async (id) => {
+        const req = await del(`/projects`, id);
+        // if (req.statusCode === 200) {
+        //     loadprojects()
+        // }
+    };
+    const buttons = [
+        {
+            label: <MdEdit className=" w-5 h-5" />,
+            onClick: (property) => {
+                route.push(`/dashboard/projects/${property._id}/edit`);
+            },
+        },
+        // {
+        //     label: <MdPageview className=" w-5 h-5" />,
+        //     onClick: (property) => {
+        //         route.push(`/dashboard/projects/${property._id}`);
+        //     },
+
+        // },
+        {
+            label: <MdDelete className=" w-5 h-5" />,
+            onClick: (property) => {
+                handleDelete(property._id)
+            },
+        },
+
+    ];
+
     return (
         <>
-            <div>
+            <div className="sm:h-64 overflow-y-auto">
                 <BasicTable
                     columns={columns}
-                    data={props?.incomes}
-                    buttons={undefined}
+                    data={props?.savings}
+                    buttons={buttons}
                     params={undefined}
                     ispagination={false}
                 />
             </div>
-            <form onSubmit={formik.handleSubmit} className="w-full  grid grid-cols-1 gap-2 p-2">
+            <form onSubmit={formik.handleSubmit} className="w-full  grid grid-cols-1 gap-2 py-5">
+                <div><h4 className=" text-lg font-semibold  ">Add New Savings</h4></div>
                 <div><Input label={undefined} type={'text'} additionalAttrs={{ ...formik.getFieldProps('name'), placeholder: "Name" }} classes={undefined} icon={undefined} id={"name"} /></div>
                 {/* <div><Input label={undefined} type={'text'} additionalAttrs={{ ...formik.getFieldProps('category') }} classes={undefined} icon={undefined} id={"category"} /></div> */}
                 <div><Input label={undefined} type={'text'} additionalAttrs={{ ...formik.getFieldProps('amount'), placeholder: "0.00" }} classes={undefined} icon={undefined} id={"amount"} /></div>
                 <div><Input label={undefined} type={'date'} additionalAttrs={{ ...formik.getFieldProps('date'), placeholder: "MM/DD/YYYY" }} classes={undefined} icon={undefined} id={"date"} /></div>
                 <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    Submit
+                    Add
                 </button>
             </form>
 
