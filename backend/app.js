@@ -8,6 +8,7 @@ const authRoute = require("./src/routes/auth");
 const userRouter = require("./src/routes/user");
 const projectsRoute = require("./src/routes/projects");
 const contactsRoute = require("./src/routes/contact");
+const expenseRoute = require("./src/routes/expense");
 
 const app = express();
 app.use(cors());
@@ -21,6 +22,7 @@ app.get("/api", (req, res) => {
   res.send("API is working!");
 });
 
+app.use("/api/v1", expenseRoute);
 app.use("/api/v1", userRouter);
 app.use("/api/v1", projectsRoute);
 app.use("/api/v1", contactsRoute);

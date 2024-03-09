@@ -1,10 +1,10 @@
 import PrivateLayout from "@/components/global/layout/privateLayout"
-import ProjectForm from "@/components/page/dashboard/projects/form"
+import { ExpenseSummery } from "@/components/page/expenses/elements";
 import { serverMethod } from "@/lib/servermethod"
 
 export async function generateMetadata({ params }) {
   return {
-    title: " Update Portfolio",
+    title: " Update Expenses",
     description: "Full stack web developer",
     openGraph: {
       type: "website",
@@ -24,12 +24,13 @@ export async function generateMetadata({ params }) {
 
 const Page = async (props) => {
 
-  const project = await getRecord(props.params.id)
+  const expenses = await getRecord(props.params.id)
+
 
   return (
     <PrivateLayout>
 
-      <ProjectForm initialValues={project.result} />
+      <ExpenseSummery />
 
     </PrivateLayout>
   )
@@ -44,10 +45,10 @@ export const getRecord = async (id) => {
   const params = {
     method: "get",
     header: {},
-    query: { },
+    query: {},
   };
   const contacts = await serverMethod(
-    `/projects/${id}`,
+    `/expenses/${id}`,
     params
   );
   return contacts
