@@ -16,7 +16,7 @@ authRoute.route("/authentication/user/reset-password/:token").post(reset);
 authRoute.route("/authentication/user/forget-password").post(forget);
 authRoute.route("/authentication/user/change-password").post(userMiddleWare,changes);
 authRoute.route("/authentication/user/current/profile").get(userMiddleWare,profile);
-authRoute.route("/authentication/user/current/profile/update/:id").patch(userMiddleWare,update);
+authRoute.route("/authentication/user/current/profile/update").patch(userMiddleWare,update);
 
 
 
