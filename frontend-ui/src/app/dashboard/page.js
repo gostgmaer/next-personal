@@ -24,12 +24,12 @@ export async function generateMetadata({ params }) {
 
 
 const Page = async (props) => {
-  const results = await getAllRecord(props.searchParams)
+  // const results = await getAllRecord(props.searchParams)
 
   return (
     <PrivateLayout>
       <div className="text-white">
-        <div className=" py-4  text-4xl capitalize text-gray-900"> Dashboard</div>
+        {/* <div className=" py-4  text-4xl capitalize text-gray-900"> Dashboard</div> */}
         {/* <Tables data={results} /> */}
       </div>
     </PrivateLayout>
@@ -40,23 +40,23 @@ export default Page;
 
 
 
-export const getAllRecord = async (query) => {
+// export const getAllRecord = async (query) => {
 
-  const params = {
-    method: "get",
-    header: {},
-    query: { ...query },
-  };
-  const contacts = await serverMethod(
-    `/contacts`,
-    params
-  );
-  const projects = await serverMethod(
-    `/projects`,
-    params
-  );
+//   const params = {
+//     method: "get",
+//     header: {},
+//     query: { ...query },
+//   };
+//   const contacts = await serverMethod(
+//     `/contacts`,
+//     params
+//   );
+//   const projects = await serverMethod(
+//     `/projects`,
+//     params
+//   );
 
 
-  return { contacts, projects }
+//   return { contacts, projects }
 
-}
+// }

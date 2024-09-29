@@ -4,16 +4,28 @@ import Table, { BasicTable } from "@/components/global/fields/Table";
 import Input from "@/components/global/fields/input";
 import ProjectForm from "@/components/projects/projectForm";
 import { arraySumByKey, generateUrlFromNestedObject } from "@/helper/function";
-import { del } from "@/lib/http";
+import { del, patch, post } from "@/lib/http";
 import { Field, FieldArray, Form, Formik, useFormik } from "formik";
 import moment from "moment";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { MdDelete, MdEdit, MdPageview } from "react-icons/md";
 import { v4 as uuidv4 } from 'uuid';
 
 export const ExpenseSummery = (props) => {
+
+    const params = useParams()
+
+    const handleSubmit = async (second) => {
+        var currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense'));
+        const req = await patch(`/expenses`, currentUserExpenses['currentData'], params.id);
+
+
+
+    }
+
     return (
         <div>
             <div className=" grid grid-cols-10">
@@ -83,6 +95,9 @@ export const ExpenseSummery = (props) => {
                     </div>
                 </div>
             </div>
+            <div className=" grid grid-cols-1 gap-2">
+                <button className="px-5 py-2 bg-gray-400 border-gray-500 text-white" onClick={handleSubmit}>Update</button>
+            </div>
         </div>
     );
 };
@@ -97,7 +112,7 @@ export const IncomeTable = (props) => {
             { Header: "Amount", accessor: "amount" },
             {
                 Header: "Date", accessor: "date",
-                cell: props =>  moment(props.value).format('DD/MM') 
+                cell: props => moment(props.value).format('DD/MM')
             },
         ],
         []
@@ -135,11 +150,23 @@ export const IncomeTable = (props) => {
     const formik = useFormik({
         initialValues: { name: "", category: "", amount: "", description: "", date: "" },
         onSubmit: (values) => {
-            const currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense')) || { incomes: [] };
-            const newExpense = { id: uuidv4(), ...values };
-            currentUserExpenses["incomes"].push(newExpense);
-            localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
-        
+            var currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense'));
+            const newExpense = { uuid: uuidv4(), ...values };
+            console.log(currentUserExpenses.currentData.incomes);
+            if (currentUserExpenses?.currentData.incomes) {
+                currentUserExpenses['currentData']["incomes"].push(newExpense);
+                localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
+            } else {
+                var expense = {
+                    currentData: {
+                        incomes: []
+                    }
+                }
+                expense.currentData.incomes.push(newExpense)
+                expense["currentData"] = { ...currentUserExpenses?.currentData, ...expense.currentData, }
+                localStorage.setItem('currentUserExpense', JSON.stringify(expense));
+            }
+
         },
     });
 
@@ -183,11 +210,22 @@ export const ExpenseTable = (props) => {
     const formik = useFormik({
         initialValues: { name: "", category: "", amount: "", description: "", date: "" },
         onSubmit: (values) => {
-            const currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense')) || { expenses: [] };
-            const newExpense = { id: uuidv4(), ...values };
-            console.log(currentUserExpenses);
-            currentUserExpenses["expenses"].push(newExpense);
-            localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
+            var currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense'));
+            const newExpense = { uuid: uuidv4(), ...values };
+            if (currentUserExpenses?.currentData.expenses) {
+                currentUserExpenses['currentData']["expenses"].push(newExpense);
+                localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
+            } else {
+                var expense = {
+                    currentData: {
+                        expenses: []
+                    }
+                }
+                expense.currentData.expenses.push(newExpense)
+                expense["currentData"] = { ...currentUserExpenses?.currentData, ...expense.currentData, }
+                localStorage.setItem('currentUserExpense', JSON.stringify(expense));
+            }
+
         },
     });
     const handleDelete = async (id) => {
@@ -259,15 +297,21 @@ export const SavingsTable = (props) => {
     const formik = useFormik({
         initialValues: { name: "", category: "", amount: "", description: "", date: "" },
         onSubmit: (values) => {
-           try {
-            const currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense')) || { savings: [] };
-            const newExpense = { id: uuidv4(), ...values };
-            console.log(currentUserExpenses);
-            currentUserExpenses["savings"].push(newExpense);
-            localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
-           } catch (error) {
-            console.log(error);
-           }
+            var currentUserExpenses = JSON.parse(localStorage.getItem('currentUserExpense'));
+            const newExpense = { uuid: uuidv4(), ...values };
+            if (currentUserExpenses?.currentData.savings) {
+                currentUserExpenses['currentData']["savings"].push(newExpense);
+                localStorage.setItem('currentUserExpense', JSON.stringify(currentUserExpenses));
+            } else {
+                var expense = {
+                    currentData: {
+                        savings: []
+                    }
+                }
+                expense.currentData.savings.push(newExpense)
+                expense["currentData"] = { ...currentUserExpenses?.currentData, ...expense.currentData, }
+                localStorage.setItem('currentUserExpense', JSON.stringify(expense));
+            }
         },
     });
 
@@ -325,3 +369,52 @@ export const SavingsTable = (props) => {
         </>
     );
 };
+
+
+export const CreateExpense = (props) => {
+
+    const { data: session } = useSession()
+
+
+    const route = useRouter()
+    const formik = useFormik({
+        initialValues: { name: "", month: "", },
+        onSubmit: (values) => {
+
+            handleCreate(values)
+
+
+        },
+    });
+
+    const handleCreate = async (values) => {
+
+        const body = {
+            user: session.user['id'], ...values
+
+        }
+        const request = await post('/expenses/create', body)
+     if (request["statusCode"]===201) {
+        route.push(`/dashboard/expenses/${request["result"]["_id"]}/edit`)
+     }
+
+    }
+
+
+
+
+    return <div>
+        <form onSubmit={formik.handleSubmit} className="w-full  grid grid-cols-2 gap-2 py-5">
+            <div className=" col-span-2"><h4 className=" text-lg font-semibold  ">Create New Expense</h4></div>
+            <div><Input label={"Expense Name"} type={'text'} additionalAttrs={{ ...formik.getFieldProps('name'), placeholder: "Name" }} classes={undefined} icon={undefined} id={"name"} /></div>
+
+            <div><Input label={"Month"} type={'date'} additionalAttrs={{ ...formik.getFieldProps('month'), placeholder: "MM/DD/YYYY" }} classes={undefined} icon={undefined} id={"month"} /></div>
+            <div className=" col-span-2">
+                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Create
+                </button>
+            </div>
+        </form>
+    </div>
+
+}

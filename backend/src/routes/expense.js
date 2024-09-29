@@ -9,7 +9,7 @@ const {
   remove,
   removeMany,
   update,
-} = require("../controller/projects/controller");
+} = require("../controller/expenses/controller");
 const createMiddleWare = require("../middleware/createMiddleWare");
 const userMiddleWare = require("../middleware/userAccess");
 

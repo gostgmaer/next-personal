@@ -5,6 +5,8 @@ import PaginationBlock from "../global/pagination/paginationBlock";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { generateUrlFromNestedObject } from "@/helper/function";
+import ProjectsServices from "@/lib/services/Project";
+import { Card, Skeleton } from "@nextui-org/react";
 
 export const Project = ({ project }) => {
     return (
@@ -34,7 +36,7 @@ export const Project = ({ project }) => {
                             </span>
                         ))}
                     </div> */}
-{/* 
+                    {/* 
                     <div className="grid grid-cols-2 gap-2 text-gray-600 mb-4"></div> */}
                 </div>
             </div>
@@ -49,14 +51,22 @@ export const PortfolioBlock = (props) => {
     const route = useRouter()
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
-    const loadprojects = () => {
+    const [data, setData] = useState(null);
+    const loadprojects = async () => {
         const query = {
             limit: itemsPerPage,
             page: currentPage,
         };
         const checkQuerydata = generateUrlFromNestedObject({ ...query });
+
         route.push(`/portfolio${checkQuerydata}`);
+        const fetch = await ProjectsServices.getProjects(query)
+
+        setData(fetch)
+
     };
+
+
 
     useEffect(() => {
         loadprojects();
@@ -66,12 +76,33 @@ export const PortfolioBlock = (props) => {
     return (
         <div className="rounded-[20px] my-5 py-10 gap-10 pb-0  shadow-md m-auto bg-gray-100 flex items-center justify-center flex-col w-full ">
             <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-center w-full px-10 ">
-                {props.projects?.result?.map((project, index) => (
+
+                <div>
+                    { }
+                </div>
+
+
+                {data ? data?.result?.map((project, index) => (
                     <Project key={index} project={project} />
-                ))}
+                )) : Array.from(Array(10).keys()).map(item => (<Card key={item} className="w-[200px] space-y-5 p-4" radius="lg">
+                    <Skeleton className="rounded-lg">
+                        <div className="h-24 rounded-lg bg-secondary"></div>
+                    </Skeleton>
+                    <div className="space-y-3">
+                        <Skeleton className="w-3/5 rounded-lg">
+                            <div className="h-3 w-full rounded-lg bg-secondary"></div>
+                        </Skeleton>
+                        <Skeleton className="w-4/5 rounded-lg">
+                            <div className="h-3 w-full rounded-lg bg-secondary-300"></div>
+                        </Skeleton>
+                        <Skeleton className="w-2/5 rounded-lg">
+                            <div className="h-3 w-full rounded-lg bg-secondary-200"></div>
+                        </Skeleton>
+                    </div>
+                </Card>))}
             </div>
             <div className="bg-gray-700 text-white py-1 w-full">
-                <PaginationBlock totalItems={props.projects?.total_record} limit={itemsPerPage} currentPage={currentPage} onPageChange={setCurrentPage} onItemsPerPageChange={setItemsPerPage} />
+                <PaginationBlock totalItems={data?.total_record} limit={itemsPerPage} currentPage={currentPage} onPageChange={setCurrentPage} onItemsPerPageChange={setItemsPerPage} />
             </div>
         </div>
     )

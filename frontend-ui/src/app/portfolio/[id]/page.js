@@ -134,7 +134,7 @@ const ProjectCard = ({ project }) => {
         <div className="mt-8">
           <h2 className="text-xl font-semibold">Project Pictures:</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-            {project?.images.map((picture, index) => (
+            {project?.images?.map((picture, index) => (
               <div key={index} className="relative">
                 <Image
                   width={5000}

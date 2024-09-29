@@ -23,14 +23,14 @@ export async function generateMetadata({ params }) {
 }
 
 const Index = async (props) => {
-  const projects = await getAllRecord(props.searchParams)
+  // const projects = await getAllRecord(props.searchParams)
   return (
     <PageLayout>
       <Head>
         <title>Kishor Sarkar Portfolio</title>
       </Head>
 
-      <PortfolioBlock projects={projects} />
+      <PortfolioBlock  />
     </PageLayout>
   );
 };
