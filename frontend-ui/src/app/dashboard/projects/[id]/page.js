@@ -7,24 +7,6 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-// export async function generateMetadata(props) {
-//   return {
-//     title: "Portfolio Details",
-//     description: "Full stack web developer",
-//     openGraph: {
-//       type: "website",
-//       url: "l",
-//       title: "My Website",
-//       description: "My Website Description",
-//       siteName: "My Website",
-//       images: [
-//         {
-//           url: "https://example.com/og.png",
-//         },
-//       ],
-//     },
-//   };
-// }
 
 
 const Page = () => {
@@ -131,7 +113,7 @@ const ProjectCard = ({ project }) => {
         <div className="mt-8">
           <h2 className="text-xl font-semibold">Project Pictures:</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-            {project?.images.map((picture, index) => (
+            {project?.images?.map((picture, index) => (
               <div key={index} className="relative">
                 <Image
                   width={5000}

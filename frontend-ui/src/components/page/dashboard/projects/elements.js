@@ -1,23 +1,25 @@
 "use client"
-import Table from '@/components/global/fields/Table';
-import ProjectForm from '@/components/projects/projectForm';
-import { generateUrlFromNestedObject } from '@/helper/function';
+import CurrentTable from '@/components/elements/component/Table';
+
 import { del } from '@/lib/http';
+import ProjectsServices from '@/lib/services/Project';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-import { MdDelete, MdEdit, MdPageview } from 'react-icons/md';
+import { FaEye, FaTrash,FaEdit } from 'react-icons/fa';
 
 export const ProjectTable = (props) => {
- 
-   
+
+
+
+
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10); // Default items per page
-
+    const [data, setData] = useState(null);
     const route = useRouter()
 
 
-  
+
 
     const handleDelete = async (id) => {
         const req = await del(`/projects`, id);
@@ -31,8 +33,9 @@ export const ProjectTable = (props) => {
             limit: itemsPerPage,
             page: currentPage,
         };
-        const checkQuerydata = generateUrlFromNestedObject({ ...query });
-        route.push(`/dashboard/projects${checkQuerydata}`);
+
+        const fetch = await ProjectsServices.getProjects(query)
+        setData(fetch)
 
     };
 
@@ -40,36 +43,85 @@ export const ProjectTable = (props) => {
         loadprojects();
     }, [currentPage, itemsPerPage]);
 
+
+
+
+
+    const columns = [
+        {
+          title: "Title",
+          dataIndex: "title",
+          key: "title",
+        },
+       
+        {
+          title: "is FullStack",
+          dataIndex: "fullstack",
+          key: "fullstack",
+        },
+        {
+          title: "UI URL",
+          dataIndex: "ui_url",
+          key: "ui_url",
+         
+        },
+   
+        {
+          title: "Status",
+          dataIndex: "current_status",
+          key: "current_status",
+          sorter: (a, b) => a.status - b.status,
+          render: (index, item) => (
+            <span className={` capitalize `}>
+              {item.status}
+            </span>
+          ),
+        },
     
-    const columns = React.useMemo(
-        () => [
-            { Header: "ID", accessor: "_id", isSortable: true },
-            { Header: "Name", accessor: "title" },
-        ],
-        []
-    );
-    const buttons = [
         {
-            label: <MdEdit className=" w-5 h-5" />,
-            onClick: (property) => {
-                route.push(`/dashboard/projects/${property._id}/edit`);
-            },
-        },
-        {
-            label: <MdPageview className=" w-5 h-5" />,
-            onClick: (property) => {
-                route.push(`/dashboard/projects/${property._id}`);
-            },
-          
-        },
-        {
-            label: <MdDelete className=" w-5 h-5" />,
-            onClick: (property) => {
-                handleDelete(property._id)
-            },
-        },
+          title: (
+            <div className="flex items-center gap-1 opacity-0">
+              <div>Actions</div>
+            </div>
+          ),
+          key: "actions",
+          render: (index, item) => (
+            <div className="flex items-center justify-end gap-3 pe-4">
+              <Link
+                href={`/dashboard/projects/${item._id}/edit`}
+                className="px-3 py-1 bg-emerald-100 text-xs text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all font-semibold rounded-full"
+              >
+                <FaEdit />
+              </Link>
+              <Link
+                href={`/dashboard/projects/${item._id}`}
+                className="px-3 py-1 bg-emerald-100 text-xs text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all font-semibold rounded-full"
+              >
+                <FaEye />
+              </Link>
+           
+              <label
+        
+                className="px-3 py-1 bg-emerald-100 text-xs text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all font-semibold rounded-full"
+              >
+                <FaTrash />
+              </label>
       
-    ];
+            </div>
+          ),
+        },
+      ];
+
+    // const buttons = [
+    //     {
+    //         label: <MdEdit className=" w-5 h-5" />,
+    //         onClick: (property) => {
+    //             route.push(`/dashboard/projects/${property._id}/edit`);
+    //         },
+    //     },
+       
+
+    // ];
 
 
 
@@ -87,22 +139,25 @@ export const ProjectTable = (props) => {
                 </div>
                 <div className="overflow-x-auto">
 
-                    <Table
-                        columns={columns}
-                        data={props?.data?.result}
-                        buttons={buttons}
-                        params={{
+            
+
+                    <CurrentTable
+                        data={data?.result}
+                        tableColumn={columns}
+                        pagination={{
+                            total: data?.total_record,
+                            page: currentPage,
+                            limit: itemsPerPage,
                             setPage: setCurrentPage,
                             setLimit: setItemsPerPage,
-                            limit: itemsPerPage,
-                            page: currentPage,
-                            total: props?.data?.total_record,
-                        }} ispagination={true}                    />
+                        }}
+                        checked={false}
+                    />
+
+
                 </div>
             </div>
-            {/* {open && (
-                <ProjectForm id={id} setId={setId} setOpen={setOpen} loadprojects={loadprojects}></ProjectForm>
-            )} */}
+         
 
         </div>
     )

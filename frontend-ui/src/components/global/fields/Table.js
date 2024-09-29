@@ -128,7 +128,7 @@ export const BasicTable = ({ columns, data, buttons, params, ispagination }) => 
             <tr {...headerGroup.getHeaderGroupProps()} key={index}>
               {headerGroup.headers.map((column, columnIndex) => (
                 <th
-                  {...column.getHeaderProps()}  
+                  {...column.getHeaderProps()}
                   className="py-1 px-2 border-b font-semibold text-xs text-gray-600 uppercase tracking-wider text-start"
                   key={columnIndex}
                 >
