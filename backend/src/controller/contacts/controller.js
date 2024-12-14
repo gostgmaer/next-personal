@@ -88,8 +88,7 @@ const create = async (req, res) => {
     res.status(StatusCodes.CREATED).json({
       message: "Record Created Successfully!",
       status: ReasonPhrases.CREATED,
-      statusCode: StatusCodes.CREATED,
-      result: result,
+      statusCode: StatusCodes.CREATED
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -210,7 +209,7 @@ const update = async (req, res) => {
       });
     } else {
       res.status(StatusCodes.OK).json({
-        result: result.value,
+
         message: `Update successfully!`,
         statusCode: StatusCodes.OK,
         status: ReasonPhrases.OK,
